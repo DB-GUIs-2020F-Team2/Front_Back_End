@@ -6,7 +6,7 @@ const mysql = require('mysql');
 const { log, ExpressAPILogMiddleware } = require('@rama41222/node-logger');
 
 // mysql connection
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
   host: process.env.MYSQL_CLOUD_HOST,
   user: process.env.MYSQL_CLOUD_USER,
   password: process.env.MYSQL_CLOUD_PASS,
@@ -34,16 +34,207 @@ app.use(cors({
 app.use(ExpressAPILogMiddleware(logger, { request: true }));
 
 // Attempting to connect to the database.
-connection.connect(function (err) {
-  if (err)
-    logger.error("Cannot connect to DB!");
-  logger.info("Connected to the DB!");
-});
+// connection.connect(function (err) {
+//   if (err)
+//     logger.error("Cannot connect to DB!");
+//   logger.info("Connected to the DB!");
+// });
 
 // GET /
 app.get('/', (req, res) => {
   res.status(200).send('Go to 0.0.0.0:3000.');
 });
+
+///////////////////////////////// USERS ////////////////////////////////////////////
+// GET user list
+app.get('/getUser', (req, res) => {
+  connection.query('SELECT * FROM User;', function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
+
+// Verify the User's username and password
+app.get('/verifyUser', (req, res) => {
+  connection.query('SELECT * FROM User WHERE UserName = ? AND HashPass = ? AND UserType = ? UNION SELECT 0,"NULL","NULL","NULL","NULL","NULL","NULL" WHERE NOT EXISTS (SELECT * FROM User WHERE UserName = ? AND HashPass = ? AND UserType = ?);', [req.body.UserName, req.body.HashPass, req.body.UserType, req.body.UserName, req.body.HashPass, req.body.UserType], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query");
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
+
+// Insert a new User with all the information it needs
+app.post('/registerUser', (req, res) => {
+  connection.query('INSERT INTO User (UserName, HashPass, ContactInfo, InformationVis, Email, UserType) VALUES (?, ?, ?, ?, ?, ?);', [req.body.UserName, req.body.HashPass, req.body.ContactInfo, req.body.InformationVis, req.body.Email, req.body.UserType], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query");
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+})
+
+
+///////////////////////////////// PROJECTS ////////////////////////////////////////////
+// Find a project based on the manager id
+app.get('/getProject/:id', (req, res) => {
+  connection.query('SELECT Project.ProjectID, Project.ProjectName, Project.ApplyDate, Project.ExpireDate, Project.ProjectStatus, Project.ProjectType FROM Project INNER JOIN User ON Project.ManagerID = User.UserID WHERE Project.ManagerID = ?', [req.params.id], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
+
+// Insert a new Project
+app.post('/postProject', (req, res) => {
+  connection.query('INSERT INTO Project (ProjectName, ApplyDate, ExpireDate, ProjectStatus, ProjectType, ManagerID) VALUES (?, ?, ?, ?, ?, ?);', [req.body.ProjectName, req.body.ApplyDate, req.body.ExpireDate, req.body.ProjectStatus, req.body.ProjectType, req.body.ManagerID], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query");
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+})
+
+
+// Change the expire date of a project
+app.put('/changeDueDate', (req, res) => {
+  connection.query('UPDATE Project SET ExpireDate = ? WHERE ProjectID = ?;', [req.body.ExpireDate, req.body.ProjectID], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query");
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+})
+
+
+
+// Delete a Project
+app.delete('/deleteProject/:id', (req, res) => {
+  connection.query('DELETE FROM Project WHERE ProjectID = ?', [req.params.id], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query");
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+})
+
+///////////////////////////////// NOTIFICATIONS ////////////////////////////////////////////
+// Get a notification based on UserID
+app.get('/getNotification/:id', (req, res) => {
+  connection.query('SELECT * FROM NotificationBox WHERE ? = UserID', [req.params.id], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
+
+// Insert a new notification
+app.post('/postNotification', (req, res) => {
+  connection.query('INSERT INTO NotificationBox (UserID, NotificationMessage) VALUES (?, ?);', [req.body.UserID, req.body.NotificationMessage], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query");
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+})
+
+// Delete a notification based on NotificationID
+app.delete('/deleteNotification/:id', (req, res) => {
+  connection.query('DELETE FROM NotificationBox WHERE NotificationID = ?', [req.params.id], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query");
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+})
 
 ///////////////////////////////// ORDERS ////////////////////////////////////////////
 // GET
