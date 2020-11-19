@@ -785,7 +785,7 @@ app.delete('/contract/', async(req, res)=>{
 //distigushing api calls nothing for Primary key Contract_ProductID, C for using ContractID, P for using ProductID
 //GET
 //get all Contract Product lists
-app.get('/ContractProducts', (req, res)=>{
+app.get('/contract_products', (req, res)=>{
   connection.query('SELECT * FROM `team2`.`Contract_Product`', function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
@@ -801,7 +801,7 @@ app.get('/ContractProducts', (req, res)=>{
     }
   });
 });
-app.get('/ContractProduct/', async(req, res)=>{
+app.get('/contract_product/', async(req, res)=>{
   var Contract_ProductID= req.param("Contract_ProductID");
   connection.query('SELECT * FROM `team2`.`Contract_Product` WHERE `Contract_ProductID` = ?', Contract_ProductID, function (err, rows, fields) {
     if (err) {
@@ -819,7 +819,7 @@ app.get('/ContractProduct/', async(req, res)=>{
   });
 });
 //get all products for a specific Contract
-app.get('/ContractProductC/', async(req, res)=>{
+app.get('/contract_productC/', async(req, res)=>{
   var ContractID= req.param("ContractID");
   connection.query('SELECT * FROM `team2`.`Contract_Product` WHERE `ContractID` = ?', ContractID, function (err, rows, fields) {
     if (err) {
@@ -837,7 +837,7 @@ app.get('/ContractProductC/', async(req, res)=>{
   });
 });
 //get all contracts for a specific product
-app.get('/ContractProductP/', async(req, res)=>{
+app.get('/contract_productP/', async(req, res)=>{
   var ProductID= req.param("ProductID");
   connection.query('SELECT * FROM `team2`.`Contract_Product` WHERE `ProductID` = ?', ProductID, function (err, rows, fields) {
     if (err) {
@@ -856,7 +856,7 @@ app.get('/ContractProductP/', async(req, res)=>{
 });
 //POST
 //this is not working
-app.post('/ContractProducts/', async(req, res)=>{
+app.post('/contract_products/', async(req, res)=>{
   var ContractID= req.param("ContractID")
   var ProductCount = req.param("ProductCount")
   var ProductID= req.param("ProductID")
@@ -875,7 +875,7 @@ app.post('/ContractProducts/', async(req, res)=>{
 });
 
 //Put
-app.put('/ContractProduct/', async(req, res)=>{
+app.put('/contract_product/', async(req, res)=>{
   var Contract_ProductID= req.param("Contract_ProductID")
   var ProductCount= req.param("ProductCount")
 
@@ -893,7 +893,7 @@ app.put('/ContractProduct/', async(req, res)=>{
   });
 });
 //Delete
-app.delete('/ContractProduct/', async(req, res)=>{
+app.delete('/contract_product/', async(req, res)=>{
   var Contract_ProductID= req.param("Contract_ProductID")
 
 
@@ -910,7 +910,7 @@ app.delete('/ContractProduct/', async(req, res)=>{
     }
   });
 });
-app.delete('/ContractProductC/', async(req, res)=>{
+app.delete('/contract_productC/', async(req, res)=>{
   var ContractID= req.param("ContractID")
 
 
@@ -927,10 +927,10 @@ app.delete('/ContractProductC/', async(req, res)=>{
     }
   });
 });
-//////////Project_Contractor abriviated to PC/////
+//////////Project_Contractor /////
 //GET
 //get all bids
-app.get('/PC', (req, res)=>{
+app.get('/project_contractors', (req, res)=>{
   connection.query('SELECT * FROM `team2`.`Project_Contractor`', function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
@@ -947,7 +947,7 @@ app.get('/PC', (req, res)=>{
   });
 });
 //primary key
-app.get('/PC/', async(req, res)=>{
+app.get('/project_contractor/', async(req, res)=>{
   var Project_ContractorID= req.param("Project_ContractorID");
   connection.query('SELECT * FROM `team2`.`Project_Contractor` WHERE `Project_ContractorID` = ?', Project_ContractorID, function (err, rows, fields) {
     if (err) {
@@ -965,7 +965,7 @@ app.get('/PC/', async(req, res)=>{
   });
 });
 //all projects with a specific contractor
-app.get('/PCC/', async(req, res)=>{
+app.get('/project_contractorC/', async(req, res)=>{
   var ContractorID= req.param("ContractorID");
   connection.query('SELECT * FROM `team2`.`Project_Contractor` WHERE `ContractorID` = ?', ContractorID, function (err, rows, fields) {
     if (err) {
@@ -983,7 +983,7 @@ app.get('/PCC/', async(req, res)=>{
   });
 });
 //all contractors for a specific project ID
-app.get('/PCP/', async(req, res)=>{
+app.get('/project_contractorsP/', async(req, res)=>{
   var ProjectID= req.param("ProjectID");
   connection.query('SELECT * FROM `team2`.`Project_Contractor` WHERE `ProjectID` = ?', ProjectID, function (err, rows, fields) {
     if (err) {
@@ -1003,7 +1003,7 @@ app.get('/PCP/', async(req, res)=>{
 
 //POST
 
-app.post('/PC/', async(req, res)=>{
+app.post('/project_contractors/', async(req, res)=>{
   var ProjectID = req.param("ProjectID")
   var ContractorID= req.param("ContractorID")
 
@@ -1024,7 +1024,7 @@ app.post('/PC/', async(req, res)=>{
 
 //Put Not really sure if these will ever be used
 //update projectID
-app.put('/PCP/', async(req, res)=>{
+app.put('/project_contractorP/', async(req, res)=>{
   var Project_ContractorID= req.param("Project_ContractorID")
   var ProjectID= req.param("ProjectID")
 
@@ -1042,7 +1042,7 @@ app.put('/PCP/', async(req, res)=>{
   });
 });
 //update projectID
-app.put('/PCC/', async(req, res)=>{
+app.put('/project_contractorC/', async(req, res)=>{
   var Project_ContractorID= req.param("Project_ContractorID")
   var ContractorID= req.param("ContractorID")
 
@@ -1060,7 +1060,7 @@ app.put('/PCC/', async(req, res)=>{
   });
 });
 //Delete
-app.delete('/PC/', async(req, res)=>{
+app.delete('/project_contractor/', async(req, res)=>{
   var Project_ContractorID= req.param("Project_ContractorID")
 
 
@@ -1078,7 +1078,7 @@ app.delete('/PC/', async(req, res)=>{
   });
 });
 //delete all entries with specific contractor use case if a contractor no longer is working
-app.delete('/PCC/', async(req, res)=>{
+app.delete('/project_contractorC/', async(req, res)=>{
   var ContractorID= req.param("ContractorID")
 
 
@@ -1095,7 +1095,7 @@ app.delete('/PCC/', async(req, res)=>{
     }
   });
 });
-app.delete('/PCP/', async(req, res)=>{
+app.delete('/project_contractorP/', async(req, res)=>{
   var ProjectID= req.param("ProjectID")
 
 
