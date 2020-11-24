@@ -312,6 +312,25 @@ app.get('/orders_full/id/', async (req, res) => {
   });
 });
 
+//get order with products for specific vendor
+app.get('/orders_full/vendor/', async (req, res) => {
+  var VendorID = req.param("VendorID");
+  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID WHERE Orders.VendorID = ?', VendorID, function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
 // POST
 // add a new order
 app.post('/orders/', async (req, res) => {
