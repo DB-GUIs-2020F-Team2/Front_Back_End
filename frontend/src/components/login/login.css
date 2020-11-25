@@ -1,0 +1,20 @@
+body,
+html {
+  height: 100%;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/challenger-ii-main-battle-tank-on-manoeuvres-in-the-oman-news-photo-1598992480.jpg");
+
+  /* Full height */
+  height: 100%;
+  min-height: 100vh;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  margin-bottom: 0;
+}
