@@ -6,22 +6,31 @@ import axios from 'axios';
 export class OrdersRepository{
 
     // SET UP ALL OF THIS 
-    url = 'http://localhost:3000'; //set up!!!!!!!!!! referenced my team's GUI from last year 
+    url = 'http://localhost:8000'; //set up!!!!!!!!!! referenced my team's GUI from last year 
     config = {
-        headers:{
 
-        }
     };
 
     // called in vendor_dash
     getOrders() {
         return new Promise((resolve, reject) => {
             axios.get(`${this.url}/orders`, this.config)
-            .then(x => resolve(x.data))
+            .then(x => resolve(x.data.data))
             .catch(e => {
                 alert(e);
                 reject();
             });
+        });
+    }
+
+    getOrdersForVendor(id) {
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/orders_full/vendor/${id}`, this.config)
+                .then(x => resolve(x.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                });
         });
     }
 
