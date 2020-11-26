@@ -4,6 +4,10 @@ import './order_list.css';
 
 export const OrdersList = props => 
     <>
+
+    <p> hello </p> 
+
+    
     <h2>  Current Orders </h2>
     <table className = "table table-condensed table-striped">
         <thead>
@@ -19,13 +23,13 @@ export const OrdersList = props =>
         </thead>
 
         <tbody>
-
         {
+
                 props.Orders.map(order =>               
                     !order.completed && 
                         <tr key={order.id}>
                             <td>
-                                {order.customer}
+                                {order.OrderStatus}
                             </td>
                             <td>{order.datePlaced}</td>
                             <td> {order.shipped ? 'Yes' : 'No'} </td>
@@ -38,13 +42,14 @@ export const OrdersList = props =>
                             <Link to={'edit/' + order.id}  className="btn btn-primary" onShipped={ () => this.onShippedClicked(order)}>Update</Link>
                             </td>
                         </tr>)
-
+                    
                     
                 
-            }      
+            }
             </tbody>       
         
     </table> 
+    
 
 
 
@@ -77,5 +82,6 @@ export const OrdersList = props =>
         </tbody>
         
     </table> 
+
     </>
 
