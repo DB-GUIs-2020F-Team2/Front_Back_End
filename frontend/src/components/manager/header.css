@@ -1,0 +1,15 @@
+.banner {
+  background-color: #23231a;
+  color: #988f2a;
+}
+button {
+  background-color: #988f2a;
+}
+
+hButtons > button {
+  background-color: #988f2a;
+}
+
+.btn {
+  background-color: #988f2a;
+}
