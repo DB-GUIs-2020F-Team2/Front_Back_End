@@ -34,6 +34,18 @@ export class OrdersRepository{
         });
     }
 
+    getOrderProducts(orderId) {
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/orders_full/${orderId}`, this.config)
+            .then(x => resolve(x.data))
+            .catch(e => {
+                alert(e);
+                console.log(e);
+                reject();
+            });
+        });
+    }
+
     //called in order_editor 
     updateOrder(id, order) {
         return new Promise((resolve, reject) => {

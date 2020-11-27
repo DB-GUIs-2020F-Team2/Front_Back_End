@@ -294,7 +294,7 @@ app.get('/orders_full', function (req, res) {
 });
 
 // get order with products
-app.get('/orders_full/id/', async (req, res) => {
+app.get('/orders_full/:id', async (req, res) => {
   var OrderID = req.param("OrderID");
   connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID WHERE Orders.OrderID = ?', OrderID, function (err, rows, fields) {
     if (err) {
