@@ -8,8 +8,7 @@ export class VendorDashboard extends React.Component{
         ordersRepository = new OrdersRepository(); 
 
     state = {
-        orders: [new Order(1,"Sue", 10, "Y", null, -1,{"one":5, "four":2, "twenty one": 1}),
-            new Order(2,"Bob", 9, "N", "N", -1,"dictionary also"), new Order(3,"Julianna", 15, "N", "N", -1,"dictionary too")],
+        orders: []
         
     }
 
