@@ -1,7 +1,10 @@
 import React from 'react';
+import {OrdersRepository} from '../../API/ordersRepo';
 
 
 export class OrderDetails extends React.Component {
+
+ordersRepository = new OrdersRepository(); 
 
 state = {
         id: 0, 
@@ -25,12 +28,13 @@ state = {
 
      componentDidMount() {
         const orderId = +this.props.match.params.orderId;
+        console.log(orderId);
         // console.log(orderId);
-        this.setState({id: orderId}); 
-        /*if (accountId) {
-            this.accountsRepository.getOrder(orderId)
-                .then(account => this.setState(account));
-        }*/
+        //this.setState({id: orderId}); 
+        if (orderId) {
+            this.ordersRepository.getOrderProducts(orderId)
+                .then(order => this.setState(order));
+        }
 
     }
 }
