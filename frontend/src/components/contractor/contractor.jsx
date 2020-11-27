@@ -3,7 +3,7 @@ import {Link, Router} from "react-router-dom";
 import NavBar from './navabar.jsx'
 import './contractor.css'
 
-class Contractor extends Component {
+export class Contractor extends Component {
     state = {  }
     render() { 
         return ( 
@@ -54,4 +54,3 @@ class Contractor extends Component {
     }
 }
  
-export default Contractor;
