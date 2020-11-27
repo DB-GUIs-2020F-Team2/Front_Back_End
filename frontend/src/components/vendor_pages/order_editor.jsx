@@ -22,7 +22,7 @@ state = {
             this.ordersRepository.updateOrder(this.state.id, this.state)
                 .then(()=>{
                 alert('Order updated!');
-                this.setState({ redirect: '/vendordash'});
+                this.setState({ redirect: '/vendor'});
             });
         } else{
             // nothing else 
@@ -66,7 +66,7 @@ state = {
                     onClick={() => this.onSave()}>
                     Save
                 </button>
-                <Link className="btn btn-secondary btn-block" to="/vendordash">Return to List</Link>
+                <Link className="btn btn-secondary btn-block" to="/vendor">Return to List</Link>
             </div>
 
 
