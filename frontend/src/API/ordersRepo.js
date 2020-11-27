@@ -34,10 +34,11 @@ export class OrdersRepository{
         });
     }
 
+    // called in order_details.jsx 
     getOrderProducts(orderId) {
         return new Promise((resolve, reject) => {
             axios.get(`${this.url}/orders_full/${orderId}`, this.config)
-            .then(x => resolve(x.data))
+            .then(x => resolve(x.data.data))
             .catch(e => {
                 alert(e);
                 console.log(e);
@@ -46,7 +47,23 @@ export class OrdersRepository{
         });
     }
 
-    //called in order_editor 
+
+    // called in order_details.jsx 
+    getProduct(productId) {
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/product/${productId}`, this.config)
+            .then(x => resolve(x.data.data))
+            .catch(e => {
+                alert(e);
+                console.log(e);
+                reject();
+            });
+        });
+    }
+
+    
+
+    //will be called in order_editor 
     updateOrder(id, order) {
         return new Promise((resolve, reject) => {
             axios.put(`${this.url}/order/${id}`, order, this.config)
