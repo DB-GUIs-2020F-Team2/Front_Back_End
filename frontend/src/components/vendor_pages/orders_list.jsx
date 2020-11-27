@@ -5,19 +5,17 @@ import './order_list.css';
 export const OrdersList = props => 
     <>
 
-    <p> hello </p> 
-
-    
     <h2>  Current Orders </h2>
     <table className = "table table-condensed table-striped">
         <thead>
             <tr>
-                <th>Customer</th>
-                <th>Date Placed</th>
-                <th> Shipped </th>
-                <th>Completed </th> 
+                <th>Order ID</th>
+                <th>Order Status</th>
+                <th> Apply Date </th>
+                <th> Expire Date </th> 
                 <th> Details </th> 
                 <th> Update</th>
+                <th> Customer??? or not </th> 
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -27,20 +25,23 @@ export const OrdersList = props =>
 
                 props.Orders.map(order =>               
                     !order.completed && 
-                        <tr key={order.id}>
+                        <tr key={order.OrderID}>
                             <td>
-                                {order.OrderStatus}
+                                {order.OrderID}
                             </td>
-                            <td>{order.datePlaced}</td>
-                            <td> {order.shipped ? 'Yes' : 'No'} </td>
-                            <td>{order.completed ? 'Yes' : 'No'} </td>
+                            <td>{order.OrderStatus}</td>
+
+                            
+                            <td> {String(order.ApplyDate).substring(5,7) + '/' + String(order.ApplyDate).substring(8,10) +'/' + String(order.ApplyDate).substring(0,4)} </td>
+                            <td>{String(order.ExpireDate).substring(5,7) + '/' + String(order.ExpireDate).substring(8,10) +'/' + String(order.ExpireDate).substring(0,4)}</td>
 
                             <td>
-                            <Link to={'details/' + order.id}  className="btn btn-primary">Details</Link>
+                            <Link to={'details/' + order.OrderID}  className="btn btn-primary">Details</Link>
                             </td>
                             <td>
-                            <Link to={'edit/' + order.id}  className="btn btn-primary" onShipped={ () => this.onShippedClicked(order)}>Update</Link>
+                            <Link to={'edit/' + order.OrderID}  className="btn btn-primary" onShipped={ () => this.onShippedClicked(order)}>Update</Link>
                             </td>
+                            <td> Customer maybe?   </td>
                         </tr>)
                     
                     
@@ -50,9 +51,6 @@ export const OrdersList = props =>
         
     </table> 
     
-
-
-
 
     <h2> Past Orders </h2> 
     <table className = "table table-condensed table-striped">
