@@ -277,7 +277,8 @@ app.get('/order/', async (req, res) => {
 
 // get order with products
 app.get('/orders_full', function (req, res) {
-  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID', function (err, rows, fields) {
+  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID;',
+  function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
       res.status(400).json({
@@ -296,7 +297,8 @@ app.get('/orders_full', function (req, res) {
 // get order with products
 app.get('/orders_full/id/', async (req, res) => {
   var OrderID = req.param("OrderID");
-  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID WHERE Orders.OrderID = ?', OrderID, function (err, rows, fields) {
+  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.OrderID = ?',
+   OrderID, function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
       res.status(400).json({
@@ -315,7 +317,8 @@ app.get('/orders_full/id/', async (req, res) => {
 //get order with products for specific vendor
 app.get('/orders_full/vendor/', async (req, res) => {
   var VendorID = req.param("VendorID");
-  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID WHERE Orders.VendorID = ?', VendorID, function (err, rows, fields) {
+  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.VendorID = ?',
+   VendorID, function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
       res.status(400).json({
