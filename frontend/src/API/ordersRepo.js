@@ -24,6 +24,7 @@ export class OrdersRepository{
     }
 
     getOrdersForVendor(id) {
+        console.log("in getting orders for vendor");
         return new Promise((resolve, reject) => {
             axios.get(`${this.url}/orders_full/vendor/${id}`, this.config)
                 .then(x => resolve(x.data))
