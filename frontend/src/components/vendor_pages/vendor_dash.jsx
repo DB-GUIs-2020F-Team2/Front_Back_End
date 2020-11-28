@@ -14,7 +14,7 @@ export class VendorDashboard extends React.Component{
 
     render(){
         return <div className = "container py-3">
-            <h1>Vendor Dashboard </h1> 
+            <h1 className = "text-white">Vendor Dashboard </h1> 
             <OrdersList Orders = { this.state.orders}  />
         </div> 
     }
