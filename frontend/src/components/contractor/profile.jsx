@@ -1,28 +1,79 @@
 import React, { Component } from 'react';
 import NavBar from './navabar.jsx'
+import { Link } from 'react-router-dom';
 
-class Profile extends Component {
+export class Profile extends Component {
     state = {
-        name:'Wyatt',
-        phoneNumber: '911',
-        email: 'whas@gmail.com',
-        password: '*******'
+        name:'',
+        phoneNumber: '',
+        email: '',
+        password: '',
+        readOnly: true
          }
+
+    onEdit(){
+        this.setState({
+            readOnly: false
+        });
+    }
+
+    onSubmit(){
+        this.setState({
+            readOnly: true
+        });
+    }
+
+
     render() { 
         return ( 
             <div>
                 <NavBar/>
-                <div className="card">
-                    <h5 className="card-header">Profile</h5>
-                    <div className="card-body">
-                        <h5 className="list-group-item">Name: {this.state.name}</h5>
-                        <h5 className="list-group-item">Phone Number: {this.state.phoneNumber}</h5>
-                        <h5 className="list-group-item">Email: {this.state.email}</h5>
-                        <h5 className="list-group-item">Password: {this.state.password}</h5>
-                        <button className="btn btn-primary">Edit</button>
+                <form className = "m-3">
+                    <div className="form-group">
+                        <label htmlFor="name">Name</label>
+                        <input type="text" className="form-control" id = "name"
+                            readOnly={this.state.readOnly}
+                            value ={this.state.name}
+                            onChange= { event => this.setState({ name: event.target.value})}/>
                     </div>
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="phoneNumber">Phone Number</label>
+                        <input type="text" className="form-control" id = "phoneNumber"
+                            readOnly={this.state.readOnly}
+                            value ={this.state.phoneNumber}
+                            onChange= { event => this.setState({ phoneNumber: event.target.value})}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input type="text" className="form-control" id = "email"
+                            readOnly={this.state.readOnly}    
+                            value ={this.state.email}
+                            onChange= { event => this.setState({ email: event.target.value})}/>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input type="text" className="form-control" id = "password"
+                            readOnly={this.state.readOnly}
+                            value ={this.state.password}
+                            onChange= { event => this.setState({ password: event.target.value})}/>
+                    </div>
+                </form>
 
+                <div className = "row m-3">
+                    <button
+                        disabled = {!this.state.readOnly} 
+                        className="btn btn-primary btn-md m-3"
+                        onClick = {() => {this.onEdit()}}>
+                        Edit
+                    </button>
+
+                    <button 
+                        disabled = {this.state.readOnly} 
+                        className="btn btn-primary btn-md m-3"
+                        onClick = {() => {this.onSubmit()}}>
+                        Submit
+                    </button>
+                </div>
             </div>
 
             /////// On page ////////
@@ -33,4 +84,3 @@ class Profile extends Component {
     }
 }
  
-export default Profile;
