@@ -7,44 +7,60 @@ export class OrderDetails extends React.Component {
 ordersRepository = new OrdersRepository(); 
 
 state = {
-        orderDetails: [],
-        products: []
+        orderDetails: []
 }
 
-    getProducts(){}
+    getPrice(currPrice, discountPrice, isDiscounted)
+    {
+        if(isDiscounted === 1){
+            return discountPrice;
+        }
+        else{
+            return currPrice;
+        }
+
+    }
+
     render(){
 
-        for (const orderDetail of this.state.orderDetails)
-            {
-                var productId = orderDetail.ProductID;
-                this.ordersRepository.getProduct(productId).then(x => {orderDetail.product = x[0];
-                console.log(x[0]);});                 
-            }
 
-        /*this.state.orderDetails.map((order)=>
-        (
-            order.product = this.ordersRepository.getProduct(order.ProductID))
-        )*/
         return <div>
+        <h2>  Order Details </h2>
+        <table className = "table table-condensed table-striped">
+        <thead>
+            <tr>
+                <th> Product </th>
+                <th>Details</th>
+                <th> Quantity </th>
+                <th> Price </th> 
+                <th> Cost </th> 
+
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+
+        <tbody>
         {
             this.state.orderDetails.map((order) =>(
-                <p>
-                    {order.Amount}
-                    {order.ApplyDate}
-                    hi
-                    {//order.product.ProductName
-                    }
-                    
-                </p>
+                <tr key={order.Order_ProductID}>
+                            <td>
+                                {order.ProductName}
+                            </td>
+                            <td>{order.Details}</td>
+
+                            
+                            <td> {order.Amount} </td>
+                            <td> ${this.getPrice(order.CurrentPrice, order.DiscountPrice, order.IsDiscount)}</td>
+
+                            <td> ${ this.getPrice(order.CurrentPrice, order.DiscountPrice, order.IsDiscount) * order.Amount}</td>
+                        </tr>
 
             ))
-            /*for (const orderDetail of this.state.orderDetails)
-            {
-                var productId = orderDetail.ProductID;
-                var x = ordersRepository.getProduct(productId);
-                console.log(x);                 
-            }*/
+
         } 
+        </tbody>       
+        
+    </table> 
 
         </div>
     }
