@@ -7,10 +7,24 @@ import Projects from './projects'
 import Contracts from './contracts'
 import Calendar from './calendar'
 import './managerHome.css'
+import {ManagerRepo} from '../../API/managerRepo';
 
 export class ManagerHome extends Component {
+
+    managerRepo = new ManagerRepo(); 
+
+    constructor(){
+        super()
+        
+    }
+
     state = { 
-        view: 5
+        view: 5,
+        orders: [],
+        directory: [],
+        products: [],
+        contracts: [],
+        projects: []
      };
 
     updateView = (viewPane) => {
@@ -18,6 +32,28 @@ export class ManagerHome extends Component {
         this.forceUpdate();
         //console.log(this.state.view)
         return;
+    }
+
+    componentDidMount(){
+
+        let managerRepo = new ManagerRepo()
+
+        managerRepo.getProducts().then(x => {
+            this.setState({ products: x });
+        });
+        managerRepo.getDirectory().then(x => {
+            this.setState({ directory: x });
+        });
+        managerRepo.getOrders().then(x => {
+            this.setState({ orders: x });
+        });
+        managerRepo.getContracts().then(x => {
+            this.setState({ contracts: x });
+        });
+        managerRepo.getProjects().then(x => {
+            this.setState({ projects: x });
+        });
+        console.log(this.state)
     }
 
     render() { 
@@ -41,35 +77,35 @@ export class ManagerHome extends Component {
         if(this.state.view == 0){
             return (
                 <React.Fragment>
-                    <History />
+                    <History orders = {this.state.orders}/>
                 </React.Fragment>
             )
         }
         else if(this.state.view == 1){ // this will have to send the db of products to the 
             return (
                 <React.Fragment>
-                    <Products />
+                    <Products products = {this.state.products}/>
                 </React.Fragment>
             )
         }
         else if(this.state.view == 2){
             return (
                 <React.Fragment>
-                    <Directory />
+                    <Directory directory = {this.state.directory}/>
                 </React.Fragment>
             )
         }
         else if(this.state.view == 3){ 
             return (
                 <React.Fragment>
-                    <Projects />
+                    <Projects projects = {this.state.projects}/>
                 </React.Fragment>
             )
         }
         else if(this.state.view == 4){ 
             return (
                 <React.Fragment>
-                    <Contracts />
+                    <Contracts contracts = {this.state.contracts}/>
                 </React.Fragment>
             )
         }
