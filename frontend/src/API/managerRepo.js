@@ -8,7 +8,7 @@ export class ManagerRepo {
 
     getDirectory(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/directory', this.config)
+            axios.get('http://localhost:8000/getUser', this.config)
                 .then(x => {
                     resolve(x.data.data);
                 })
@@ -73,7 +73,7 @@ export class ManagerRepo {
 
     getProjects(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/projects',this.config)
+            axios.get('http://localhost:8000/getProjects',this.config)
                 .then(x => {
                     resolve(x.data);
                 })
