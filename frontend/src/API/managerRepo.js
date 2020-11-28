@@ -2,9 +2,13 @@ import axios from 'axios'
 
 export class ManagerRepo {
 
+    config = {
+
+    };
+
     getDirectory(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/directory')
+            axios.get('http://localhost:8000/directory', this.config)
                 .then(x => {
                     resolve(x.data.data);
                 })
@@ -17,7 +21,7 @@ export class ManagerRepo {
 
     getOrders(date){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/orders',date)
+            axios.get(`http://localhost:8000/orders/${date}`,this.config)
                 .then(x => {
                     resolve(x.data.data);
                 })
@@ -43,7 +47,7 @@ export class ManagerRepo {
 
     getContracts(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/contracts')
+            axios.get('http://localhost:8000/contracts',this.config)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -56,7 +60,7 @@ export class ManagerRepo {
 
     getPastOrders(date){ //send todays date
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getPastOrders',date)
+            axios.get(`http://localhost:8000/getPastOrders/${date}`,this.config)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -69,7 +73,7 @@ export class ManagerRepo {
 
     getProjects(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/projects')
+            axios.get('http://localhost:8000/projects',this.config)
                 .then(x => {
                     resolve(x.data);
                 })
