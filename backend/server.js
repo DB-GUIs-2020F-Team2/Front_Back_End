@@ -103,6 +103,24 @@ app.post('/registerUser', (req, res) => {
 })
 
 
+app.get('/getProjects', (req, res) => {
+  connection.query('SELECT * FROM Project;', function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
+
 ///////////////////////////////// PROJECTS ////////////////////////////////////////////
 // Find a project based on the manager id
 app.get('/getProject/:id', (req, res) => {
