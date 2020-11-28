@@ -103,6 +103,24 @@ app.post('/registerUser', (req, res) => {
 })
 
 
+app.get('/getProjects', (req, res) => {
+  connection.query('SELECT * FROM Project;', function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
+
 ///////////////////////////////// PROJECTS ////////////////////////////////////////////
 // Find a project based on the manager id
 app.get('/getProject/:id', (req, res) => {
@@ -296,10 +314,10 @@ app.get('/orders_full', function (req, res) {
 
 // get order with products
 
-app.get('/orders_full/id/', async (req, res) => {
-  var OrderID = req.param("OrderID");
+app.get('/orders_full/:id', async (req, res) => {
+  //var OrderID = req.param("OrderID");
   connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.OrderID = ?',
-  OrderID, function (err, rows, fields) {
+  [req.params.id], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
       res.status(400).json({

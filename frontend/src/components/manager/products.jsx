@@ -21,8 +21,23 @@ class Products extends Component {
                         </thead>
 
                         <tbody>
-                            
+                            {this.props.products.map(item => {
+                            console.log("item " + item);
+                            //console.log(this.props.match.params.id)
+                                return (
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>name</td>
+                                        <td>quant</td>
+                                        <td>$price</td>
+                                        <td>$dis price</td>
+                                        <td>dets</td>
+                                        <td>discounted</td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
+
                     </table>
 
                 </div>

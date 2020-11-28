@@ -2,11 +2,15 @@ import axios from 'axios'
 
 export class ManagerRepo {
 
+    config = {
+
+    };
+
     getDirectory(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getDirectory')
+            axios.get('http://localhost:8000/getUser', this.config)
                 .then(x => {
-                    resolve(x.data);
+                    resolve(x.data.data);
                 })
                 .catch(x => {
                     alert(x);
@@ -17,9 +21,9 @@ export class ManagerRepo {
 
     getOrders(date){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getOrders',date)
+            axios.get(`http://localhost:8000/orders/${date}`,this.config)
                 .then(x => {
-                    resolve(x.data);
+                    resolve(x.data.data);
                 })
                 .catch(x => {
                     alert(x);
@@ -30,7 +34,7 @@ export class ManagerRepo {
 
     getProducts(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getProducts')
+            axios.get('http://localhost:8000/products')
                 .then(x => {
                     resolve(x.data);
                 })
@@ -43,20 +47,7 @@ export class ManagerRepo {
 
     getContracts(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getContracts')
-                .then(x => {
-                    resolve(x.data);
-                })
-                .catch(x => {
-                    alert(x);
-                    reject(x);
-                })
-        })
-    }
-
-    getContracts(){
-        return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getContracts')
+            axios.get('http://localhost:8000/contracts',this.config)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -69,7 +60,7 @@ export class ManagerRepo {
 
     getPastOrders(date){ //send todays date
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getPastOrders',date)
+            axios.get(`http://localhost:8000/getPastOrders/${date}`,this.config)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -82,7 +73,7 @@ export class ManagerRepo {
 
     getProjects(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getProjects')
+            axios.get('http://localhost:8000/getProjects',this.config)
                 .then(x => {
                     resolve(x.data);
                 })

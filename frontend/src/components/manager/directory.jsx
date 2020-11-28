@@ -18,7 +18,18 @@ class Directory extends Component {
                         </thead>
                         
                         <tbody>
-                            
+                            {this.props.directory.map(item => {
+                                console.log("item " + item);
+                                //console.log(this.props.match.params.id)
+                                    return (
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>name</td>
+                                            <td>quant</td>
+                                            <td>$price</td>
+                                        </tr>
+                                    );
+                            })}
                         </tbody>
                     </table>
 
