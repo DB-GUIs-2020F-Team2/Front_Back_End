@@ -1,0 +1,18 @@
+.container{
+    min-height:100%;
+    border: green;
+}
+.jumbotron{
+min-height: 100vh;
+width: 100%;
+background-image: url('https://www.armytimes.com/resizer/JhU0N3rr3s-mNh7y82-jkhTc08M=/1200x0/filters:quality(100)/cloudfront-us-east-1.images.arcpublishing.com/mco/FENRILSFQ5F7VIOMHNUSRBZ4CI.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+margin-bottom:0;
+padding-bottom:0; 
+border:none;
+}
+
+
+
