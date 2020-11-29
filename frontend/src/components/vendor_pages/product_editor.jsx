@@ -3,13 +3,13 @@ import {OrdersRepository} from '../../API/ordersRepo';
 import { Link } from 'react-router-dom';
 
 // referenced AccountEditor.jsx. Need to add ordersRepository 
-export class OrderEditor  extends React.Component {
+export class ProductEditor  extends React.Component {
 
     ordersRepository = new OrdersRepository(); 
 
 state = {
         id: 0, 
-        OrderStatus:''
+        whateverElse:''
 }
 
     onSave(){
@@ -28,7 +28,7 @@ state = {
 
     render(){
         return <form className = "container pt-3">
-        <h1> Order Editor
+        <h1> Product Editor
         </h1> 
 
          <label htmlFor="orderUpdate"> <b>Order Status:</b> </label>
@@ -50,6 +50,7 @@ state = {
                     Save
                 </button>
                 <Link className="btn btn-secondary btn-block" to="/vendor">Return to List</Link>
+    }
             </div>
 
 
@@ -58,9 +59,9 @@ state = {
     }
 
      componentDidMount() {
-        const orderId = +this.props.match.params.orderId;
+        const productId = +this.props.match.params.productId;
         // console.log(orderId);
-        this.setState({id: orderId}); 
+        this.setState({id: productId}); 
 
     }
 }
