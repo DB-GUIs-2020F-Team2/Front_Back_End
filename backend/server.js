@@ -82,7 +82,7 @@ app.get('/getUserType/', (req, res) => {
 });
 
 // Verify the User's username and password
-app.post('/verifyUser', (req, res) => {
+app.post('/verifyUser/', (req, res) => {
   connection.query('SELECT * FROM User WHERE UserName = ? AND HashPass = ? AND UserType = ? UNION SELECT 0,"NULL","NULL","NULL","NULL","NULL","NULL" WHERE NOT EXISTS (SELECT * FROM User WHERE UserName = ? AND HashPass = ? AND UserType = ?);', [req.body.UserName, req.body.HashPass, req.body.UserType, req.body.UserName, req.body.HashPass, req.body.UserType], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query");
