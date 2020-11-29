@@ -373,6 +373,25 @@ app.get('/orders_full/date/:ExpireDate', async (req, res) => {
   });
 });
 
+// get orders before a given date
+app.get('/orders_full/before/:ExpireDate', async (req, res) => {
+  connection.query(`SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE datediff(Orders.ExpireDate, ?) > 0;`,
+   [req.params.ExpireDate], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
 // POST
 // add a new order
 app.post('/orders/', async (req, res) => {
