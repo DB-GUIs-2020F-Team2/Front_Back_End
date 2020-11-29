@@ -40,6 +40,7 @@ class LoginForm extends Component {
     login() {
         let pass = this.state.password;
         pass = sha256(pass);
+        localStorage.setItem('userType', userType);
         axios.post('http://localhost:8000/verifyUser', {username: this.state.username, password: pass})
                     .then(response => {
                         if (response.data === 0) {
