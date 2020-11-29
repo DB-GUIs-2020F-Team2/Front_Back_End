@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 
 class Products extends Component {
     state = {  }
+
+    isDiscounted(disc){
+        if(disc === 0){
+            return "True"
+        }
+        else{
+            return 'False'
+        }
+    }
+
     render() { 
         return (  
             <div className="container">
@@ -12,7 +22,6 @@ class Products extends Component {
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Quantity</th>
                                 <th>Current Price</th>
                                 <th>Discount Price</th>
                                 <th>Details</th>
@@ -21,18 +30,17 @@ class Products extends Component {
                         </thead>
 
                         <tbody>
-                            {this.props.products.map(item => {
+                            {this.props.products.data.map(item => {
                             console.log("item " + item);
                             //console.log(this.props.match.params.id)
                                 return (
                                     <tr>
-                                        <td>ID</td>
-                                        <td>name</td>
-                                        <td>quant</td>
-                                        <td>$price</td>
-                                        <td>$dis price</td>
-                                        <td>dets</td>
-                                        <td>discounted</td>
+                                        <td>{item.ProductID}</td>
+                                        <td>{item.ProductName}</td>
+                                        <td>${item.CurrentPrice}</td>
+                                        <td>${item.DiscountPrice}</td>
+                                        <td>{item.Details}</td>
+                                        <td>{this.isDiscounted(item.IsDiscount)}</td>
                                     </tr>
                                 );
                             })}

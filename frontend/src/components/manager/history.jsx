@@ -15,6 +15,7 @@ class History extends Component {
                                 <th>Start Date</th>
                                 <th>Due Date</th>
                                 <th>Vendor ID</th>
+                                <th>Purchase</th>
                             </tr>
                         </thead>
                         

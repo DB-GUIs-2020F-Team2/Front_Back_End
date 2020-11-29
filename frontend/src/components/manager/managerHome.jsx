@@ -5,7 +5,7 @@ import Products from './products'
 import Directory from './directory'
 import Projects from './projects'
 import Contracts from './contracts'
-import Calendar from './calendar'
+import Control from './control'
 import './managerHome.css'
 import {ManagerRepo} from '../../API/managerRepo';
 
@@ -112,7 +112,7 @@ export class ManagerHome extends Component {
         else if(this.state.view == 5){ 
             return (
                 <React.Fragment>
-                    <Calendar />
+                    <Control />
                 </React.Fragment>
             )
         }

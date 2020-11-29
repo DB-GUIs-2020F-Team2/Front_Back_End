@@ -12,8 +12,8 @@ class Projects extends Component {
                             <tr>
                                 <th>ID</th>
                                 <th>Project Name</th>
-                                <th>Start Date</th>
-                                <th>Due Date</th>
+                                <th>Apply Date</th>
+                                <th>Expire Date</th>
                                 <th>Status</th>
                                 <th>Type</th>
                                 <th>Manager in Charge</th>
@@ -21,18 +21,18 @@ class Projects extends Component {
                         </thead>
                         
                         <tbody>
-                        {this.props.projects.map(item => {
+                        {this.props.projects.data.map(item => {
                             console.log("item " + item);
                             //console.log(this.props.match.params.id)
                                 return (
                                     <tr>
-                                        <td>ID</td>
-                                        <td>name</td>
-                                        <td>quant</td>
-                                        <td>$price</td>
-                                        <td>$dis price</td>
-                                        <td>dets</td>
-                                        <td>discounted</td>
+                                        <td>{item.ProjectID}</td>
+                                        <td>{item.ProjectName}</td>
+                                        <td>{item.ApplyDate}</td>
+                                        <td>{item.ExpireDate}</td>
+                                        <td>{item.ProjectStatus}</td>
+                                        <td>{item.ProjectType}</td>
+                                        <td>{item.ManagerID}</td>
                                     </tr>
                                 );
                             })}

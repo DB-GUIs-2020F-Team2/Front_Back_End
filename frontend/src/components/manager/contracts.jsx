@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 
 class Contracts extends Component {
     state = {  }
+
+    isPayedFor(paid){
+        if(paid === 0){
+            return (
+                "False"
+            )
+        }
+        else{
+            return "True"
+        }
+    }
+
     render() { 
         return ( 
             <div className="container">
@@ -19,18 +31,16 @@ class Contracts extends Component {
                         </thead>
                         
                         <tbody>
-                            {this.props.contracts.map(item => {
+                            {this.props.contracts.data.map(item => {
                                 console.log("item " + item);
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
-                                            <td>ID</td>
-                                            <td>name</td>
-                                            <td>quant</td>
-                                            <td>$price</td>
-                                            <td>$dis price</td>
-                                            <td>dets</td>
-                                            <td>discounted</td>
+                                            <td>{item.ContractID}</td>
+                                            <td>{item.ContractDetails}</td>
+                                            <td>{item.BestBiddingID}</td>
+                                            <td>{item.ContractorID}</td>
+                                            <td>{this.isPayedFor(item.IsPaid)}</td>
                                         </tr>
                                     );
                             })}
