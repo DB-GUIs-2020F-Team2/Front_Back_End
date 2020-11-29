@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 class Directory extends Component {
-    state = {  }
+    state = { 
+        userType: 0
+     }
     render() { 
         return (
             <div className="container">

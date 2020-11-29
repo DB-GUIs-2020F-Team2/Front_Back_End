@@ -71,7 +71,7 @@ export class ManagerHome extends Component {
     render() { 
         return ( 
 
-            <div className = "bg">
+            <div className = "bg managerHome">
 
                 <div>
                         <Header changer = {this.updateView}/>
