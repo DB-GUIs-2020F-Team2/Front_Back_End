@@ -20,7 +20,7 @@ class History extends Component {
                         </thead>
                         
                         <tbody>
-                            {this.props.orders.map(item => {
+                            {this.props.orders.data.map(item => {
                                 console.log("item " + item);
                                 //console.log(this.props.match.params.id)
                                     return (

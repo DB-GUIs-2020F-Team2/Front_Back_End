@@ -4,7 +4,7 @@ import {ManagerRepo} from '../../API/managerRepo';
 
 class Control extends Component {
     state = { 
-        view: -2,
+        view: 0,
         day0: [],
         day1: [],
         day2: [],
@@ -15,30 +15,58 @@ class Control extends Component {
         products: []
      }
 
+     dateCheck(month,day){
+         console.log(month,' ',day)
+        if(day>31 && month == 0 | 2 | 4 | 6 | 7 | 9 | 11){
+            return ""+(month+1)+'-'+(day-31)
+        }
+        else if(day>30){
+            return ""+(month+1)+'-'+(day-30)
+        }
+        else{
+            return ""+(month)+'-'+(day)
+        }
+     }
+
+     getDate(daysFromToday){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth();; //January is 0!
+        var yyyy = today.getFullYear();
+        
+        dd=dd+daysFromToday
+        console.log(dd)
+        return (""+yyyy+'-'+ this.dateCheck(mm+1,dd))
+     }
+
      componentDidMount(){
         let managerRepo = new ManagerRepo()
-        var d = new Date();
-        var n = d.getDate();
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth();; //January is 0!
+        var yyyy = today.getFullYear();
 
-        managerRepo.getOrders(n).then(x => {
+
+
+        managerRepo.getOrders(""+yyyy+'-'+ this.dateCheck(mm+1,dd)).then(x => {
             this.setState({ day0: x });
         });
-        managerRepo.getOrders(n+1).then(x => {
+        managerRepo.getOrders(""+yyyy+'-'+ this.dateCheck(mm+1,dd+1)).then(x => {
             this.setState({ day1: x });
         });
-        managerRepo.getOrders(n+2).then(x => {
+        managerRepo.getOrders(""+yyyy+'-'+ this.dateCheck(mm+1,dd+2)).then(x => {
             this.setState({ day2: x });
         });
-        managerRepo.getOrders(n+3).then(x => {
+        managerRepo.getOrders(""+yyyy+'-'+ this.dateCheck(mm+1,dd+3)).then(x => {
             this.setState({ day3: x });
         });
-        managerRepo.getOrders(n+4).then(x => {
+        managerRepo.getOrders(""+yyyy+'-'+ this.dateCheck(mm+1,dd+4)).then(x => {
             this.setState({ day4: x });
         });
-        managerRepo.getOrders(n+5).then(x => {
+        managerRepo.getOrders(""+yyyy+'-'+ this.dateCheck(mm+1,dd+5)).then(x => {
             this.setState({ day5: x });
         });
-        managerRepo.getOrders(n+6).then(x => {
+        managerRepo.getOrders(""+yyyy+'-'+ this.dateCheck(mm+1,dd+6)).then(x => {
             this.setState({ day6: x });
         });
         managerRepo.getProducts().then(x => {
@@ -57,17 +85,18 @@ class Control extends Component {
         return ( 
             <div className="container">
                 <div className = "col align-self-center">
-                    <h2 className = 'row'>
-                        <button className = ' btn col-1' onClick = {() => this.updateView(0)}>Today</button>
-                        <button className = ' btn col-1' onClick = {() => this.updateView(1)}>1</button>
-                        <button className = ' btn col-1' onClick = {() => this.updateView(2)}>2</button>
-                        <button className = ' btn col-1' onClick = {() => this.updateView(3)}>3</button>
-                        <button className = ' btn col-1' onClick = {() => this.updateView(4)}>4</button>
-                        <button className = ' btn col-1' onClick = {() => this.updateView(5)}>5</button>
-                        <button className = ' btn col-1' onClick = {() => this.updateView(6)}>6</button>
+                    <h2 className = 'row justify-content-around'>
+                        <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(0)}>Today</button>
+                        <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(1)}>1 Day from Now</button>
+                        <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(2)}>2 Days from Now</button>
+                        <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(3)}>3 Days from Now</button>
+                        <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(4)}>4 Days from Now</button>
+                        <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(5)}>5 Days from Now</button>
+                        <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(6)}>6 Days from Now</button>
                         <input className = 'form-control col-2' type="text" placeholder="Search.."></input>
                     </h2>
                     <div className="container">
+                        <h4 className = 'bg-warning'>Orders for {this.getDate(this.state.view)}</h4>
                         {this.changeView()}
                     </div>
 
