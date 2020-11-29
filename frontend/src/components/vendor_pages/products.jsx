@@ -1,6 +1,7 @@
 
 import React from 'react';
 import {OrdersRepository} from '../../API/ordersRepo';
+import { Link } from 'react-router-dom';
 
 export class Products extends React.Component{
 
@@ -18,6 +19,11 @@ export class Products extends React.Component{
         <thead>
             <tr>
                 <th> Product </th>
+                <th> Details </th>
+                <th> Regular Price </th>
+                <th> Discount Price </th>
+                <th> On Discount </th>
+                <th> Update </th> 
 
                 <th>&nbsp;</th>
             </tr>
@@ -28,8 +34,24 @@ export class Products extends React.Component{
             this.state.products.map((product) =>(
                 <tr key={product.ProductID}>
                             <td>
-                                {product.ProductID}
+                                {product.ProductName}
                             </td>
+                            <td>
+                            {product.Details}
+                            </td>
+                            <td>
+                            ${ product.CurrentPrice}
+                            </td>
+                            <td>
+                            ${product.DiscountPrice}
+                            </td>
+                            <td>
+                            {product.IsDiscount ? 'yes' : 'no'}
+                            </td>
+                            <td>
+                            <Link to={'editproduct/' + product.ProductID}  className="btn btn-primary">Update</Link>
+                            </td> 
+
                         </tr>
 
             ))

@@ -79,9 +79,11 @@ export class OrdersRepository{
     
 
     //will be called in order_editor 
-    updateOrder(id, order) {
+    updateOrder(id, orderStatus) {
+        let params = { OrderStatus: orderStatus,
+                    OrderID: id}
         return new Promise((resolve, reject) => {
-            axios.put(`${this.url}/order/${id}`, order, this.config)
+            axios.put(`${this.url}/order/`, params, this.config)
             .then(x => resolve(x.data))
             .catch(e => {
                 alert(e);
