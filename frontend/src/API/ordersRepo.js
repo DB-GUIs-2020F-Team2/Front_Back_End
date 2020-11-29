@@ -62,6 +62,20 @@ export class OrdersRepository{
         });
     }
 
+
+    // called in products.jsx 
+    getProductsForVendor(vendorId) {
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/vendor_product/${vendorId}`, this.config)
+            .then(x => resolve(x.data.data))
+            .catch(e => {
+                alert(e);
+                console.log(e);
+                reject();
+            });
+        });
+    }
+
     
 
     //will be called in order_editor 

@@ -20,6 +20,7 @@ export class VendorDashboard extends React.Component{
     }
 
     componentDidMount() {
+        // change to getting orders based on vendor id 
         this.ordersRepository.getOrders()
         .then(orders=>this.setState({orders}));
     }

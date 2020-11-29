@@ -314,10 +314,10 @@ app.get('/orders_full', function (req, res) {
 
 // get order with products
 
-app.get('/orders_full/', async (req, res) => {
-  var OrderID = req.param("OrderID");
+app.get('/orders_full/:id', async (req, res) => {
+  //var OrderID = req.param("OrderID");
   connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.OrderID = ?',
-  req.params.id, function (err, rows, fields) {
+  [req.params.id], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
       res.status(400).json({
@@ -1403,10 +1403,10 @@ app.delete('/project_order/', async (req, res) =>{
 ////////////////////////////////// VENDOR_PRODUCT /////////////////////////////////
 // GET
 // gets orders associated with a product
-app.get('/vendor_product/', async (req, res) =>{
-  var VendorID = req.param("VendorID")
+app.get('/vendor_product/:id', async (req, res) =>{
+  //var VendorID = req.param("VendorID")
   connection.query('SELECT * FROM `team2`.`Vendor_Product` WHERE VendorID = ?',
-  VendorID, function(err, rows, fields) {
+  [req.params.id], function(err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
       res.status(400).json({
