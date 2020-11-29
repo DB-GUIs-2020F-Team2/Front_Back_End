@@ -63,7 +63,23 @@ app.get('/getUser', (req, res) => {
     }
   });
 });
-
+app.get('/getUserType/', (req, res) => {
+  var Usertype=req.param("UserType")
+  connection.query('SELECT * FROM User where `UserType`= ?;',[Usertype], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
 
 // Verify the User's username and password
 app.get('/verifyUser', (req, res) => {
