@@ -86,7 +86,7 @@ export class ManagerRepo {
 
     getVendors(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getProjects',this.config)
+            axios.get('http://localhost:8000/getUserType/?UserType=vendor')
                 .then(x => {
                     resolve(x.data);
                 })
@@ -99,7 +99,7 @@ export class ManagerRepo {
 
     getContractors(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getProjects',this.config)
+            axios.get('http://localhost:8000/getUserType/?UserType=contractor')
                 .then(x => {
                     resolve(x.data);
                 })

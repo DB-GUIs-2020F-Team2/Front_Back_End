@@ -3,6 +3,7 @@ import "./loginForm.css"
 import { sha256 } from 'js-sha256';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { LoginRepo } from '../../API/loginRepo';
 
 class LoginForm extends Component {
 
@@ -39,18 +40,10 @@ class LoginForm extends Component {
 
     login() {
         let pass = this.state.password;
+        let lr = new LoginRepo()
         pass = sha256(pass);
         localStorage.setItem('userType', this.state.userType);
-        axios.post('http://localhost:8000/verifyUser', {username: this.state.username, password: pass})
-                    .then(response => {
-                        if (response.data === 0) {
-                            this.failedLogin()
-                        }
-                        else {
-                            console.log(response.data)
-                            this.goodLogin(response.data)
-                        }
-        })
+        this.setState({redirect: lr.loginUser(this.state.username,this.state.password,this.state.userType)})
 
     }
 
@@ -59,7 +52,7 @@ class LoginForm extends Component {
             <div className = "row-12 align-self-center">
                 <div id = "loginForm" className = "mt-5 mb-5 border bg-white container-fluid col-7 align-self-center">
                     <h2 className = "p-2 banner">Login</h2>
-                    <form className = "" action = "http://localhost:3000/manager">
+                    <form className = "form">
                         <div className = "">
                             <label htmlFor = "username" className = "m-2">Username</label>
                             <input type = "text" id = "username" onChange = {(e) => this.setState({username: e.target.value})}></input>
@@ -77,7 +70,45 @@ class LoginForm extends Component {
                             </select>
                         </div>
                         <div>
-                            <button type = "button" className = "submit m-2 login" onClick = {this.login}>Login</button>
+                            {(() => {
+                                if (this.state.userType === '') {
+                                    return (
+                                        <div>
+                                            <button type = "button" className="btn button login disabled">Login</button>
+                                        </div>
+                                    )
+                                }
+                                else if (this.state.userType === 'Manager' && this.state.username) {
+                                    return (
+                                        <div>
+                                            <button type = "button" className="btn button login" onClick ={this.onLogin}>Login</button>
+                                            {this.state.redirect ? 
+                                            <Redirect to={"/manager"}/>: 
+                                            <Redirect to = {"/"}/>}
+                                        </div>
+                                    )
+                                }
+                                else if (this.state.userType === 'Contractor' && this.state.username) {
+                                    return (
+                                        <div>
+                                            <button type = "button" className="btn login button" onClick ={this.onLogin}>Login</button>
+                                            {this.state.redirect ? 
+                                            <Redirect to={"/contractor"}/>: 
+                                            <Redirect to = {"/"}/>}
+                                        </div>
+                                    )
+                                }
+                                else if (this.state.userType === 'Vendor' && this.state.username) {
+                                    return (
+                                        <div>
+                                            <button type = "button" className="btn login button" onClick ={this.onLogin}>Login</button>
+                                            {this.state.redirect ? 
+                                            <Redirect to={"/vendor"}/>: 
+                                            <Redirect to = {"/"}/>}
+                                        </div>
+                                    )
+                                }
+                            })}
                                 
                         </div>
                     </form>
