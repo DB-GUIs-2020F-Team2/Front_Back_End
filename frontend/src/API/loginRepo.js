@@ -4,7 +4,7 @@ export class LoginRepo {
 
     loginUser(username, password, userType){
         return new Promise((resolve,reject) =>{
-            axios.post('http://localhost:8000/loginUser', username, password, userType)
+            axios.post('http://localhost:8000/verifyUser', username, password, userType)
                 .then(x => {
                     resolve(x.data);
                 })
