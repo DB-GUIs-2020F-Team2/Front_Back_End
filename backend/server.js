@@ -1416,7 +1416,7 @@ app.delete('/project_order/', async (req, res) =>{
 // GET
 // gets orders associated with a product
 app.get('/vendor_product/:VendorID', async (req, res) =>{
-  connection.query('SELECT * FROM `team2`.`Vendor_Product` WHERE VendorID = ?',
+  connection.query('SELECT * FROM Vendor_Product INNER JOIN Product ON Product.ProductID = Vendor_Product.ProductID WHERE VendorID = ?',
   [req.params.VendorID], function(err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
