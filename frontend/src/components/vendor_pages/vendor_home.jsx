@@ -3,7 +3,6 @@ import Header from './header'
 import { VendorDashboard}from './vendor_dash'
 import { Products } from './products'
 
-
 //import './managerHome.css'
 
 export class VendorHome extends Component {
