@@ -1227,9 +1227,28 @@ app.put('/product/', async (req, res) =>{
       })
     }
     else{
-      res.status(200).send(`Updated order ${ProductID} with discount = ${IsDiscount}.`);
+      res.status(200).send(`Updated order ${ProductID} with discount = ${IsDiscount} .`);
     }
   });
+})
+
+app.put('/productdiscountdetails/', async (req, res) =>{
+  var IsDiscount = req.param("IsDiscount")
+  var ProductID = req.param("ProductID")
+  var Details = req.param("Details")
+  connection.query('UPDATE `team2`.`Product` SET  `IsDiscount`=? , `Details`= ? WHERE `ProductID` = ?',
+      [IsDiscount,Details, ProductID], function (err, rows, fields) {
+        if (err) {
+          logger.error("Error while executing Query: \n", err);
+          res.status(400).json({
+            "data": [],
+            "error": "MySQL error"
+          })
+        }
+        else{
+          res.status(200).send(`Updated order ${ProductID} With IsDiscount = ${IsDiscount} and details= ${Details}.`);
+        }
+      });
 })
 
 //DELETE
