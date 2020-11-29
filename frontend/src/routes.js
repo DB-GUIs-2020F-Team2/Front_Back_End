@@ -12,6 +12,7 @@ import { Directory } from './components/contractor/directory'
 import { Profile } from './components/contractor/profile'
 import { Contracts } from './components/contractor/contracts'
 import {Register} from './components/register/register' 
+import { Products } from './components/vendor_pages/products'
 
 export const ROUTES = [
     { path: '/home', component: Home },
@@ -24,6 +25,7 @@ export const ROUTES = [
     { path: '/details/:orderId', component: OrderDetails },
     { path: '/edit/:orderId', component: OrderEditor },
     { path: '/editproduct/:productId', component: ProductEditor},
+    { path: '/products', component: Products},
     { path: '/project', component: Project },
     { path: '/directory', component: Directory },
     { path: '/profile', component: Profile },
