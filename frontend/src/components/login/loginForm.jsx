@@ -28,16 +28,6 @@ class LoginForm extends Component {
         this.setState({password: value})
     }
 
-    failedLogin(){
-        alert('Login Failed, try again')
-        this.setState({redirect: false})
-    }
-
-    goodLogin(){
-        alert('Welcome')
-        this.setState({redirect: true})
-    }
-
     login() {
         let pass = this.state.password;
         let lr = new LoginRepo()
@@ -45,6 +35,49 @@ class LoginForm extends Component {
         localStorage.setItem('userType', this.state.userType);
         this.setState({redirect: lr.loginUser(this.state.username,this.state.password,this.state.userType)})
 
+    }
+
+    makeButton(){
+        if (this.state.userType === '') {
+            return (
+                <div>
+                    <button type = "button" className="btn btn-success button login disabled">Login</button>
+                </div>
+            )
+        }
+        else if (this.state.userType === 'Manager' && this.state.username) {
+            return (
+                <div>
+                    <button type = "button" className="btn btn-success button login" onClick ={this.onLogin}>Login</button>
+                    {this.state.redirect ? 
+                    <Redirect to={"/manager"}/>: 
+                    <Redirect to = {"/login"}/>}
+                </div>
+            )
+        }
+        else if (this.state.userType === 'Contractor' && this.state.username) {
+            return (
+                <div>
+                    <button type = "button" className="btn btn-success login button" onClick ={this.onLogin}>Login</button>
+                    {this.state.redirect ? 
+                    <Redirect to={"/contractor"}/>: 
+                    <Redirect to = {"/login"}/>}
+                </div>
+            )
+        }
+        else if (this.state.userType === 'Vendor' && this.state.username) {
+            return (
+                <div>
+                    <button type = "button" className="btn btn-success login button" onClick ={this.onLogin}>Login</button>
+                    {this.state.redirect ? 
+                    <Redirect to={"/vendor"}/>: 
+                    <Redirect to = {"/login"}/>}
+                </div>
+            )
+        }
+        else{
+            return (<p>you messed up</p>)
+        }
     }
 
     render() { 
@@ -64,54 +97,18 @@ class LoginForm extends Component {
                         <div className = "">
                             <label htmlFor = "usertype" className = "m-2">Department</label>
                             <select type = "text" id = "usertype" onChange = {(e) => this.setState({userType: e.target.value})}>
+                                <option value = ''></option>
                                 <option value = 'Manager'>Manager</option>
                                 <option value = 'Contractor'>Contractor</option>
                                 <option value = 'Vendor'>Vendor</option>
                             </select>
                         </div>
-                        <div>
-                            {(() => {
-                                if (this.state.userType === '') {
-                                    return (
-                                        <div>
-                                            <button type = "button" className="btn button login disabled">Login</button>
-                                        </div>
-                                    )
-                                }
-                                else if (this.state.userType === 'Manager' && this.state.username) {
-                                    return (
-                                        <div>
-                                            <button type = "button" className="btn button login" onClick ={this.onLogin}>Login</button>
-                                            {this.state.redirect ? 
-                                            <Redirect to={"/manager"}/>: 
-                                            <Redirect to = {"/"}/>}
-                                        </div>
-                                    )
-                                }
-                                else if (this.state.userType === 'Contractor' && this.state.username) {
-                                    return (
-                                        <div>
-                                            <button type = "button" className="btn login button" onClick ={this.onLogin}>Login</button>
-                                            {this.state.redirect ? 
-                                            <Redirect to={"/contractor"}/>: 
-                                            <Redirect to = {"/"}/>}
-                                        </div>
-                                    )
-                                }
-                                else if (this.state.userType === 'Vendor' && this.state.username) {
-                                    return (
-                                        <div>
-                                            <button type = "button" className="btn login button" onClick ={this.onLogin}>Login</button>
-                                            {this.state.redirect ? 
-                                            <Redirect to={"/vendor"}/>: 
-                                            <Redirect to = {"/"}/>}
-                                        </div>
-                                    )
-                                }
-                            })}
-                                
-                        </div>
                     </form>
+                </div>
+
+                <div id = 'loginButton' className = 'banner'>
+                    {this.makeButton()}
+ 
                 </div>
             </div>
         );
