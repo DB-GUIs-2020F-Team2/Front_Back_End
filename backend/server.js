@@ -429,7 +429,7 @@ app.post('/orders/', async (req, res) => {
 
 // PUT
 // updates an order status
-app.put('/order/', async (req, res) =>{
+app.put('/order/status/', async (req, res) =>{
   var OrderStatus = req.param("OrderStatus")
   var OrderID = req.param("OrderID")
   connection.query('UPDATE `team2`.`Orders` SET `OrderStatus` = ? WHERE `OrderID` = ?',
@@ -443,6 +443,25 @@ app.put('/order/', async (req, res) =>{
     }
     else{
       res.status(200).send(`Updated order ${OrderID} with status ${OrderStatus}.`);
+    }
+  });
+})
+
+// updates an expire date
+app.put('/order/date/', async (req, res) =>{
+  var ExpireDate = req.param("ExpireDate")
+  var OrderID = req.param("OrderID")
+  connection.query('UPDATE `team2`.`Orders` SET `ExpireDate` = ? WHERE `OrderID` = ?',
+  [ExpireDate, OrderID], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).send(`Updated order ${OrderID} with expire date ${ExpireDate}.`);
     }
   });
 })
