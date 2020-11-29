@@ -29,6 +29,7 @@ class History extends Component {
                                             <td>quant</td>
                                             <td>$price</td>
                                             <td>$dis price</td>
+                                            <td><button>Buy</button></td>
                                         </tr>
                                     );
                                 })}
