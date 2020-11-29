@@ -100,6 +100,40 @@ app.get('/verifyUser', (req, res) => {
 });
 
 
+app.get('/getUserByID', (req, res) => {
+  connection.query('SELECT * FROM User WHERE UserID = ?;', [req.body.UserID], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
+
+app.post('/verifyUserpost', (req, res) => {
+  connection.query('SELECT IF(EXISTS(SELECT * FROM User WHERE UserName = ? AND HashPass = ? AND UserType = ?), (SELECT UserID AS result FROM User WHERE UserName = ? AND HashPass = ? AND UserType = ?), 0) AS result;', [req.body.UserName, req.body.HashPass, req.body.UserType, req.body.UserName, req.body.HashPass, req.body.UserType], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query");
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).send(rows[0].result.toString());
+    }
+  });
+});
+
+
 // Insert a new User with all the information it needs
 app.post('/registerUser', (req, res) => {
   connection.query('INSERT INTO User (UserName, HashPass, ContactInfo, InformationVis, Email, UserType) VALUES (?, ?, ?, ?, ?, ?);', [req.body.UserName, req.body.HashPass, req.body.ContactInfo, req.body.InformationVis, req.body.Email, req.body.UserType], function (err, rows, fields) {
