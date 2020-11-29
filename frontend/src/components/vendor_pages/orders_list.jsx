@@ -38,7 +38,7 @@ export const OrdersList = props =>
                             <Link to={'details/' + order.OrderID}  className="btn btn-primary">Details</Link>
                             </td>
                             <td>
-                            <Link to={'edit/' + order.OrderID}  className="btn btn-primary" onShipped={ () => this.onShippedClicked(order)}>Update</Link>
+                            <Link to={'edit/' + order.OrderID}  className="btn btn-primary">Update</Link>
                             </td>
                         </tr>)
                     

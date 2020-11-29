@@ -9,17 +9,12 @@ export class OrderEditor  extends React.Component {
 
 state = {
         id: 0, 
-        customer: 0,
-        datePlaced: 0,
-        shipped :0,
-        completed :0,
-        dateCompleted : 0,
-        productQuantity: 0,
+        OrderStatus:''
 }
 
     onSave(){
         if(this.state.id){
-            this.ordersRepository.updateOrder(this.state.id, this.state)
+            this.ordersRepository.updateOrder(this.state.id, this.state.OrderStatus)
                 .then(()=>{
                 alert('Order updated!');
                 this.setState({ redirect: '/vendor'});
@@ -36,27 +31,15 @@ state = {
         <h1> Order Editor
         </h1> 
 
-        <div className="form-group">
-                <label htmlFor="isShipped">
-                    <input type="checkbox"
-                        id="isShipped"
-                        name="isShipped"
-                        checked={this.state.shipped}
-                        onChange={event => this.setState({ shipped: event.target.checked })} />
-                        Shipped
-                    </label>
-            </div>
-
-        <div className="form-group">
-            <label htmlFor="isCompleted">
-                    <input type="checkbox"
-                        id="isCompleted"
-                        name="isCompleted"
-                        checked={this.state.completed}
-                        onChange={event => this.setState({ completed: event.target.checked })} />
-                        Completed
-                </label>
-            </div>
+         <label htmlFor="orderUpdate"> <b>Order Status:</b> </label>
+                        <textarea 
+                            className="form-control" 
+                            name="orderStatus" 
+                            rows="1"
+                            value={this.state.OrderStatus}
+                            onChange={ e => { this.setState({ OrderStatus: e.target.value }) }}
+                            placeholder=""
+                        ></textarea>    
 
             <hr />
             <br />
@@ -78,10 +61,6 @@ state = {
         const orderId = +this.props.match.params.orderId;
         // console.log(orderId);
         this.setState({id: orderId}); 
-        /*if (accountId) {
-            this.accountsRepository.getOrder(orderId)
-                .then(account => this.setState(account));
-        }*/
 
     }
 }

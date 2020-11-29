@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './navabar.jsx'
 
-class Directory extends Component {
+export class Directory extends Component {
     state = { 
         name:'Wyatt',
         phoneNumber: '911',

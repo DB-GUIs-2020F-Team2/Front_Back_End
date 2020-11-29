@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import NavBar from './navabar.jsx'
+import { Link } from 'react-router-dom';
 
-class Project extends Component {
+export class Project extends Component {
     state = {
         project: 'Tank',
         contact: '209382999'
@@ -36,5 +37,3 @@ class Project extends Component {
          );
     }
 }
- 
-export default Project;

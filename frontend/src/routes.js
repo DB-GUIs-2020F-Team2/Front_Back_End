@@ -6,11 +6,17 @@ import { VendorDashboard } from './components/vendor_pages/vendor_dash'
 import { Contractor } from './components/contractor/contractor'
 import { OrderDetails } from './components/vendor_pages/order_details' 
 import { OrderEditor } from './components/vendor_pages/order_editor' 
+import { ProductEditor } from './components/vendor_pages/product_editor' 
+import { Project } from './components/contractor/project'
+import { Directory } from './components/contractor/directory'
+import { Profile } from './components/contractor/profile'
+import { Contracts } from './components/contractor/contracts'
 import {Register} from './components/register/register' 
+import { Products } from './components/vendor_pages/products'
 
 export const ROUTES = [
     { path: '/home', component: Home },
-    {path: '/register', component: Register},
+    { path: '/register', component: Register},
     { path: '/login', component: Login },
     { path: '/manager', component: ManagerHome },
     { path: '/vendor', component: VendorHome},
@@ -18,5 +24,11 @@ export const ROUTES = [
     { path: '/contractor', component: Contractor},
     { path: '/details/:orderId', component: OrderDetails },
     { path: '/edit/:orderId', component: OrderEditor },
+    { path: '/editproduct/:productId', component: ProductEditor},
+    { path: '/products', component: Products},
+    { path: '/project', component: Project },
+    { path: '/directory', component: Directory },
+    { path: '/profile', component: Profile },
+    { path: '/contracts', component: Contracts },
     { path: '/', component: Home }
 ]

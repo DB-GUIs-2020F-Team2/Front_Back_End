@@ -8,7 +8,7 @@ export class ManagerRepo {
 
     getDirectory(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/directory', this.config)
+            axios.get('http://localhost:8000/getUser', this.config)
                 .then(x => {
                     resolve(x.data.data);
                 })
@@ -21,7 +21,7 @@ export class ManagerRepo {
 
     getOrders(date){
         return new Promise((resolve,reject) =>{
-            axios.get(`http://localhost:8000/orders/${date}`,this.config)
+            axios.get(`http://localhost:8000/orders_full/date/${date}`,this.config)
                 .then(x => {
                     resolve(x.data.data);
                 })
@@ -60,7 +60,7 @@ export class ManagerRepo {
 
     getPastOrders(date){ //send todays date
         return new Promise((resolve,reject) =>{
-            axios.get(`http://localhost:8000/getPastOrders/${date}`,this.config)
+            axios.get(`http://localhost:8000/orders_full/before/${date}'`,this.config)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -73,7 +73,33 @@ export class ManagerRepo {
 
     getProjects(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/projects',this.config)
+            axios.get('http://localhost:8000/getProjects',this.config)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    getVendors(){
+        return new Promise((resolve,reject) =>{
+            axios.get('http://localhost:8000/getProjects',this.config)
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    getContractors(){
+        return new Promise((resolve,reject) =>{
+            axios.get('http://localhost:8000/getProjects',this.config)
                 .then(x => {
                     resolve(x.data);
                 })

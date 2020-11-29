@@ -62,12 +62,28 @@ export class OrdersRepository{
         });
     }
 
+
+    // called in products.jsx 
+    getProductsForVendor(vendorId) {
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/vendor_product/${vendorId}`, this.config)
+            .then(x => resolve(x.data.data))
+            .catch(e => {
+                alert(e);
+                console.log(e);
+                reject();
+            });
+        });
+    }
+
     
 
     //will be called in order_editor 
-    updateOrder(id, order) {
+    updateOrder(id, orderStatus) {
+        let params = { OrderStatus: orderStatus,
+                    OrderID: id}
         return new Promise((resolve, reject) => {
-            axios.put(`${this.url}/order/${id}`, order, this.config)
+            axios.put(`${this.url}/order/`, params, this.config)
             .then(x => resolve(x.data))
             .catch(e => {
                 alert(e);

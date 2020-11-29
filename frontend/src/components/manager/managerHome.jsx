@@ -5,7 +5,7 @@ import Products from './products'
 import Directory from './directory'
 import Projects from './projects'
 import Contracts from './contracts'
-import Calendar from './calendar'
+import Control from './control'
 import './managerHome.css'
 import {ManagerRepo} from '../../API/managerRepo';
 
@@ -22,6 +22,8 @@ export class ManagerHome extends Component {
         view: 5,
         orders: [],
         directory: [],
+        vendors: [],
+        contractors: [],
         products: [],
         contracts: [],
         projects: []
@@ -37,6 +39,10 @@ export class ManagerHome extends Component {
     componentDidMount(){
 
         let managerRepo = new ManagerRepo()
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth();; //January is 0!
+        var yyyy = today.getFullYear();
 
         managerRepo.getProducts().then(x => {
             this.setState({ products: x });
@@ -44,7 +50,7 @@ export class ManagerHome extends Component {
         managerRepo.getDirectory().then(x => {
             this.setState({ directory: x });
         });
-        managerRepo.getOrders().then(x => {
+        managerRepo.getPastOrders(""+yyyy+'-'+(mm+1)+'-'+dd).then(x => {
             this.setState({ orders: x });
         });
         managerRepo.getContracts().then(x => {
@@ -53,13 +59,19 @@ export class ManagerHome extends Component {
         managerRepo.getProjects().then(x => {
             this.setState({ projects: x });
         });
+        managerRepo.getVendors().then(x => {
+            this.setState({ vendors: x });
+        });
+        managerRepo.getContractors().then(x => {
+            this.setState({ contractors: x });
+        });
         console.log(this.state)
     }
 
     render() { 
         return ( 
 
-            <div className = "bg">
+            <div className = "bg managerHome">
 
                 <div>
                         <Header changer = {this.updateView}/>
@@ -112,7 +124,7 @@ export class ManagerHome extends Component {
         else if(this.state.view == 5){ 
             return (
                 <React.Fragment>
-                    <Calendar />
+                    <Control />
                 </React.Fragment>
             )
         }

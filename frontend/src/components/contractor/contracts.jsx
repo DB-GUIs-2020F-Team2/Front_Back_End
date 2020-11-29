@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
-class Contracts extends Component {
+export class Contracts extends Component {
     state = {  }
     render() { 
         return ( 
@@ -11,5 +12,3 @@ class Contracts extends Component {
          );
     }
 }
- 
-export default Contracts;
