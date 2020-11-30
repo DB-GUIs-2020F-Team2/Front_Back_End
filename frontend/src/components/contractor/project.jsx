@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import NavBar from './navabar.jsx'
+import { ContractorRepo } from '../../API/contractorRepo'
 
 export class Project extends Component {
+
+    contractorRepo = new ContractorRepo();
+
     state = {
-        project: 'Tank',
-        contact: '209382999'
+        user: [],
+        projects: []
      }
     render() { 
         return ( 
@@ -12,7 +16,7 @@ export class Project extends Component {
                 <NavBar/>
 
                 <h2 className = "display-5 text-center font-weight m-2 p-2 bg-light">Projects</h2>
-                <table class="table table-hover">
+                <table className="table table-hover">
                 <thead>
                     <tr>
                     <th scope="col">Project</th>
@@ -34,5 +38,18 @@ export class Project extends Component {
             // api calls - get projects, get contacts
             // update button -> update page
          );
+    }
+    
+    componentDidMount(){
+        
+        const id = localStorage.getItem('UserID');
+
+        this.contractorRepo.getProjectsC(id)
+            .then(x => this.setState({user : x}));
+
+            const ids = this.state.user.ProjectID;
+
+            this.contractorRepo.getProjects(ids)
+                .then(x => this.setState({projects : x}));
     }
 }

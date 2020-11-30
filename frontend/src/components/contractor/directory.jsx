@@ -16,7 +16,7 @@ export class Directory extends Component {
                 <NavBar/>
 
                 <h2 className = "display-5 text-center font-weight m-2 p-2 bg-light">Contractor Directory</h2>
-                <table class="table table-hover">
+                <table className="table table-hover">
                 <thead>
                     <tr>
                     <th scope="col">Name</th>
