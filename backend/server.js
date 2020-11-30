@@ -437,6 +437,43 @@ app.get('/orders_full/vendor/:VendorID', async (req, res) => {
   });
 });
 
+// get expired orders for vendor
+app.get('/orders/vendor/old/:VendorID', async (req, res) => {
+  connection.query(`SELECT * FROM Orders WHERE datediff(Orders.ExpireDate, CURDATE()) < 0 AND Orders.VendorID = ? ORDER BY Orders.ApplyDate;`,
+   [req.params.VendorID], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
+// get current orders for vendor
+app.get('/orders/vendor/curr/:VendorID', async (req, res) => {
+  connection.query(`SELECT * FROM Orders WHERE datediff(Orders.ExpireDate, CURDATE()) >= 0 AND Orders.VendorID = ? ORDER BY Orders.ApplyDate;`,
+   [req.params.VendorID], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
 
 // get orders from given date
 app.get('/orders_full/date/:ExpireDate', async (req, res) => {
