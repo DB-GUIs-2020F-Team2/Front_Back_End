@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 
-class Navbar extends React.Component{
+class Navbar extends Component{
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-            <a className="navbar-brand p-2" href="#">Project Tracker</a> 
+             <Link to ='/' className="text-light">Project Tracker</Link>   
             </nav>
 
             //href takes you back to home page 

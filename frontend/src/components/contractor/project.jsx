@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import NavBar from './navabar.jsx'
-import { Link } from 'react-router-dom';
 
 export class Project extends Component {
     state = {
