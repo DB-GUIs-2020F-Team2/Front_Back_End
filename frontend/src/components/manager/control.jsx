@@ -5,6 +5,8 @@ import {ManagerRepo} from '../../API/managerRepo';
 class Control extends Component {
     state = { 
         view: 0,
+        searchVal: '',
+        searchResults: [],
         day0: [],
         day1: [],
         day2: [],
@@ -16,7 +18,7 @@ class Control extends Component {
      }
 
      dateCheck(month,day){
-         console.log(month,' ',day)
+        //console.log(month,' ',day)
         if(day>31 && month == 0 | 2 | 4 | 6 | 7 | 9 | 11){
             return ""+(month+1)+'-'+(day-31)
         }
@@ -35,7 +37,7 @@ class Control extends Component {
         var yyyy = today.getFullYear();
         
         dd=dd+daysFromToday
-        console.log(dd)
+        //console.log(dd)
         return (""+yyyy+'-'+ this.dateCheck(mm+1,dd))
      }
 
@@ -81,6 +83,14 @@ class Control extends Component {
         return;
     }
 
+    searching(projectID){
+        let managerRepo = new ManagerRepo()
+        managerRepo.searchForProjectOrders(projectID).then(x => {
+            this.setState({ searchResults: x });
+        });
+        this.updateView(7)
+    }
+
     render() { 
         return ( 
             <div className="container">
@@ -93,7 +103,10 @@ class Control extends Component {
                         <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(4)}>4 Days from Now</button>
                         <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(5)}>5 Days from Now</button>
                         <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(6)}>6 Days from Now</button>
-                        <input className = 'form-control col-2' type="text" placeholder="Search.."></input>
+                        <form>
+                            <input type="text" placeholder="Search.." name="search" onChange = {(e) => this.setState({searchVal: e.target.value})}></input>
+                            <button onClick = {() => this.searching(this.state.searchVal)}><i class="fa fa-search"></i></button>
+                        </form>
                     </h2>
                     <div className="container">
                         <h4 className = 'bg-warning'>Orders for {this.getDate(this.state.view)}</h4>
@@ -114,6 +127,7 @@ class Control extends Component {
         }
         else if(this.state.view == 0){
             return (
+                this.state.day0.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
@@ -147,6 +161,7 @@ class Control extends Component {
         }
         else if(this.state.view == 1){ 
             return (
+                this.state.day1.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
@@ -180,6 +195,7 @@ class Control extends Component {
         }
         else if(this.state.view == 2){
             return (
+                this.state.day2.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
@@ -213,6 +229,7 @@ class Control extends Component {
         }
         else if(this.state.view == 3){ 
             return (
+                this.state.day3.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
@@ -246,6 +263,7 @@ class Control extends Component {
         }
         else if(this.state.view == 4){ 
             return (
+                this.state.day4.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
@@ -279,6 +297,7 @@ class Control extends Component {
         }
         else if(this.state.view == 5){ 
             return (
+                this.state.day5.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
@@ -312,6 +331,7 @@ class Control extends Component {
         }
         else if(this.state.view == 6){ 
             return (
+                this.state.day6.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
@@ -326,6 +346,40 @@ class Control extends Component {
                         
                         <tbody>
                             {this.state.day6.map(item => {
+                                console.log("item " + item);
+                                //console.log(this.props.match.params.id)
+                                    return (
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>name</td>
+                                            <td>quant</td>
+                                            <td>$price</td>
+                                            <td>$dis price</td>
+                                        </tr>
+                                    );
+                                })}
+                        </tbody>
+                    </table>
+                </React.Fragment>
+            )
+        }
+        else if(this.state.view == 7){ 
+            return (
+                this.state.searchResults.length === 0 ? <p className = 'bg-light'>No results found</p> :
+                <React.Fragment>
+                    <table className = "table table-striped">
+                        <thead className = "thead-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Status</th>
+                                <th>Start Date</th>
+                                <th>Due Date</th>
+                                <th>Vendor ID</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            {this.state.searchResults.map(item => {
                                 console.log("item " + item);
                                 //console.log(this.props.match.params.id)
                                     return (

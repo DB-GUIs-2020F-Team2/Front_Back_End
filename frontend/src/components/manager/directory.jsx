@@ -1,16 +1,42 @@
 import React, { Component } from 'react';
 
 class Directory extends Component {
+    constructor(){
+        super()
+        
+    }
     state = { 
-        userType: 0
+        userType: 0,
+        list:[]
      }
+
+     newList(listNum){
+         if(listNum ===0){
+            this.setState({list: this.props.directory})
+         }
+         else if(listNum === 1){
+            this.setState({list: this.props.vendors.data})
+         }
+         else{
+            this.setState({list: this.props.contractors.data})
+         }
+         this.forceUpdate()
+     }
+
+     startUp(){
+         if(this.state.list == []){
+            this.setState({list: this.props.directory})
+            this.forceUpdate()
+         }
+     }
+
     render() { 
         return (
             <div className="container">
-                <h3 className = 'row justify-content-around'>
-                    <button className = 'btn col-4 btn-success'>All</button>
-                    <button className = 'btn col-4 btn-success'>Vendor</button>
-                    <button className = 'btn col-4 btn-success'>Contractor</button>
+                <h3 onLoad = {() => this.startUp()} className = 'row justify-content-around'>
+                    <button className = 'btn col-4 btn-success' onClick = {() => this.newList(0)}>All</button>
+                    <button className = 'btn col-4 btn-success' onClick = {() => this.newList(1)}>Vendor</button>
+                    <button className = 'btn col-4 btn-success' onClick = {() => this.newList(2)}>Contractor</button>
                 </h3>
                 <div className = "col align-self-center">
                     
@@ -26,7 +52,7 @@ class Directory extends Component {
                         </thead>
                         
                         <tbody>
-                            {this.props.directory.map(item => {
+                            {this.state.list.map(item => {
                                 console.log("item " + item);
                                 //console.log(this.props.match.params.id)
                                     return (

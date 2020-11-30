@@ -1,6 +1,7 @@
 import React from 'react';
 import {OrdersRepository} from '../../API/ordersRepo';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 // referenced AccountEditor.jsx. Need to add ordersRepository 
 export class ProductEditor  extends React.Component {
@@ -16,15 +17,15 @@ state = {
 }
 
     onSave(){
-        /*if(this.state.id){
-            this.ordersRepository.updateOrder(this.state.id, this.state.OrderStatus)
+        if(this.state.id){
+            this.ordersRepository.updateProduct(this.state.id, this.state.IsDiscount, this.state.Details)
                 .then(()=>{
-                alert('Order updated!');
-                this.setState({ redirect: '/vendor'});
+                alert('Product updated!');
+                this.setState({ redirect: '/products'});
             });
         } else{
             // nothing else 
-        }*/ 
+        }
 
     } // end onSave()
 
@@ -52,7 +53,6 @@ state = {
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
                 </select>
-            <p> {this.state.IsDiscount} </p> 
             <div>
                 <button type="button"
                     className="btn btn-primary btn-block"

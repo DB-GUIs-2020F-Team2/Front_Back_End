@@ -2,6 +2,7 @@
 import React from 'react';
 import {OrdersRepository} from '../../API/ordersRepo';
 import { Link } from 'react-router-dom';
+import { VendorNav } from './vendor_nav';
 
 export class Products extends React.Component{
 
@@ -13,8 +14,10 @@ export class Products extends React.Component{
     }
 
     render(){
-        return <div>
-        <h2>  Products </h2>
+        return <>
+        <VendorNav> </VendorNav>
+        <div className = "container py-3">
+        <h1>  Products </h1>
         <table className = "table table-condensed table-striped">
         <thead>
             <tr>
@@ -62,6 +65,7 @@ export class Products extends React.Component{
     </table> 
 
         </div>
+        </> 
     }
 
     componentDidMount() {

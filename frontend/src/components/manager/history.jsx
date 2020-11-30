@@ -12,10 +12,9 @@ class History extends Component {
                             <tr>
                                 <th>ID</th>
                                 <th>Status</th>
-                                <th>Start Date</th>
-                                <th>Due Date</th>
+                                <th>Apply Date</th>
+                                <th>Expire Date</th>
                                 <th>Vendor ID</th>
-                                <th>Purchase</th>
                             </tr>
                         </thead>
                         
@@ -25,12 +24,11 @@ class History extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
-                                            <td>ID</td>
-                                            <td>name</td>
-                                            <td>quant</td>
-                                            <td>$price</td>
-                                            <td>$dis price</td>
-                                            <td><button>Buy</button></td>
+                                            <td>{item.OrderID}</td>
+                                            <td>{item.OrderStatus}</td>
+                                            <td>{item.ApplyDate}</td>
+                                            <td>{item.ExpireDate}</td>
+                                            <td>{item.VendorID}</td>
                                         </tr>
                                     );
                                 })}

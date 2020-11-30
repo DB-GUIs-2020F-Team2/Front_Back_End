@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ManagerRepo } from '../../API/managerRepo';
 
 class Products extends Component {
     state = {  }
@@ -10,6 +11,37 @@ class Products extends Component {
         else{
             return 'False'
         }
+    }
+
+    dateCheck(month,day){
+        //console.log(month,' ',day)
+        if(day>31 && month == 0 | 2 | 4 | 6 | 7 | 9 | 11){
+            return ""+(month+1)+'-'+(day-31)
+        }
+        else if(day>30){
+            return ""+(month+1)+'-'+(day-30)
+        }
+        else{
+            return ""+(month)+'-'+(day)
+        }
+     }
+
+     getDate(daysFromToday){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth();; //January is 0!
+        var yyyy = today.getFullYear();
+        
+        dd=dd+daysFromToday
+        //console.log(dd)
+        return (""+yyyy+'-'+ this.dateCheck(mm+1,dd))
+     }
+
+    buy(prodName){
+        let MR = new ManagerRepo()
+        let vid = (Math.floor(Math.random() * 2))+1;
+        MR.newOrder("In Progess",this.getDate(0),this.getDate(7),vid)
+        alert('One order of ' + prodName + ' has been purchased')
     }
 
     render() { 
@@ -26,6 +58,7 @@ class Products extends Component {
                                 <th>Discount Price</th>
                                 <th>Details</th>
                                 <th>Is Discounted</th>
+                                <td>Purchase</td>
                             </tr>
                         </thead>
 
@@ -41,6 +74,7 @@ class Products extends Component {
                                         <td>${item.DiscountPrice}</td>
                                         <td>{item.Details}</td>
                                         <td>{this.isDiscounted(item.IsDiscount)}</td>
+                                        <td><button onClick = {() => this.buy(item.ProductName)}>Buy</button></td>
                                     </tr>
                                 );
                             })}

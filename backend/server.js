@@ -82,7 +82,7 @@ app.get('/getUserType/', (req, res) => {
 });
 
 // Verify the User's username and password
-app.get('/verifyUser', (req, res) => {
+app.post('/verifyUser/', (req, res) => {
   connection.query('SELECT * FROM User WHERE UserName = ? AND HashPass = ? AND UserType = ? UNION SELECT 0,"NULL","NULL","NULL","NULL","NULL","NULL" WHERE NOT EXISTS (SELECT * FROM User WHERE UserName = ? AND HashPass = ? AND UserType = ?);', [req.body.UserName, req.body.HashPass, req.body.UserType, req.body.UserName, req.body.HashPass, req.body.UserType], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query");
@@ -345,7 +345,7 @@ app.get('/order/:OrderID', async (req, res) => {
 
 // get order with products
 app.get('/orders_full', function (req, res) {
-  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID;',
+  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID ORDER BY Orders.ApplyDate;',
   function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
@@ -364,7 +364,7 @@ app.get('/orders_full', function (req, res) {
 
 // get order with products
 app.get('/orders_full/:OrderID', async (req, res) => {
-  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.OrderID = ?',
+  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.OrderID = ? ORDER BY Orders.ApplyDate',
   [req.params.OrderID], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
@@ -382,8 +382,27 @@ app.get('/orders_full/:OrderID', async (req, res) => {
 });
 
 //get order with products for specific vendor
+app.get('/order/vendor/:VendorID', async (req, res) => {
+  connection.query('SELECT * FROM Orders WHERE Orders.VendorID = ? ORDER BY Orders.ApplyDate',
+   [req.params.VendorID], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+}); 
+
+//get order with products for specific vendor
 app.get('/orders_full/vendor/:VendorID', async (req, res) => {
-  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.VendorID = ?',
+  connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.VendorID = ? ORDER BY Orders.ApplyDate',
    [req.params.VendorID], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
@@ -403,7 +422,7 @@ app.get('/orders_full/vendor/:VendorID', async (req, res) => {
 
 // get orders from given date
 app.get('/orders_full/date/:ExpireDate', async (req, res) => {
-  connection.query(`SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.ExpireDate = ?`,
+  connection.query(`SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.ExpireDate = ? ORDER BY Orders.ApplyDate`,
    [req.params.ExpireDate], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
@@ -422,7 +441,7 @@ app.get('/orders_full/date/:ExpireDate', async (req, res) => {
 
 // get orders before a given date
 app.get('/orders_full/before/:ExpireDate', async (req, res) => {
-  connection.query(`SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE datediff(Orders.ExpireDate, ?) > 0;`,
+  connection.query(`SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE datediff(Orders.ExpireDate, ?) < 0 ORDER BY Orders.ApplyDate;`,
    [req.params.ExpireDate], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
@@ -463,7 +482,7 @@ app.post('/orders/', async (req, res) => {
 
 // PUT
 // updates an order status
-app.put('/order/', async (req, res) =>{
+app.put('/order/status/', async (req, res) =>{
   var OrderStatus = req.param("OrderStatus")
   var OrderID = req.param("OrderID")
   connection.query('UPDATE `team2`.`Orders` SET `OrderStatus` = ? WHERE `OrderID` = ?',
@@ -477,6 +496,25 @@ app.put('/order/', async (req, res) =>{
     }
     else{
       res.status(200).send(`Updated order ${OrderID} with status ${OrderStatus}.`);
+    }
+  });
+})
+
+// updates an expire date
+app.put('/order/date/', async (req, res) =>{
+  var ExpireDate = req.param("ExpireDate")
+  var OrderID = req.param("OrderID")
+  connection.query('UPDATE `team2`.`Orders` SET `ExpireDate` = ? WHERE `OrderID` = ?',
+  [ExpireDate, OrderID], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).send(`Updated order ${OrderID} with expire date ${ExpireDate}.`);
     }
   });
 })

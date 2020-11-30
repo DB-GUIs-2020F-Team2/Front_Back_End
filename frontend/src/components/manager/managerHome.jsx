@@ -71,7 +71,7 @@ export class ManagerHome extends Component {
     render() { 
         return ( 
 
-            <div className = "bg managerHome">
+            <div className = "bg managerHome container-fluid">
 
                 <div>
                         <Header changer = {this.updateView}/>
@@ -103,7 +103,7 @@ export class ManagerHome extends Component {
         else if(this.state.view == 2){
             return (
                 <React.Fragment>
-                    <Directory directory = {this.state.directory}/>
+                    <Directory directory = {this.state.directory} vendors = {this.state.vendors} contractors = {this.state.contractors}/>
                 </React.Fragment>
             )
         }

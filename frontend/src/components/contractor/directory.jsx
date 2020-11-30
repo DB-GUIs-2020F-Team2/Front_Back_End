@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import NavBar from './navabar.jsx'
+import { ContractorRepo } from '../../API/contractorRepo'
+
 
 export class Directory extends Component {
+
+    contractorRepo = new ContractorRepo();
+
     state = { 
-        name:'Wyatt',
-        phoneNumber: '911',
-        email: 'who dat'
+        directory: []
      }
     render() { 
         return ( 
@@ -13,20 +16,25 @@ export class Directory extends Component {
                 <NavBar/>
 
                 <h2 className = "display-5 text-center font-weight m-2 p-2 bg-light">Contractor Directory</h2>
-                <table class="table table-hover">
+                <table className="table table-hover">
                 <thead>
                     <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Phone Number</th>
+                    <th scope="col">Contact Info</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Type</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>{this.state.name}</td>
-                    <td>{this.state.phoneNumber}</td>
-                    <td>{this.state.email}</td>
-                    </tr>
+                    {this.state.directory.map((x,i) =>
+                            <tr key = {i}>
+                            <td>{x.UserName}</td>
+                            <td>{x.ContactInfo}</td>
+                            <td>{x.Email}</td>
+                            <td>{x.UserType}</td>
+                            </tr>
+                    )}
+                    
                 </tbody>
                 </table>
             </div>
@@ -36,6 +44,9 @@ export class Directory extends Component {
             // api calls - get contractors, get contacts
          );
     }
+
+    componentDidMount() {
+        this.contractorRepo.getDirectory()
+            .then(x => this.setState({directory : x}));
+    }
 }
- 
-export default Directory;

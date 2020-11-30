@@ -3,6 +3,7 @@ import "./loginForm.css"
 import { sha256 } from 'js-sha256';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
+import { LoginRepo } from '../../API/loginRepo';
 
 class LoginForm extends Component {
 
@@ -27,31 +28,67 @@ class LoginForm extends Component {
         this.setState({password: value})
     }
 
-    failedLogin(){
-        alert('Login Failed, try again')
-        this.setState({redirect: false})
-    }
-
-    goodLogin(){
-        alert('Welcome')
-        this.setState({redirect: true})
-    }
-
     login() {
+        var d = new Date();
         let pass = this.state.password;
+        let lr = new LoginRepo()
         pass = sha256(pass);
-        localStorage.setItem('userType', this.state.userType);
-        axios.post('http://localhost:8000/verifyUser', {username: this.state.username, password: pass})
-                    .then(response => {
-                        if (response.data === 0) {
-                            this.failedLogin()
-                        }
-                        else {
-                            console.log(response.data)
-                            this.goodLogin(response.data)
-                        }
-        })
+        lr.loginUser(this.state.username,this.state.password,this.state.userType).then(x => {
+            this.setState({ redirect: x.data });
+            console.log(this.state.redirect[0].UserName)
+            if(this.state.redirect[0].UserName != "NULL" && this.state.userType.toLowerCase() == this.state.redirect[0].UserType.toLowerCase()){
+                localStorage.setItem('UserType', this.state.redirect[0].UserType);
+                localStorage.setItem('UserID', this.state.redirect[0].UserID);
+                window.location.replace(`http://localhost:3000/${this.state.userType}`);
+            }
+            else{
+                alert("Login Failed");
+                window.location.replace("http://localhost:3000/login/")
+            }
+            
+        });
+        
 
+    }
+
+    makeButton(){
+        if (this.state.userType === '') {
+            return (
+                <div>
+                    <button type = "button" className="btn btn-success button login disabled">Login</button>
+                </div>
+            )
+        }
+        else if (this.state.userType === 'Manager' && this.state.username) {
+            return (
+                <div>
+                    <button type = "button" className="btn btn-success button login" onClick ={() => this.login()}>Login</button>
+                </div>
+            )
+        }
+        else if (this.state.userType === 'Contractor' && this.state.username) {
+            return (
+                <div>
+                    <button type = "button" className="btn btn-success login button" onClick ={() => this.login()}>Login</button>
+
+                </div>
+            )
+        }
+        else if (this.state.userType === 'Vendor' && this.state.username) {
+            return (
+                <div>
+                    <button type = "button" className="btn btn-success login button" onClick ={() => this.login()}>Login</button>
+
+                </div>
+            )
+        }
+        else{
+            return (
+                <div>
+                    <button type = "button" className="btn btn-success button login disabled">Login</button>
+                </div>
+            )
+        }
     }
 
     render() { 
@@ -59,7 +96,7 @@ class LoginForm extends Component {
             <div className = "row-12 align-self-center">
                 <div id = "loginForm" className = "mt-5 mb-5 border bg-white container-fluid col-7 align-self-center">
                     <h2 className = "p-2 banner">Login</h2>
-                    <form className = "" action = "http://localhost:3000/manager">
+                    <form className = "form">
                         <div className = "">
                             <label htmlFor = "username" className = "m-2">Username</label>
                             <input type = "text" id = "username" onChange = {(e) => this.setState({username: e.target.value})}></input>
@@ -71,16 +108,18 @@ class LoginForm extends Component {
                         <div className = "">
                             <label htmlFor = "usertype" className = "m-2">Department</label>
                             <select type = "text" id = "usertype" onChange = {(e) => this.setState({userType: e.target.value})}>
+                                <option value = ''></option>
                                 <option value = 'Manager'>Manager</option>
                                 <option value = 'Contractor'>Contractor</option>
                                 <option value = 'Vendor'>Vendor</option>
                             </select>
                         </div>
-                        <div>
-                            <button type = "button" className = "submit m-2 login" onClick = {this.login}>Login</button>
-                                
-                        </div>
                     </form>
+                </div>
+
+                <div id = 'loginButton' className = ''>
+                    {this.makeButton()}
+ 
                 </div>
             </div>
         );
