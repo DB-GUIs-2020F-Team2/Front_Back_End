@@ -191,6 +191,24 @@ app.get('/getProject/:id', (req, res) => {
 });
 
 
+app.get('/getProjectByP/:id', (req, res) => {
+  connection.query('SELECT Project.ProjectID, Project.ProjectName, Project.ApplyDate, Project.ExpireDate, Project.ProjectStatus, Project.ProjectType FROM Project INNER JOIN User ON Project.ManagerID = User.UserID WHERE Project.ProjectID = ?', [req.params.id], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
+
 // Insert a new Project
 app.post('/postProject', (req, res) => {
   connection.query('INSERT INTO Project (ProjectName, ApplyDate, ExpireDate, ProjectStatus, ProjectType, ManagerID) VALUES (?, ?, ?, ?, ?, ?);', [req.body.ProjectName, req.body.ApplyDate, req.body.ExpireDate, req.body.ProjectStatus, req.body.ProjectType, req.body.ManagerID], function (err, rows, fields) {
@@ -1131,7 +1149,7 @@ app.get('/project_contractor/', async(req, res)=>{
 //all projects with a specific contractor
 app.get('/project_contractorC/', async(req, res)=>{
   var ContractorID= req.param("ContractorID");
-  connection.query('SELECT * FROM `team2`.`Project_Contractor` WHERE `ContractorID` = ?', ContractorID, function (err, rows, fields) {
+  connection.query('SELECT * FROM team2.Project INNER JOIN team2.Project_Contractor ON team2.Project.ProjectID = team2.Project_Contractor.ProjectID WHERE team2.Project_Contractor.ContractorID = ?', ContractorID, function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
       res.status(400).json({
