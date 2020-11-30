@@ -100,8 +100,8 @@ app.post('/verifyUser/', (req, res) => {
 });
 
 
-app.get('/getUserByID', (req, res) => {
-  connection.query('SELECT * FROM User WHERE UserID = ?;', [req.body.UserID], function (err, rows, fields) {
+app.get('/getUserByID/:id', (req, res) => {
+  connection.query('SELECT * FROM User WHERE UserID = ?;', [req.params.id], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
       res.status(400).json({

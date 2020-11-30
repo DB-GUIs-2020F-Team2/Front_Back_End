@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import NavBar from './navabar.jsx'
+import NavBar from './navabar.jsx';
+import { ContractorRepo } from '../../API/contractorRepo';
 
 export class Profile extends Component {
+
+    contractorRepo = new ContractorRepo();
+
     state = {
+        user :[],
         name:'',
         phoneNumber: '',
         email: '',
@@ -80,6 +85,15 @@ export class Profile extends Component {
             // api calls - get profile
             // edit button -> edit any info on page
          );
+    }componentDidMount(){
+        
+        const id = localStorage.getItem('UserID');
+
+        this.contractorRepo.getUserByID(id)
+            .then(x => this.setState({user : x}));
+
     }
+
+
 }
  

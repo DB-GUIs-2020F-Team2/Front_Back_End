@@ -33,9 +33,9 @@ export class ContractorRepo{
         })
     }
 
-    getProjects(id){
+    getProjects(){
         return new Promise((resolve,reject) =>{
-            axios.get(`${this.url}/getProject/${id}`, this.config)
+            axios.get(`${this.url}/getProjects`,this.config)
                 .then(x => {
                     resolve(x.data.data);
                 })
@@ -45,4 +45,44 @@ export class ContractorRepo{
                 })
         })
     }
+
+    getContracts(ContractorID){
+        return new Promise((resolve,reject) =>{
+            axios.get(`${this.url}/contractC/`,{params: {ContractorID}},this.config)
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    getUserByID(userID){
+        return new Promise((resolve,reject) =>{
+            axios.get(`${this.url}/getUserByID/${userID}`, this.config)
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    getAllContracts(){
+        return new Promise((resolve,reject) =>{
+            axios.get(`${this.url}/contracts`,this.config)
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
 }

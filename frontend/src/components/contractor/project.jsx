@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import NavBar from './navabar.jsx'
-import { ContractorRepo } from '../../API/contractorRepo'
+import NavBar from './navabar.jsx';
+import { ContractorRepo } from '../../API/contractorRepo';
 
 export class Project extends Component {
 
     contractorRepo = new ContractorRepo();
 
     state = {
-        user: [],
+        myProjects: [],
         projects: []
      }
     render() { 
@@ -15,21 +15,56 @@ export class Project extends Component {
             <div>
                 <NavBar/>
 
-                <h2 className = "display-5 text-center font-weight m-2 p-2 bg-light">Projects</h2>
+                <h2 className = "display-5 text-center font-weight m-2 p-2 bg-light">My Projects</h2>
                 <table className="table table-hover">
                 <thead>
                     <tr>
-                    <th scope="col">Project</th>
-                    <th scope="col">contact info</th>
-                    <th scope="col"></th>
+                    <th scope="col">Project Type</th>
+                    <th scope="col">Project Status</th>
+                    <th scope="col">Date Started</th>
+                    <th scope="col">Date Expire</th>
                     </tr>
                 </thead>
                 <tbody>
+
+                 {this.state.myProjects.map((x,i) =>
+                            <tr key = {i}>
+                            <td>{x.ProjectType}</td>
+                            <td>{x.ProjectStatus}</td>
+                            <td>{x.ApplyDate}</td>
+                            <td>{x.ExpireDate}</td>
+                            <td><button className = "btn-primary">update</button></td>
+                            </tr>
+                    )}
+                </tbody>
+                </table>
+
+
+                <br/>
+                <br/>
+                <br/>
+
+                <h2 className = "display-5 text-center font-weight m-2 p-2 bg-light"> All Projects</h2>
+                <table className="table table-hover">
+                <thead>
                     <tr>
-                    <td>{this.state.project}</td>
-                    <td>{this.state.contact}</td>
-                    <td><button className = "btn-primary">update</button></td>
+                    <th scope="col">Project Type</th>
+                    <th scope="col">Project Status</th>
+                    <th scope="col">Date Started</th>
+                    <th scope="col">Date Expire</th>
                     </tr>
+                </thead>
+                <tbody>
+
+                 {this.state.projects.map((x,i) =>
+                            <tr key = {i}>
+                            <td>{x.ProjectType}</td>
+                            <td>{x.ProjectStatus}</td>
+                            <td>{x.ApplyDate}</td>
+                            <td>{x.ExpireDate}</td>
+                            <td><button className = "btn-primary">Details</button></td>
+                            </tr>
+                    )}
                 </tbody>
                 </table>
             </div>
@@ -45,11 +80,10 @@ export class Project extends Component {
         const id = localStorage.getItem('UserID');
 
         this.contractorRepo.getProjectsC(id)
-            .then(x => this.setState({user : x}));
+            .then(x => this.setState({myProjects : x}));
+        
+        this.contractorRepo.getProjects()
+            .then(x => this.setState({projects : x}));
 
-            const ids = this.state.user.ProjectID;
-
-            this.contractorRepo.getProjects(ids)
-                .then(x => this.setState({projects : x}));
     }
 }
