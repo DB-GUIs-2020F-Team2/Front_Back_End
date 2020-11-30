@@ -60,7 +60,7 @@ export class ManagerRepo {
 
     getPastOrders(date){ //send todays date
         return new Promise((resolve,reject) =>{
-            axios.get(`http://localhost:8000/orders_full/before/${date}'`,this.config)
+            axios.get(`http://localhost:8000/orders_full/before/${date}`,this.config)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -100,6 +100,37 @@ export class ManagerRepo {
     getContractors(){
         return new Promise((resolve,reject) =>{
             axios.get('http://localhost:8000/getUserType/?UserType=contractor')
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    newOrder(os,ad,ed,vid){
+        return new Promise((resolve,reject) =>{
+            axios.post('http://localhost:8000/orders/',{
+                "OrderStatus": os,
+                "ApplyDate": ad,
+                "ExpireDate": ed,
+                "VendorID": vid
+              })
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    searchForProjectOrders(projectID){
+        return new Promise((resolve,reject) =>{
+            axios.get(`http://localhost:8000/searchOrders/${projectID}`)
                 .then(x => {
                     resolve(x.data);
                 })

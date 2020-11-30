@@ -23,10 +23,17 @@ class Directory extends Component {
          this.forceUpdate()
      }
 
+     startUp(){
+         if(this.state.list == []){
+            this.setState({list: this.props.directory})
+            this.forceUpdate()
+         }
+     }
+
     render() { 
         return (
             <div className="container">
-                <h3 className = 'row justify-content-around'>
+                <h3 onLoad = {() => this.startUp()} className = 'row justify-content-around'>
                     <button className = 'btn col-4 btn-success' onClick = {() => this.newList(0)}>All</button>
                     <button className = 'btn col-4 btn-success' onClick = {() => this.newList(1)}>Vendor</button>
                     <button className = 'btn col-4 btn-success' onClick = {() => this.newList(2)}>Contractor</button>

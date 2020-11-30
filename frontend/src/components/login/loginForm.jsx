@@ -117,7 +117,7 @@ class LoginForm extends Component {
                     </form>
                 </div>
 
-                <div id = 'loginButton' className = 'banner'>
+                <div id = 'loginButton' className = ''>
                     {this.makeButton()}
  
                 </div>

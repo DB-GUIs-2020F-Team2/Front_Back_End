@@ -28,8 +28,8 @@ class Projects extends Component {
                                     <tr>
                                         <td>{item.ProjectID}</td>
                                         <td>{item.ProjectName}</td>
-                                        <td>{item.ApplyDate}</td>
-                                        <td>{item.ExpireDate}</td>
+                                        <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
+                                        <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                         <td>{item.ProjectStatus}</td>
                                         <td>{item.ProjectType}</td>
                                         <td>{item.ManagerID}</td>
