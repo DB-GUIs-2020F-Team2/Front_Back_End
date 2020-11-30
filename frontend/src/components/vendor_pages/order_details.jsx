@@ -24,7 +24,7 @@ state = {
     render(){
 
 
-        return <div>
+        return <div className = "container pt-3">
         <h2>  Order Details </h2>
         <table className = "table table-condensed table-striped">
         <thead>
