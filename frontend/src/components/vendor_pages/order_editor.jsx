@@ -49,7 +49,7 @@ state = {
                     onClick={() => this.onSave()}>
                     Save
                 </button>
-                <Link className="btn btn-secondary btn-block" to="/vendor">Return to List</Link>
+                <Link className="btn btn-secondary btn-block" to="/vendordash">Return to List</Link>
             </div>
 
 
