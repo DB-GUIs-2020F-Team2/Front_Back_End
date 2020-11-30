@@ -6,7 +6,7 @@ export const VendorNav = props => <>
         <nav className = "navbar navbar-expand bg-dark navbar-dark">
         <ul className = "navbar-nav">
             <li className = "nav-item btn btn-link">
-                <Link to = "/vendordash" className = "text-white"> Orders </Link>
+                <Link to = "/vendor" className = "text-white"> Orders </Link>
             </li>
             <li className = "navbar-nav btn btn-link">
                 <Link to = "/products" className = "text-white"> Products </Link>
