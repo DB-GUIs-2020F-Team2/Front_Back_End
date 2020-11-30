@@ -25,6 +25,9 @@ export class VendorDashboard extends React.Component{
 
     componentDidMount() {
         // change to getting orders based on vendor id 
+        console.log(localStorage.getItem('UserID')); // is indeed correct 
+        //this.ordersRepository.getOrdersForVendor(localStorage.getItem('UserID'))
+        //.then(orders=>this.setState({orders}));
         this.ordersRepository.getOrders()
         .then(orders=>this.setState({orders}));
     }
