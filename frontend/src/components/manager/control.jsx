@@ -16,7 +16,7 @@ class Control extends Component {
      }
 
      dateCheck(month,day){
-         console.log(month,' ',day)
+        //console.log(month,' ',day)
         if(day>31 && month == 0 | 2 | 4 | 6 | 7 | 9 | 11){
             return ""+(month+1)+'-'+(day-31)
         }
@@ -35,7 +35,7 @@ class Control extends Component {
         var yyyy = today.getFullYear();
         
         dd=dd+daysFromToday
-        console.log(dd)
+        //console.log(dd)
         return (""+yyyy+'-'+ this.dateCheck(mm+1,dd))
      }
 
