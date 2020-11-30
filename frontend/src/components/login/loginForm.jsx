@@ -33,11 +33,12 @@ class LoginForm extends Component {
         let pass = this.state.password;
         let lr = new LoginRepo()
         pass = sha256(pass);
-        localStorage.setItem('userType', this.state.userType);
         lr.loginUser(this.state.username,this.state.password,this.state.userType).then(x => {
             this.setState({ redirect: x.data });
             console.log(this.state.redirect[0].UserName)
             if(this.state.redirect[0].UserName != "NULL" && this.state.userType.toLowerCase() == this.state.redirect[0].UserType.toLowerCase()){
+                localStorage.setItem('UserType', this.state.redirect[0].UserType);
+                localStorage.setItem('UserID', this.state.redirect[0].UserID);
                 window.location.replace(`http://localhost:3000/${this.state.userType}`);
             }
             else{
