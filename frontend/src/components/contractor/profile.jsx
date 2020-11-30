@@ -8,10 +8,10 @@ export class Profile extends Component {
 
     state = {
         user :[],
-        name:'',
-        phoneNumber: '',
+        name: '',
         email: '',
         password: '',
+        phoneNumber: '',
         readOnly: true
          }
 
@@ -27,54 +27,64 @@ export class Profile extends Component {
         });
     }
 
-
     render() { 
         return ( 
             <div>
                 <NavBar/>
                 <form className = "m-3">
+                {this.state.user.map((x,i) => 
+                    <div key = {i}>
                     <div className="form-group">
-                        <label htmlFor="name">Name</label>
-                        <input type="text" className="form-control" id = "name"
-                            readOnly={this.state.readOnly}
-                            value ={this.state.name}
-                            onChange= { event => this.setState({ name: event.target.value})}/>
+                            <label htmlFor="name">User Name</label>
+                            <input type="text" className="form-control" id = "name"
+                                readOnly={this.state.readOnly}
+                                value ={x.UserName}
+                                onChange= { event => this.setState({ name: event.target.value})}/>
                     </div>
+
                     <div className="form-group">
-                        <label htmlFor="phoneNumber">Phone Number</label>
+                        <label htmlFor="phoneNumber">Contact Info</label>
                         <input type="text" className="form-control" id = "phoneNumber"
                             readOnly={this.state.readOnly}
-                            value ={this.state.phoneNumber}
+                            value ={x.ContactInfo}
                             onChange= { event => this.setState({ phoneNumber: event.target.value})}/>
                     </div>
+
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input type="text" className="form-control" id = "email"
                             readOnly={this.state.readOnly}    
-                            value ={this.state.email}
+                            value ={x.Email}
                             onChange= { event => this.setState({ email: event.target.value})}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input type="text" className="form-control" id = "password"
                             readOnly={this.state.readOnly}
-                            value ={this.state.password}
+                            value ={x.HashPass}
                             onChange= { event => this.setState({ password: event.target.value})}/>
                     </div>
+
+
+
+
+                    </div>
+                )}
+            
                 </form>
 
                 <div className = "row m-3">
                     <button
                         disabled = {!this.state.readOnly} 
                         className="btn btn-primary btn-md m-3"
-                        onClick = {() => {this.onEdit()}}>
+                        onClick = {() => this.onEdit()}>
                         Edit
                     </button>
 
                     <button 
                         disabled = {this.state.readOnly} 
                         className="btn btn-primary btn-md m-3"
-                        onClick = {() => {this.onSubmit()}}>
+                        onClick = {() => this.onSubmit()}>
                         Submit
                     </button>
                 </div>
