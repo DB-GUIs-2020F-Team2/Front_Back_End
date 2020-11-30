@@ -13,7 +13,7 @@ export class Products extends React.Component{
     }
 
     render(){
-        return <div>
+        return <div className = "container py-3">
         <h2>  Products </h2>
         <table className = "table table-condensed table-striped">
         <thead>
