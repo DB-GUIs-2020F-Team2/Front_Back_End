@@ -17,7 +17,7 @@ export class VendorDashboard extends React.Component{
         return <>
         <VendorNav> </VendorNav> 
         <div className = "container py-3">
-            <h1>Vendor Dashboard </h1> 
+            <h1>Orders </h1> 
             <OrdersList Orders = { this.state.orders}  />
         </div> 
         </> 
@@ -26,9 +26,9 @@ export class VendorDashboard extends React.Component{
     componentDidMount() {
         // change to getting orders based on vendor id 
         console.log(localStorage.getItem('UserID')); // is indeed correct 
-        //this.ordersRepository.getOrdersForVendor(localStorage.getItem('UserID'))
-        //.then(orders=>this.setState({orders}));
-        this.ordersRepository.getOrders()
+        this.ordersRepository.getOrdersForAVendor(localStorage.getItem('UserID'))
         .then(orders=>this.setState({orders}));
+        //this.ordersRepository.getOrders()
+        //.then(orders=>this.setState({orders}));
     }
 }

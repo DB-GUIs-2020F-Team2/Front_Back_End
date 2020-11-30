@@ -23,10 +23,23 @@ export class OrdersRepository{
         });
     }
 
+    //wasn't working :/
     getOrdersForVendor(id) {
         console.log("in getting orders for vendor");
         return new Promise((resolve, reject) => {
             axios.get(`${this.url}/orders_full/vendor/${id}`, this.config)
+                .then(x => resolve(x.data.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                });
+        });
+    }
+    //try this! 
+    getOrdersForAVendor(id) {
+        console.log("in getting orders for vendor");
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/order/vendor/${id}`, this.config)
                 .then(x => resolve(x.data.data))
                 .catch(x => {
                     alert(x);
@@ -83,7 +96,22 @@ export class OrdersRepository{
         let params = { OrderStatus: orderStatus,
                     OrderID: id}
         return new Promise((resolve, reject) => {
-            axios.put(`${this.url}/order/`, params, this.config)
+            axios.put(`${this.url}/order/status/`, params, this.config)
+            .then(x => resolve(x.data))
+            .catch(e => {
+                alert(e);
+                reject();
+            });
+        });
+    }
+
+        //will be called in order_editor 
+    updateProduct(id, isDiscount, details) {
+        let params = { IsDiscount: isDiscount,
+                    ProductID: id,
+                    Details: details}
+        return new Promise((resolve, reject) => {
+            axios.put(`${this.url}/productdiscountdetails/`, params, this.config)
             .then(x => resolve(x.data))
             .catch(e => {
                 alert(e);

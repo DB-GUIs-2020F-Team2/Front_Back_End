@@ -17,7 +17,7 @@ export class Products extends React.Component{
         return <>
         <VendorNav> </VendorNav>
         <div className = "container py-3">
-        <h2>  Products </h2>
+        <h1>  Products </h1>
         <table className = "table table-condensed table-striped">
         <thead>
             <tr>

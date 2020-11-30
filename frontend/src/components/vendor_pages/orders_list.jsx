@@ -5,7 +5,7 @@ import './order_list.css';
 export const OrdersList = props => 
     <>
 
-    <h2>  Current Orders </h2>
+    <h2 className>  Current Orders </h2>
     <table className = "table table-condensed table-striped">
         <thead>
             <tr>
