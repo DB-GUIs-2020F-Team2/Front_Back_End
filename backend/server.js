@@ -348,6 +348,25 @@ app.get('/orders_full/:OrderID', async (req, res) => {
 });
 
 //get order with products for specific vendor
+app.get('/order/vendor/:VendorID', async (req, res) => {
+  connection.query('SELECT * FROM Orders WHERE Orders.VendorID = ? ORDER BY Orders.ApplyDate',
+   [req.params.VendorID], function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+}); 
+
+//get order with products for specific vendor
 app.get('/orders_full/vendor/:VendorID', async (req, res) => {
   connection.query('SELECT * FROM Orders INNER JOIN Order_Product ON Order_Product.OrderID = Orders.OrderID INNER JOIN Product ON Order_Product.ProductID = Product.ProductID WHERE Orders.VendorID = ? ORDER BY Orders.ApplyDate',
    [req.params.VendorID], function (err, rows, fields) {
