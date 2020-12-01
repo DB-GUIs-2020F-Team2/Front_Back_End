@@ -85,4 +85,53 @@ export class ContractorRepo{
         })
     }
 
+    getVendors(){
+        return new Promise((resolve,reject) =>{
+            axios.get(`${this.url}/getUserType/?UserType=vendor`)
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    getContractors(){
+        return new Promise((resolve,reject) =>{
+            axios.get(`${this.url}/getUserType/?UserType=contractor`)
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    registerUser(UserName, email, contact, password, department ){
+        return new Promise((resolve,reject) =>{
+
+            let iv = 1;
+
+            axios.post(`${this.url}/registerUser`,{
+                "UserName": UserName,
+                "HashPass": password,
+                "ContactInfo": contact,
+                "InformationVis": iv,
+                "Email": email,
+                "UserType": department
+              })
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
 }
