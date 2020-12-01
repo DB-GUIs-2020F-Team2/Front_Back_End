@@ -418,7 +418,7 @@ class Control extends Component {
             )
         }
         else if(this.state.view == 7){ 
-            return (
+            return (                                      
                 this.state.searchResults.length === 0 ? <p className = 'bg-light'>No results found</p> :
                 <React.Fragment>
                 <h4>Search Results</h4>

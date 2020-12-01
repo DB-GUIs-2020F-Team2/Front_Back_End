@@ -74,7 +74,7 @@ class Products extends Component {
                                         <td>${item.DiscountPrice}</td>
                                         <td>{item.Details}</td>
                                         <td>{this.isDiscounted(item.IsDiscount)}</td>
-                                        <td><button onClick = {() => this.buy(item.ProductName)}>Buy</button></td>
+                                        <td><button className = 'btn btn-primary' onClick = {() => this.buy(item.ProductName)}>Buy</button></td>
                                     </tr>
                                 );
                             })}
