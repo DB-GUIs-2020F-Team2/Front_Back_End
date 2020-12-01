@@ -153,6 +153,24 @@ app.post('/registerUser', (req, res) => {
 })
 
 
+app.put('/UpdateUser', (req, res) => {
+  connection.query('UPDATE User SET UserName = ?, HashPass = ?, ContactInfo = ?, Email = ? WHERE UserID = ?;', [req.body.UserName, req.body.HashPass, req.body.ContactInfo, req.body.Email, req.body.UserID],  function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
+
 app.get('/getProjects', (req, res) => {
   connection.query('SELECT * FROM Project;', function (err, rows, fields) {
     if (err) {
@@ -169,6 +187,7 @@ app.get('/getProjects', (req, res) => {
     }
   });
 });
+
 
 
 ///////////////////////////////// PROJECTS ////////////////////////////////////////////
