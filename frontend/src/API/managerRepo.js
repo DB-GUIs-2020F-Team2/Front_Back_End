@@ -20,7 +20,21 @@ export class ManagerRepo {
                     reject(x);
                 })
         })
-    }
+    } ///deleteProject/:id
+
+    deleteProject(id){
+        console.log(this.url)
+        return new Promise((resolve,reject) =>{
+            axios.delete(`${this.url}/deleteProject/${id}`, this.config)
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    } 
 
     getOrders(date){
         return new Promise((resolve,reject) =>{

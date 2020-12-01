@@ -45,7 +45,7 @@ class Control extends Component {
         let managerRepo = new ManagerRepo()
         var today = new Date();
         var dd = today.getDate();
-        var mm = today.getMonth();; //January is 0!
+        var mm = today.getMonth();//January is 0!
         var yyyy = today.getFullYear();
 
 
