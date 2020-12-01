@@ -48,6 +48,32 @@ export class OrdersRepository{
         });
     }
 
+    //try this for past! 
+    getPastOrdersForAVendor(id) {
+        console.log("in getting past orders for vendor");
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/orders/vendor/old/${id}`, this.config)
+                .then(x => resolve(x.data.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                });
+        });
+    }
+
+    //try this for current! 
+    getCurrentOrdersForAVendor(id) {
+        console.log("in getting past orders for vendor");
+        return new Promise((resolve, reject) => {
+            axios.get(`${this.url}/orders/vendor/curr/${id}`, this.config)
+                .then(x => resolve(x.data.data))
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                });
+        });
+    }
+
     // called in order_details.jsx 
     getOrderProducts(orderId) {
         return new Promise((resolve, reject) => {

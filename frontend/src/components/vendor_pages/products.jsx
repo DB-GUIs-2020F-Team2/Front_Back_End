@@ -28,7 +28,6 @@ export class Products extends React.Component{
                 <th> On Discount </th>
                 <th> Update </th> 
 
-                <th>&nbsp;</th>
             </tr>
         </thead>
 
