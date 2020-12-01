@@ -2,13 +2,14 @@ import axios from 'axios'
 
 export class ManagerRepo {
 
+    url = 'http://3.137.192.24:3000';
     config = {
 
     };
 
     getDirectory(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getUser', this.config)
+            axios.get(`${this.url}/getUser`, this.config)
                 .then(x => {
                     resolve(x.data.data);
                 })
@@ -21,7 +22,7 @@ export class ManagerRepo {
 
     getOrders(date){
         return new Promise((resolve,reject) =>{
-            axios.get(`http://localhost:8000/orders_full/date/${date}`,this.config)
+            axios.get(`${this.url}/orders_full/date/${date}`,this.config)
                 .then(x => {
                     resolve(x.data.data);
                 })
@@ -34,7 +35,7 @@ export class ManagerRepo {
 
     getProducts(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/products')
+            axios.get(`${this.url}/products`)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -47,7 +48,7 @@ export class ManagerRepo {
 
     getContracts(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/contracts',this.config)
+            axios.get(`${this.url}/contracts`,this.config)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -60,7 +61,7 @@ export class ManagerRepo {
 
     getPastOrders(date){ //send todays date
         return new Promise((resolve,reject) =>{
-            axios.get(`http://localhost:8000/orders_full/before/${date}`,this.config)
+            axios.get(`${this.url}/orders_full/before/${date}`,this.config)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -73,7 +74,7 @@ export class ManagerRepo {
 
     getProjects(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getProjects',this.config)
+            axios.get(`${this.url}/getProjects`,this.config)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -86,7 +87,7 @@ export class ManagerRepo {
 
     getVendors(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getUserType/?UserType=vendor')
+            axios.get(`${this.url}/getUserType/?UserType=vendor`)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -99,7 +100,7 @@ export class ManagerRepo {
 
     getContractors(){
         return new Promise((resolve,reject) =>{
-            axios.get('http://localhost:8000/getUserType/?UserType=contractor')
+            axios.get(`${this.url}/getUserType/?UserType=contractor`)
                 .then(x => {
                     resolve(x.data);
                 })
@@ -112,7 +113,7 @@ export class ManagerRepo {
 
     newOrder(os,ad,ed,vid){
         return new Promise((resolve,reject) =>{
-            axios.post('http://localhost:8000/orders/',{
+            axios.post(`${this.url}/orders/`,{
                 "OrderStatus": os,
                 "ApplyDate": ad,
                 "ExpireDate": ed,
@@ -130,7 +131,7 @@ export class ManagerRepo {
 
     searchForProjectOrders(projectID){
         return new Promise((resolve,reject) =>{
-            axios.get(`http://localhost:8000/project_order/${projectID}`)
+            axios.get(`${this.url}/project_order/${projectID}`)
                 .then(x => {
                     resolve(x.data);
                 })

@@ -2,9 +2,11 @@ import axios from 'axios'
 
 export class LoginRepo {
 
+    url = 'http://3.137.192.24:3000';
+
     loginUser(username, password, userType){
         return new Promise((resolve,reject) =>{
-            axios.post('http://localhost:8000/verifyUser', {
+            axios.post(`${this.url}/verifyUser`, {
                 "UserName": username,
                 "HashPass": password,
                 "UserType": userType

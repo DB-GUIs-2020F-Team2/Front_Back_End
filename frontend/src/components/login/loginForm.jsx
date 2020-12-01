@@ -39,11 +39,11 @@ class LoginForm extends Component {
             if(this.state.redirect[0].UserName != "NULL" && this.state.userType.toLowerCase() == this.state.redirect[0].UserType.toLowerCase()){
                 localStorage.setItem('UserType', this.state.redirect[0].UserType);
                 localStorage.setItem('UserID', this.state.redirect[0].UserID);
-                window.location.replace(`http://localhost:3000/${this.state.userType}`);
+                window.location.replace(`http://3.137.192.24:3000/${this.state.userType}`);
             }
             else{
                 alert("Login Failed");
-                window.location.replace("http://localhost:3000/login/")
+                window.location.replace("http://3.137.192.24:3000/login/")
             }
             
         });
