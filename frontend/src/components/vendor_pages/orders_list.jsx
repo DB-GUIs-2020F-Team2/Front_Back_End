@@ -16,15 +16,13 @@ export const OrdersList = props =>
                 <th> Expire Date </th> 
                 <th> Details </th> 
                 <th> Update</th>
-                <th>&nbsp;</th>
             </tr>
         </thead>
 
         <tbody>
         {
 
-                props.Orders.map(order =>               
-                    !order.completed && 
+                props.CurrentOrders.map(order =>               
                         <tr key={order.OrderID}>
                             <td>
                                 {order.OrderID}
@@ -60,14 +58,14 @@ export const OrdersList = props =>
                 <th> Apply Date </th>
                 <th> Expire Date </th> 
                 <th> Details </th> 
-                <th>&nbsp;</th>
+                
             </tr>
         </thead>
 
         <tbody>
             {
-                props.Orders.map(order =>
-                    order.completed && <tr key={order.Order.ID}>
+                props.PastOrders.map(order =>
+                 <tr key={order.OrderID}>
                         <td>
                             {order.OrderID}
                         </td>

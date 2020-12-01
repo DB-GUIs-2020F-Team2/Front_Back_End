@@ -9,7 +9,8 @@ export class VendorDashboard extends React.Component{
         ordersRepository = new OrdersRepository(); 
 
     state = {
-        orders: []
+        pastorders: [],
+        currorders: []
         
     }
 
@@ -18,7 +19,7 @@ export class VendorDashboard extends React.Component{
         <VendorNav> </VendorNav> 
         <div className = "container py-3">
             <h1>Orders </h1> 
-            <OrdersList Orders = { this.state.orders}  />
+            <OrdersList CurrentOrders = { this.state.currorders} PastOrders = {this.state.pastorders} />
         </div> 
         </> 
     }
@@ -26,9 +27,15 @@ export class VendorDashboard extends React.Component{
     componentDidMount() {
         // change to getting orders based on vendor id 
         console.log(localStorage.getItem('UserID')); // is indeed correct 
-        this.ordersRepository.getOrdersForAVendor(localStorage.getItem('UserID'))
-        .then(orders=>this.setState({orders}));
+        //this.ordersRepository.getOrdersForAVendor(localStorage.getItem('UserID')) this is working just not sepearting orders
+        //.then(orders=>this.setState({orders})); this is working just not separating orders 
         //this.ordersRepository.getOrders()
         //.then(orders=>this.setState({orders}));
+
+        this.ordersRepository.getPastOrdersForAVendor(localStorage.getItem('UserID'))
+        .then(pastorders=>this.setState({pastorders}));
+
+        this.ordersRepository.getCurrentOrdersForAVendor(localStorage.getItem('UserID'))
+        .then(currorders=>this.setState({currorders}));
     }
 }
