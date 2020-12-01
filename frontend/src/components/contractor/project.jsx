@@ -19,6 +19,7 @@ export class Project extends Component {
                 <table className="table table-hover">
                 <thead>
                     <tr>
+                    <th scope="col">Project Name</th>
                     <th scope="col">Project Type</th>
                     <th scope="col">Project Status</th>
                     <th scope="col">Date Started</th>
@@ -29,10 +30,11 @@ export class Project extends Component {
 
                  {this.state.myProjects.map((x,i) =>
                             <tr key = {i}>
+                            <td>{x.ProjectName}</td>
                             <td>{x.ProjectType}</td>
                             <td>{x.ProjectStatus}</td>
-                            <td>{x.ApplyDate}</td>
-                            <td>{x.ExpireDate}</td>
+                            <td> {String(x.ApplyDate).substring(5,7) + '/' + String(x.ApplyDate).substring(8,10) +'/' + String(x.ApplyDate).substring(0,4)} </td>
+                            <td>{String(x.ExpireDate).substring(5,7) + '/' + String(x.ExpireDate).substring(8,10) +'/' + String(x.ExpireDate).substring(0,4)}</td>
                             <td><button className = "btn-primary">update</button></td>
                             </tr>
                     )}
@@ -48,6 +50,7 @@ export class Project extends Component {
                 <table className="table table-hover">
                 <thead>
                     <tr>
+                    <th scope="col">Project Name</th>
                     <th scope="col">Project Type</th>
                     <th scope="col">Project Status</th>
                     <th scope="col">Date Started</th>
@@ -58,10 +61,11 @@ export class Project extends Component {
 
                  {this.state.projects.map((x,i) =>
                             <tr key = {i}>
+                            <td>{x.ProjectName}</td>
                             <td>{x.ProjectType}</td>
                             <td>{x.ProjectStatus}</td>
-                            <td>{x.ApplyDate}</td>
-                            <td>{x.ExpireDate}</td>
+                            <td> {String(x.ApplyDate).substring(5,7) + '/' + String(x.ApplyDate).substring(8,10) +'/' + String(x.ApplyDate).substring(0,4)} </td>
+                            <td>{String(x.ExpireDate).substring(5,7) + '/' + String(x.ExpireDate).substring(8,10) +'/' + String(x.ExpireDate).substring(0,4)}</td>
                             <td><button className = "btn-primary">Details</button></td>
                             </tr>
                     )}

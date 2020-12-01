@@ -85,4 +85,30 @@ export class ContractorRepo{
         })
     }
 
+    getVendors(){
+        return new Promise((resolve,reject) =>{
+            axios.get(`${this.url}/getUserType/?UserType=vendor`)
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    getContractors(){
+        return new Promise((resolve,reject) =>{
+            axios.get(`${this.url}/getUserType/?UserType=contractor`)
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
 }
