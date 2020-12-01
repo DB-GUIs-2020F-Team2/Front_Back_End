@@ -2,6 +2,7 @@ import React from 'react';
 import {OrdersRepository} from '../../API/ordersRepo';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
+import { VendorNav } from './vendor_nav';
 
 // referenced AccountEditor.jsx. Need to add ordersRepository 
 export class ProductEditor  extends React.Component {
@@ -31,7 +32,9 @@ state = {
 
 
     render(){
-        return <form className = "container pt-3">
+        return <>
+        <VendorNav> </VendorNav> 
+        <form className = "container pt-3">
         <h1> Product Editor
         </h1> 
 
@@ -65,7 +68,8 @@ state = {
 
 
 
-        </form>;
+        </form>
+        </>; 
     }
 
      componentDidMount() {
