@@ -55,21 +55,21 @@ class LoginForm extends Component {
         if (this.state.userType === '') {
             return (
                 <div>
-                    <button type = "button" className="btn btn-success button login disabled">Login</button>
+                    <button type = "button" className="btn btn-dark button login disabled buttonPadding">Login</button>
                 </div>
             )
         }
         else if (this.state.userType === 'Manager' && this.state.username) {
             return (
                 <div>
-                    <button type = "button" className="btn btn-success button login" onClick ={() => this.login()}>Login</button>
+                    <button type = "button" className="btn btn-dark button login buttonPadding" onClick ={() => this.login()}>Login</button>
                 </div>
             )
         }
         else if (this.state.userType === 'Contractor' && this.state.username) {
             return (
                 <div>
-                    <button type = "button" className="btn btn-success login button" onClick ={() => this.login()}>Login</button>
+                    <button type = "button" className="btn btn-dark login button buttonPadding" onClick ={() => this.login()}>Login</button>
 
                 </div>
             )
@@ -77,7 +77,7 @@ class LoginForm extends Component {
         else if (this.state.userType === 'Vendor' && this.state.username) {
             return (
                 <div>
-                    <button type = "button" className="btn btn-success login button" onClick ={() => this.login()}>Login</button>
+                    <button type = "button" className="btn btn-dark login button buttonPadding" onClick ={() => this.login()}>Login</button>
 
                 </div>
             )
@@ -85,7 +85,7 @@ class LoginForm extends Component {
         else{
             return (
                 <div>
-                    <button type = "button" className="btn btn-success button login disabled">Login</button>
+                    <button type = "button" className="btn btn-dark button login disabled buttonPadding">Login</button>
                 </div>
             )
         }
@@ -114,12 +114,12 @@ class LoginForm extends Component {
                                 <option value = 'Vendor'>Vendor</option>
                             </select>
                         </div>
-                    </form>
-                </div>
-
-                <div id = 'loginButton' className = ''>
+                        <div id = 'loginButton' className = ''>
                     {this.makeButton()}
  
+                </div>
+
+                    </form>
                 </div>
             </div>
         );

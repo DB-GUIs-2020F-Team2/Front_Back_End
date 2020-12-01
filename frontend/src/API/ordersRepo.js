@@ -88,6 +88,21 @@ export class OrdersRepository{
     }
 
 
+    //addition so we have sum of costs for vendor 
+    getOrderSum(orderId) {
+            return new Promise((resolve, reject) => {
+                axios.get(`${this.url}/order/cost/${orderId}`, this.config)
+                .then(x => resolve(x.data.data))
+                .catch(e => {
+                    alert(e);
+                    console.log(e);
+                    reject();
+                });
+            });
+        }
+
+
+
     // called in order_details.jsx 
     getProduct(productId) {
         return new Promise((resolve, reject) => {
