@@ -285,6 +285,24 @@ app.delete('/deleteProject/:id', (req, res) => {
   });
 })
 
+
+app.put('/UpdatePStatus', (req, res) => {
+  connection.query('UPDATE Project SET ProjectStatus = ? WHERE ProjectID = ?;', [req.body.ProjectStatus, req.body.ProjectID],  function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
 ///////////////////////////////// NOTIFICATIONS ////////////////////////////////////////////
 // Get a notification based on UserID
 app.get('/getNotification/:id', (req, res) => {
