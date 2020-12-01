@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export class LoginRepo {
 
-    url = '3.137.192.24:8000';
+    url = 'http://3.137.192.24:8000';
 
     loginUser(username, password, userType){
         return new Promise((resolve,reject) =>{

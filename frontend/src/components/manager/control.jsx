@@ -30,6 +30,16 @@ class Control extends Component {
         }
      }
 
+     ordersFor(view){
+         if(view < 7){
+            return this.getDate(view)
+         }
+         else{
+             return "search results"
+         }
+        
+     }
+
      getDate(daysFromToday){
         var today = new Date();
         var dd = today.getDate();
@@ -104,6 +114,7 @@ class Control extends Component {
     }
 
     render() { 
+        console.log(this.state.view)
         return ( 
             <div className="container">
                 <div className = "col align-self-center">
@@ -116,12 +127,12 @@ class Control extends Component {
                         <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(5)}>5 Days from Now</button>
                         <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(6)}>6 Days from Now</button>
                         <form>
-                            <input type="text" placeholder="Search.." name="search" onChange = {(e) => this.setState({searchVal: e.target.value})}></input>
-                            <button className = 'btn btn-light' onClick = {() => this.searching(this.state.searchVal)}>Search</button>
+                            <input type="text" placeholder="Search a Project ID.." name="search" onChange = {(e) => this.setState({searchVal: e.target.value})}></input>
+                            <button type = 'button' className = 'btn btn-light' onClick = {() => this.searching(this.state.searchVal)}>Search</button>
                         </form>
                     </h2>
                     <div className="container">
-                        <h4 className = 'bg-warning'>Orders for {this.getDate(this.state.view)}</h4>
+                        <h4 className = 'bg-warning'>Orders for {this.ordersFor(this.state.view)}</h4>
                         {this.changeView()}
                     </div>
 
@@ -144,7 +155,8 @@ class Control extends Component {
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
-                            <th>ID</th>
+                                <th>Project ID</th>
+                                <th>Order ID</th>
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>Due Date</th>
@@ -161,6 +173,7 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
+                                            <td>{item.ProjectID}</td>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
                                             <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
@@ -184,7 +197,8 @@ class Control extends Component {
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
-                                <th>ID</th>
+                                <th>Project ID</th>
+                                <th>Order ID</th>
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>Due Date</th>
@@ -201,6 +215,7 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
+                                            <td>{item.ProjectID}</td>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
                                             <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
@@ -224,7 +239,8 @@ class Control extends Component {
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
-                                <th>ID</th>
+                                <th>Project ID</th>
+                                <th>Order ID</th>
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>Due Date</th>
@@ -241,6 +257,7 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
+                                            <td>{item.ProjectID}</td>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
                                             <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
@@ -264,7 +281,8 @@ class Control extends Component {
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
-                                <th>ID</th>
+                                <th>Project ID</th>
+                                <th>Order ID</th>
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>Due Date</th>
@@ -281,6 +299,7 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
+                                            <td>{item.ProjectID}</td>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
                                             <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
@@ -304,7 +323,8 @@ class Control extends Component {
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
-                                <th>ID</th>
+                                <th>Project ID</th>
+                                <th>Order ID</th>
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>Due Date</th>
@@ -321,6 +341,7 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
+                                            <td>{item.ProjectID}</td>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
                                             <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
@@ -344,7 +365,8 @@ class Control extends Component {
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
-                                <th>ID</th>
+                                <th>Project ID</th>
+                                <th>Order ID</th>
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>Due Date</th>
@@ -361,6 +383,7 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
+                                            <td>{item.ProjectID}</td>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
                                             <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
@@ -384,7 +407,8 @@ class Control extends Component {
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
-                                <th>ID</th>
+                                <th>Project ID</th>
+                                <th>Order ID</th>
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>Due Date</th>
@@ -401,6 +425,7 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
+                                            <td>{item.ProjectID}</td>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
                                             <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
@@ -418,14 +443,16 @@ class Control extends Component {
             )
         }
         else if(this.state.view == 7){ 
+            console.log(this.state.searchResults)
             return (                                      
-                this.state.searchResults.length === 0 ? <p className = 'bg-light'>No results found</p> :
+                !this.state.searchResults.data ? <p className = 'bg-light'>No results found</p> :
                 <React.Fragment>
-                <h4>Search Results</h4>
+                <h4 className = 'bg-light'>Search Results</h4>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
-                                <th>ID</th>
+                                <th>Project ID</th>
+                                <th>Order ID</th>
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>Due Date</th>
@@ -437,11 +464,12 @@ class Control extends Component {
                         </thead>
                         
                         <tbody>
-                            {this.state.searchResults.map(item => {
+                            {this.state.searchResults.data.map(item => {
                                 console.log("item " + item);
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
+                                            <td>{item.ProjectID}</td>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
                                             <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
