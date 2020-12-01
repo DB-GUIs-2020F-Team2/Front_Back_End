@@ -49,7 +49,7 @@ state = {
             <br />
 
             <label for="discount">Set on Discount:</label>
-                <select id='discount' value={ this.state.IsDiscount === 1 ? 'yes' : 'no' } onChange={ e => this.setState({ IsDiscount: e.target.value === 'yes'? 1: 0 })}>
+                <select id='discount' className = "ml-3" value={ this.state.IsDiscount === 1 ? 'yes' : 'no' } onChange={ e => this.setState({ IsDiscount: e.target.value === 'yes'? 1: 0 })}>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
                 </select>
