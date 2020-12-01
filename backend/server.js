@@ -401,7 +401,7 @@ app.get('/orders_full/:OrderID', async (req, res) => {
 
 // get cost of an order
 app.get('/order/cost/:OrderID', async (req, res) => {
-  connection.query('SELECT o.OrderID, SUM(IF(p.IsDiscount, p.DiscountPrice, p.CurrentPrice) * op.Amount) AS cost FROM Orders o INNER JOIN Order_Product op ON op.OrderID = o.OrderID INNER JOIN Product p ON p.ProductID = op.ProductID WHERE o.OrderID = ? GROUP BY o.OrderID;',
+  connection.query('SELECT *, SUM(IF(p.IsDiscount, p.DiscountPrice, p.CurrentPrice) * op.Amount) AS cost FROM Orders o INNER JOIN Order_Product op ON op.OrderID = o.OrderID INNER JOIN Product p ON p.ProductID = op.ProductID WHERE o.OrderID = ? GROUP BY o.OrderID;',
   [req.params.OrderID], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
