@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import { ManagerRepo } from '../../API/managerRepo';
 
 class History extends Component {
     state = {  }
+
+    deleteOrder(id){
+        MR = ManagerRepo()
+        MR.deleteOrder(id)
+        alert('Order '+ id + ' has been deleted')
+    }
+
     render() { 
         return ( 
             <div className="container">
@@ -15,6 +23,7 @@ class History extends Component {
                                 <th>Apply Date</th>
                                 <th>Expire Date</th>
                                 <th>Vendor ID</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         
@@ -29,6 +38,7 @@ class History extends Component {
                                             <td>{item.ApplyDate}</td>
                                             <td>{item.ExpireDate}</td>
                                             <td>{item.VendorID}</td>
+                                            <td><button className = 'btn btn-danger' onClick = {() => this.deleteOrder(item.OrderID)}>Delete Order</button></td>
                                         </tr>
                                     );
                                 })}

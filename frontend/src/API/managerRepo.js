@@ -8,6 +8,30 @@ export class ManagerRepo {
 
     };
 
+    dateCheck(month,day){
+        //console.log(month,' ',day)
+        if(day>31 && month == 0 | 2 | 4 | 6 | 7 | 9 | 11){
+            return ""+(month+1)+'-'+(day-31)
+        }
+        else if(day>30){
+            return ""+(month+1)+'-'+(day-30)
+        }
+        else{
+            return ""+(month)+'-'+(day)
+        }
+     }
+
+    getDate(daysFromToday){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth();; //January is 0!
+        var yyyy = today.getFullYear();
+        
+        dd=dd+daysFromToday
+        //console.log(dd)
+        return (""+yyyy+'-'+ this.dateCheck(mm+1,dd))
+     }
+
     getDirectory(){
         console.log(this.url)
         return new Promise((resolve,reject) =>{
@@ -35,6 +59,21 @@ export class ManagerRepo {
                 })
         })
     } 
+
+    deleteOrder(id){
+        return new Promise((resolve,reject) =>{
+            axios.delete(`${this.url}/order/`, {
+                "OrderID": id
+                })
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
 
     getOrders(date){
         return new Promise((resolve,reject) =>{
@@ -134,6 +173,32 @@ export class ManagerRepo {
                 "ApplyDate": ad,
                 "ExpireDate": ed,
                 "VendorID": vid
+              })
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    newProject(name,Id,type){
+        //ProjectName, ApplyDate, ExpireDate, ProjectStatus, ProjectType, ManagerID
+
+        let ad = this.getDate(0)
+        let ed = this.getDate(7)
+        let vid = 'In progress'
+
+        return new Promise((resolve,reject) =>{
+            axios.post(`${this.url}/postProject`,{
+                "ProjectName": name,
+                "ApplyDate": ad,
+                "ExpireDate": ed,
+                "ProjectStatus": vid,
+                "ProjectType": type,
+                "ManagerID": Id
               })
                 .then(x => {
                     resolve(x.data);

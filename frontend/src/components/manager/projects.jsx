@@ -2,18 +2,38 @@ import React, { Component } from 'react';
 import { ManagerRepo } from '../../API/managerRepo';
 
 class Projects extends Component {
-    state = {  }
+    state = { //ProjectName, ApplyDate, ExpireDate, ProjectStatus, ProjectType, ManagerID
+        name: '',
+        ManagerID: '',
+        type: ''
+
+     }
 
     deleteMe(id){
         MR = new ManagerRepo()
         MR.deleteProject(id)
+        alert('Project  '+ id + ' has been deleted')
+    }
+
+    addProject(name,Id,type){
+        MR = new ManagerRepo()
+        MR.addProject(name,Id,type)
+        alert(name + ' has been added')
     }
 
     render() { 
         return ( 
             <div className="container">
                 <div className = "col align-self-center">
-                    
+                    <form>
+                        <label htmlFor = "name" className = "m-2">Project Name</label>
+                        <input type = "text" id = "name" onChange = {(e) => this.setState({name: e.target.value})}></input>
+
+                        <label htmlFor = "type" className = "m-2">Project Type</label>
+                        <input type = "text" id = "type" onChange = {(e) => this.setState({type: e.target.value})}></input>
+
+                        <button className = 'btn btn-success' onClick = {() => this.addProject(this.state.name,localStorage.getItem(UserID),this.state.type)}>New Project</button>
+                    </form>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
