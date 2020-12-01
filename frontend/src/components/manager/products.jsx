@@ -49,7 +49,7 @@ class Products extends Component {
             <div className="container">
                 <div className = "col align-self-center">
                     
-                    <table className = "table table-striped">
+                    <table className = "table table-striped table-responsive-md">
                         <thead className = "thead-light">
                             <tr>
                                 <th>ID</th>

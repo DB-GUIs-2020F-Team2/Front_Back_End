@@ -152,7 +152,7 @@ class Control extends Component {
             return (
                 this.state.day0.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
-                    <table className = "table table-striped">
+                    <table className = "table table-striped table-responsive-md">
                         <thead className = "thead-light">
                             <tr>
                                 <th>Project ID</th>
@@ -194,7 +194,7 @@ class Control extends Component {
             return (
                 this.state.day1.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
-                    <table className = "table table-striped">
+                    <table className = "table table-striped table-responsive-md">
                         <thead className = "thead-light">
                             <tr>
                                 <th>Project ID</th>
@@ -236,7 +236,7 @@ class Control extends Component {
             return (
                 this.state.day2.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
-                    <table className = "table table-striped">
+                    <table className = "table table-striped table-responsive-md">
                         <thead className = "thead-light">
                             <tr>
                                 <th>Project ID</th>
@@ -278,7 +278,7 @@ class Control extends Component {
             return (
                 this.state.day3.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
-                    <table className = "table table-striped">
+                    <table className = "table table-striped table-responsive-md">
                         <thead className = "thead-light">
                             <tr>
                                 <th>Project ID</th>
@@ -320,7 +320,7 @@ class Control extends Component {
             return (
                 this.state.day4.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
-                    <table className = "table table-striped">
+                    <table className = "table table-striped table-responsive-md">
                         <thead className = "thead-light">
                             <tr>
                                 <th>Project ID</th>
@@ -362,7 +362,7 @@ class Control extends Component {
             return (
                 this.state.day5.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
-                    <table className = "table table-striped">
+                    <table className = "table table-striped table-responsive-md">
                         <thead className = "thead-light">
                             <tr>
                                 <th>Project ID</th>
@@ -404,7 +404,7 @@ class Control extends Component {
             return (
                 this.state.day6.length === 0 ? <p className = 'bg-light'>No orders for this day</p> :
                 <React.Fragment>
-                    <table className = "table table-striped">
+                    <table className = "table table-striped table-responsive-md">
                         <thead className = "thead-light">
                             <tr>
                                 <th>Project ID</th>
@@ -448,7 +448,7 @@ class Control extends Component {
                 !this.state.searchResults.data ? <p className = 'bg-light'>No results found</p> :
                 <React.Fragment>
                 <h4 className = 'bg-light'>Search Results</h4>
-                    <table className = "table table-striped">
+                    <table className = "table table-striped table-responsive-md">
                         <thead className = "thead-light">
                             <tr>
                                 <th>Project ID</th>

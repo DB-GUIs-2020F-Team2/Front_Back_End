@@ -34,7 +34,7 @@ class Projects extends Component {
 
                         <button type = 'button' className = 'btn btn-success' onClick = {() => this.addProject(this.state.name,localStorage.getItem('UserID'),this.state.type)}>New Project</button>
                     </form>
-                    <table className = "table table-striped">
+                    <table className = "table table-striped table-responsive-md">
                         <thead className = "thead-light">
                             <tr>
                                 <th>ID</th>
