@@ -89,7 +89,7 @@ class Control extends Component {
         console.log(ID)
         managerRepo.searchForProjectOrders(ID).then(x => {
             this.setState({ searchResults: x });
-            () => this.updateView(7)
+            this.updateView(7)
         });
         
     }
@@ -163,8 +163,8 @@ class Control extends Component {
                                         <tr>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
-                                            <td>{item.ApplyDate}</td>
-                                            <td>{item.ExpireDate}</td>
+                                            <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
+                                            <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                             <td>{item.VendorID}</td>
                                             <td>{item.ProductID}</td>
                                             <td>{item.Amount}</td>
@@ -203,8 +203,8 @@ class Control extends Component {
                                         <tr>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
-                                            <td>{item.ApplyDate}</td>
-                                            <td>{item.ExpireDate}</td>
+                                            <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
+                                            <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                             <td>{item.VendorID}</td>
                                             <td>{item.ProductID}</td>
                                             <td>{item.Amount}</td>
@@ -243,8 +243,8 @@ class Control extends Component {
                                         <tr>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
-                                            <td>{item.ApplyDate}</td>
-                                            <td>{item.ExpireDate}</td>
+                                            <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
+                                            <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                             <td>{item.VendorID}</td>
                                             <td>{item.ProductID}</td>
                                             <td>{item.Amount}</td>
@@ -283,8 +283,8 @@ class Control extends Component {
                                         <tr>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
-                                            <td>{item.ApplyDate}</td>
-                                            <td>{item.ExpireDate}</td>
+                                            <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
+                                            <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                             <td>{item.VendorID}</td>
                                             <td>{item.ProductID}</td>
                                             <td>{item.Amount}</td>
@@ -323,8 +323,8 @@ class Control extends Component {
                                         <tr>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
-                                            <td>{item.ApplyDate}</td>
-                                            <td>{item.ExpireDate}</td>
+                                            <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
+                                            <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                             <td>{item.VendorID}</td>
                                             <td>{item.ProductID}</td>
                                             <td>{item.Amount}</td>
@@ -363,8 +363,8 @@ class Control extends Component {
                                         <tr>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
-                                            <td>{item.ApplyDate}</td>
-                                            <td>{item.ExpireDate}</td>
+                                            <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
+                                            <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                             <td>{item.VendorID}</td>
                                             <td>{item.ProductID}</td>
                                             <td>{item.Amount}</td>
@@ -403,8 +403,8 @@ class Control extends Component {
                                         <tr>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
-                                            <td>{item.ApplyDate}</td>
-                                            <td>{item.ExpireDate}</td>
+                                            <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
+                                            <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                             <td>{item.VendorID}</td>
                                             <td>{item.ProductID}</td>
                                             <td>{item.Amount}</td>
@@ -444,8 +444,8 @@ class Control extends Component {
                                         <tr>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
-                                            <td>{item.ApplyDate}</td>
-                                            <td>{item.ExpireDate}</td>
+                                            <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
+                                            <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                             <td>{item.VendorID}</td>
                                             <td>{item.ProductID}</td>
                                             <td>{item.Amount}</td>

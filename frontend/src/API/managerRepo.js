@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export class ManagerRepo {
 
-    url = '3.137.192.24:8000';
+    url = 'http://3.137.192.24:8000';
     //url = 'http://localhost:8000';
     config = {
 
@@ -33,7 +33,7 @@ export class ManagerRepo {
      }
 
     getDirectory(){
-        console.log(this.url)
+        console.log(`${this.url}/getUser`)
         return new Promise((resolve,reject) =>{
             axios.get(`${this.url}/getUser`, this.config)
                 .then(x => {
@@ -47,9 +47,9 @@ export class ManagerRepo {
     } ///deleteProject/:id
 
     deleteProject(id){
-        console.log(this.url)
+        console.log(`${this.url}/deleteProject/id=${id}`)
         return new Promise((resolve,reject) =>{
-            axios.delete(`${this.url}/deleteProject/${id}`, this.config)
+            axios.delete(`${this.url}/deleteProject/id=${id}`, this.config)
                 .then(x => {
                     resolve(x.data.data);
                 })

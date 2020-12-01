@@ -5,7 +5,7 @@ class History extends Component {
     state = {  }
 
     deleteOrder(id){
-        MR = ManagerRepo()
+        let MR = new ManagerRepo()
         MR.deleteOrder(id)
         alert('Order '+ id + ' has been deleted')
     }
@@ -35,8 +35,8 @@ class History extends Component {
                                         <tr>
                                             <td>{item.OrderID}</td>
                                             <td>{item.OrderStatus}</td>
-                                            <td>{item.ApplyDate}</td>
-                                            <td>{item.ExpireDate}</td>
+                                            <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
+                                            <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                             <td>{item.VendorID}</td>
                                             <td><button className = 'btn btn-danger' onClick = {() => this.deleteOrder(item.OrderID)}>Delete Order</button></td>
                                         </tr>

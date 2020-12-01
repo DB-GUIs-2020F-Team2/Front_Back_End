@@ -10,14 +10,14 @@ class Projects extends Component {
      }
 
     deleteMe(id){
-        MR = new ManagerRepo()
+        let MR = new ManagerRepo()
         MR.deleteProject(id)
         alert('Project  '+ id + ' has been deleted')
     }
 
     addProject(name,Id,type){
-        MR = new ManagerRepo()
-        MR.addProject(name,Id,type)
+        let MR = new ManagerRepo()
+        MR.newProject(name,Id,type)
         alert(name + ' has been added')
     }
 
@@ -25,14 +25,14 @@ class Projects extends Component {
         return ( 
             <div className="container">
                 <div className = "col align-self-center">
-                    <form>
+                    <form className = 'bg-light'>
                         <label htmlFor = "name" className = "m-2">Project Name</label>
                         <input type = "text" id = "name" onChange = {(e) => this.setState({name: e.target.value})}></input>
 
                         <label htmlFor = "type" className = "m-2">Project Type</label>
                         <input type = "text" id = "type" onChange = {(e) => this.setState({type: e.target.value})}></input>
 
-                        <button className = 'btn btn-success' onClick = {() => this.addProject(this.state.name,localStorage.getItem(UserID),this.state.type)}>New Project</button>
+                        <button type = 'button' className = 'btn btn-success' onClick = {() => this.addProject(this.state.name,localStorage.getItem('UserID'),this.state.type)}>New Project</button>
                     </form>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
@@ -55,9 +55,12 @@ class Projects extends Component {
                             var today = new Date();
                             var dd = today.getDate();
                             var mm = today.getMonth();
+                            var yy = today.getFullYear();
+                            let todayDate = yy + '-'+mm+'-'+dd
+                            let itemDate = String(item.ExpireDate).substring(0,9)
                             //console.log(this.props.match.params.id) table-danger
                                 return (
-                                    today > item.ExpireDate ? 
+                                    todayDate > itemDate ? 
                                         <tr className = 'table-danger'>
                                             <td>{item.ProjectID}</td>
                                             <td>{item.ProjectName}</td>
@@ -66,7 +69,7 @@ class Projects extends Component {
                                             <td>{item.ProjectStatus}</td>
                                             <td>{item.ProjectType}</td>
                                             <td>{item.ManagerID}</td>
-                                            <th><button className = 'btn btn-danger' onClick = {this.deleteMe(item.ProjectID)}></button></th>
+                                            <th><button className = 'btn btn-danger' onClick = {() => this.deleteMe(item.ProjectID)}>Delete Project</button></th>
                                         </tr> :
                                         <tr>
                                             <td>{item.ProjectID}</td>
@@ -76,7 +79,7 @@ class Projects extends Component {
                                             <td>{item.ProjectStatus}</td>
                                             <td>{item.ProjectType}</td>
                                             <td>{item.ManagerID}</td>
-                                            <th><button className = 'btn btn-danger' onClick = {this.deleteMe(item.ProjectID)}></button></th>
+                                            <th><button className = 'btn btn-danger' onClick = {() => this.deleteMe(item.ProjectID)}>Delete Project</button></th>
                                         </tr>
                                 );
                             })}
