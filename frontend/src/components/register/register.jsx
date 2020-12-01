@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './register.css'
 import NavBar from '../contractor/navabar'
+import { ContractorRepo } from '../../API/contractorRepo'
 
 export class Register extends Component {
+    
+    contractorRepo = new ContractorRepo();
+
     state = { 
         userName: '',
         password: '',
@@ -12,6 +16,17 @@ export class Register extends Component {
         phoneNumber: '',
         email: ''
      }
+     handleSubmit(){
+         if(this.state.userName && this.state.email && this.state.password && this.state.department && this.state.phoneNumber){
+            this.contractorRepo.registerUser(this.state.userName, this.state.email, this.state.phoneNumber, this.state.password, this.state.department)
+            alert(this.state.name + ' has been registered')
+         }
+
+         else{
+            alert("Incomplete User, Please Fill out all fields");
+         }
+     }
+
 
     render() { 
 
@@ -93,7 +108,7 @@ export class Register extends Component {
                         </div> 
 
                         <div className = "row justify-content-center">
-                        <Link to='/login'  className="btn btn-primary">Register</Link>
+                        <Link to='/login'  className="btn btn-primary" onClick ={() => this.handleSubmit()} >Register</Link>
                             
                         </div>
                     </div>
