@@ -19,11 +19,11 @@ class Control extends Component {
 
      dateCheck(month,day){
         //console.log(month,' ',day)
-        if(day>31 && month == 0 | 2 | 4 | 6 | 7 | 9 | 11){
-            return ""+(month+1)+'-'+(day-31)
-        }
-        else if(day>30){
+        if(day>30 && month == 0 | 2 | 4 | 6 | 7 | 9 | 11){
             return ""+(month+1)+'-'+(day-30)
+        }
+        else if(day>31){
+            return ""+(month+1)+'-'+(day-31)
         }
         else{
             return ""+(month)+'-'+(day)
@@ -89,7 +89,7 @@ class Control extends Component {
         console.log(ID)
         managerRepo.searchForProjectOrders(ID).then(x => {
             this.setState({ searchResults: x });
-            this.updateView(7)
+            () => this.updateView(7)
         });
         
     }

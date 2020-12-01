@@ -76,7 +76,7 @@ export class ManagerHome extends Component {
                 <div>
                         <Header changer = {this.updateView}/>
                 </div>
-                <div>
+                <div className = 'container-fluid'>
                         {this.changeView()}
                 </div>
 
