@@ -85,10 +85,22 @@ class Control extends Component {
 
     searching(projectID){
         let managerRepo = new ManagerRepo()
-        managerRepo.searchForProjectOrders(projectID).then(x => {
+        let ID = parseInt(projectID)
+        console.log(ID)
+        managerRepo.searchForProjectOrders(ID).then(x => {
             this.setState({ searchResults: x });
+            this.updateView(7)
         });
-        this.updateView(7)
+        
+    }
+
+    discountPricing(discounted, cp,dp){
+        if(discounted === 1){
+            return dp
+        }
+        else{
+            return cp
+        }
     }
 
     render() { 
@@ -105,7 +117,7 @@ class Control extends Component {
                         <button className = ' btn col-1 btn-success' onClick = {() => this.updateView(6)}>6 Days from Now</button>
                         <form>
                             <input type="text" placeholder="Search.." name="search" onChange = {(e) => this.setState({searchVal: e.target.value})}></input>
-                            <button onClick = {() => this.searching(this.state.searchVal)}><i class="fa fa-search"></i></button>
+                            <button className = 'btn btn-light' onClick = {() => this.searching(this.state.searchVal)}>Search</button>
                         </form>
                     </h2>
                     <div className="container">
@@ -132,11 +144,14 @@ class Control extends Component {
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
-                                <th>ID</th>
+                            <th>ID</th>
                                 <th>Status</th>
                                 <th>Start Date</th>
                                 <th>Due Date</th>
                                 <th>Vendor ID</th>
+                                <th>Product ID</th>
+                                <th>Amount</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         
@@ -146,11 +161,14 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
-                                            <td>ID</td>
-                                            <td>name</td>
-                                            <td>quant</td>
-                                            <td>$price</td>
-                                            <td>$dis price</td>
+                                            <td>{item.OrderID}</td>
+                                            <td>{item.OrderStatus}</td>
+                                            <td>{item.ApplyDate}</td>
+                                            <td>{item.ExpireDate}</td>
+                                            <td>{item.VendorID}</td>
+                                            <td>{item.ProductID}</td>
+                                            <td>{item.Amount}</td>
+                                            <td>{this.discountPricing(item.IsDiscount,item.CurrentPrice,item.DiscountPrice)}</td>
                                         </tr>
                                     );
                                 })}
@@ -171,6 +189,9 @@ class Control extends Component {
                                 <th>Start Date</th>
                                 <th>Due Date</th>
                                 <th>Vendor ID</th>
+                                <th>Product ID</th>
+                                <th>Amount</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         
@@ -180,11 +201,14 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
-                                            <td>ID</td>
-                                            <td>name</td>
-                                            <td>quant</td>
-                                            <td>$price</td>
-                                            <td>$dis price</td>
+                                            <td>{item.OrderID}</td>
+                                            <td>{item.OrderStatus}</td>
+                                            <td>{item.ApplyDate}</td>
+                                            <td>{item.ExpireDate}</td>
+                                            <td>{item.VendorID}</td>
+                                            <td>{item.ProductID}</td>
+                                            <td>{item.Amount}</td>
+                                            <td>{this.discountPricing(item.IsDiscount,item.CurrentPrice,item.DiscountPrice)}</td>
                                         </tr>
                                     );
                                 })}
@@ -205,6 +229,9 @@ class Control extends Component {
                                 <th>Start Date</th>
                                 <th>Due Date</th>
                                 <th>Vendor ID</th>
+                                <th>Product ID</th>
+                                <th>Amount</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         
@@ -214,11 +241,14 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
-                                            <td>ID</td>
-                                            <td>name</td>
-                                            <td>quant</td>
-                                            <td>$price</td>
-                                            <td>$dis price</td>
+                                            <td>{item.OrderID}</td>
+                                            <td>{item.OrderStatus}</td>
+                                            <td>{item.ApplyDate}</td>
+                                            <td>{item.ExpireDate}</td>
+                                            <td>{item.VendorID}</td>
+                                            <td>{item.ProductID}</td>
+                                            <td>{item.Amount}</td>
+                                            <td>{this.discountPricing(item.IsDiscount,item.CurrentPrice,item.DiscountPrice)}</td>
                                         </tr>
                                     );
                                 })}
@@ -239,6 +269,9 @@ class Control extends Component {
                                 <th>Start Date</th>
                                 <th>Due Date</th>
                                 <th>Vendor ID</th>
+                                <th>Product ID</th>
+                                <th>Amount</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         
@@ -248,11 +281,14 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
-                                            <td>ID</td>
-                                            <td>name</td>
-                                            <td>quant</td>
-                                            <td>$price</td>
-                                            <td>$dis price</td>
+                                            <td>{item.OrderID}</td>
+                                            <td>{item.OrderStatus}</td>
+                                            <td>{item.ApplyDate}</td>
+                                            <td>{item.ExpireDate}</td>
+                                            <td>{item.VendorID}</td>
+                                            <td>{item.ProductID}</td>
+                                            <td>{item.Amount}</td>
+                                            <td>{this.discountPricing(item.IsDiscount,item.CurrentPrice,item.DiscountPrice)}</td>
                                         </tr>
                                     );
                                 })}
@@ -273,6 +309,9 @@ class Control extends Component {
                                 <th>Start Date</th>
                                 <th>Due Date</th>
                                 <th>Vendor ID</th>
+                                <th>Product ID</th>
+                                <th>Amount</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         
@@ -282,11 +321,14 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
-                                            <td>ID</td>
-                                            <td>name</td>
-                                            <td>quant</td>
-                                            <td>$price</td>
-                                            <td>$dis price</td>
+                                            <td>{item.OrderID}</td>
+                                            <td>{item.OrderStatus}</td>
+                                            <td>{item.ApplyDate}</td>
+                                            <td>{item.ExpireDate}</td>
+                                            <td>{item.VendorID}</td>
+                                            <td>{item.ProductID}</td>
+                                            <td>{item.Amount}</td>
+                                            <td>{this.discountPricing(item.IsDiscount,item.CurrentPrice,item.DiscountPrice)}</td>
                                         </tr>
                                     );
                                 })}
@@ -307,6 +349,9 @@ class Control extends Component {
                                 <th>Start Date</th>
                                 <th>Due Date</th>
                                 <th>Vendor ID</th>
+                                <th>Product ID</th>
+                                <th>Amount</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         
@@ -316,11 +361,14 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
-                                            <td>ID</td>
-                                            <td>name</td>
-                                            <td>quant</td>
-                                            <td>$price</td>
-                                            <td>$dis price</td>
+                                            <td>{item.OrderID}</td>
+                                            <td>{item.OrderStatus}</td>
+                                            <td>{item.ApplyDate}</td>
+                                            <td>{item.ExpireDate}</td>
+                                            <td>{item.VendorID}</td>
+                                            <td>{item.ProductID}</td>
+                                            <td>{item.Amount}</td>
+                                            <td>{this.discountPricing(item.IsDiscount,item.CurrentPrice,item.DiscountPrice)}</td>
                                         </tr>
                                     );
                                 })}
@@ -341,6 +389,9 @@ class Control extends Component {
                                 <th>Start Date</th>
                                 <th>Due Date</th>
                                 <th>Vendor ID</th>
+                                <th>Product ID</th>
+                                <th>Amount</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         
@@ -350,11 +401,14 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
-                                            <td>ID</td>
-                                            <td>name</td>
-                                            <td>quant</td>
-                                            <td>$price</td>
-                                            <td>$dis price</td>
+                                            <td>{item.OrderID}</td>
+                                            <td>{item.OrderStatus}</td>
+                                            <td>{item.ApplyDate}</td>
+                                            <td>{item.ExpireDate}</td>
+                                            <td>{item.VendorID}</td>
+                                            <td>{item.ProductID}</td>
+                                            <td>{item.Amount}</td>
+                                            <td>{this.discountPricing(item.IsDiscount,item.CurrentPrice,item.DiscountPrice)}</td>
                                         </tr>
                                     );
                                 })}
@@ -367,6 +421,7 @@ class Control extends Component {
             return (
                 this.state.searchResults.length === 0 ? <p className = 'bg-light'>No results found</p> :
                 <React.Fragment>
+                <h4>Search Results</h4>
                     <table className = "table table-striped">
                         <thead className = "thead-light">
                             <tr>
@@ -375,6 +430,9 @@ class Control extends Component {
                                 <th>Start Date</th>
                                 <th>Due Date</th>
                                 <th>Vendor ID</th>
+                                <th>Product ID</th>
+                                <th>Amount</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         
@@ -384,11 +442,14 @@ class Control extends Component {
                                 //console.log(this.props.match.params.id)
                                     return (
                                         <tr>
-                                            <td>ID</td>
-                                            <td>name</td>
-                                            <td>quant</td>
-                                            <td>$price</td>
-                                            <td>$dis price</td>
+                                            <td>{item.OrderID}</td>
+                                            <td>{item.OrderStatus}</td>
+                                            <td>{item.ApplyDate}</td>
+                                            <td>{item.ExpireDate}</td>
+                                            <td>{item.VendorID}</td>
+                                            <td>{item.ProductID}</td>
+                                            <td>{item.Amount}</td>
+                                            <td>{this.discountPricing(item.IsDiscount,item.CurrentPrice,item.DiscountPrice)}</td>
                                         </tr>
                                     );
                                 })}

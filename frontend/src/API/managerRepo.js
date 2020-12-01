@@ -130,7 +130,7 @@ export class ManagerRepo {
 
     searchForProjectOrders(projectID){
         return new Promise((resolve,reject) =>{
-            axios.get(`http://localhost:8000/searchOrders/${projectID}`)
+            axios.get(`http://localhost:8000/project_order/${projectID}`)
                 .then(x => {
                     resolve(x.data);
                 })
