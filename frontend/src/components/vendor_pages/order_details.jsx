@@ -1,7 +1,6 @@
 import React from 'react';
 import {OrdersRepository} from '../../API/ordersRepo';
 import { Link } from 'react-router-dom';
-import { VendorNav } from './vendor_nav';
 
 
 export class OrderDetails extends React.Component {
@@ -9,8 +8,7 @@ export class OrderDetails extends React.Component {
 ordersRepository = new OrdersRepository(); 
 
 state = {
-        orderDetails: [],
-        orderSum: ''
+        orderDetails: []
 }
 
     getPrice(currPrice, discountPrice, isDiscounted)
@@ -27,9 +25,7 @@ state = {
     render(){
 
 
-        return <>
-        <VendorNav> </VendorNav> 
-        <div className = "container pt-3">
+        return <div className = "container pt-3">
         <h1>  Order Details </h1>
         <table className = "table table-condensed table-striped">
         <thead>
@@ -66,26 +62,18 @@ state = {
         </tbody>       
         
     </table> 
-    <p> {this.state.orderSum.cost}</p>
     <Link className="btn btn-secondary btn-block" to="/vendor">Return to Orders</Link>
-        </div> 
-        </>
+
+        </div>
     }
 
      componentDidMount() {
         const orderId = +this.props.match.params.orderId;
-        console.log(orderId);
-        // console.log(orderId);
-        //this.setState({id: orderId}); 
+        console.log(orderId); 
         if (orderId) {
             this.ordersRepository.getOrderProducts(orderId)
                 .then(orderDetails => this.setState({orderDetails: orderDetails}));
-
-            this.ordersRepository.getOrderSum(orderId)
-                .then(order => this.setState({orderSum: order}));
-
-            console.log(this.state.orderSum.cost); 
-            
         }
+
     }
 }
