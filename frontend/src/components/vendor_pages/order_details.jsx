@@ -1,6 +1,7 @@
 import React from 'react';
 import {OrdersRepository} from '../../API/ordersRepo';
 import { Link } from 'react-router-dom';
+import { VendorNav } from './vendor_nav';
 
 
 export class OrderDetails extends React.Component {
@@ -25,7 +26,9 @@ state = {
     render(){
 
 
-        return <div className = "container pt-3">
+        return <>
+        <VendorNav> </VendorNav>
+        <div className = "container pt-3">
         <h1>  Order Details </h1>
         <table className = "table table-condensed table-striped">
         <thead>
@@ -65,6 +68,7 @@ state = {
     <Link className="btn btn-secondary btn-block" to="/vendor">Return to Orders</Link>
 
         </div>
+        </> 
     }
 
      componentDidMount() {
