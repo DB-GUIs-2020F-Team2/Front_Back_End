@@ -6,7 +6,7 @@ class Header extends Component {
     render() { 
         return ( 
             <div className = "container-fluid banner p-1">
-                <h1>Project Tracker</h1>
+                <h1>Tanks</h1>
             </div>
          );
     }

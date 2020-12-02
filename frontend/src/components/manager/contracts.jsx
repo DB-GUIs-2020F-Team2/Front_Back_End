@@ -37,7 +37,7 @@ class Contracts extends Component {
                                     return (
                                         <tr>
                                             <td>{item.ContractID}</td>
-                                            <td>{item.ContractDetails}</td>
+                                            <td>{item.ContractDetail}</td>
                                             <td>{item.BestBiddingID}</td>
                                             <td>{item.ContractorID}</td>
                                             <td>{this.isPayedFor(item.IsPaid)}</td>

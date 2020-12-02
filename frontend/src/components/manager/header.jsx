@@ -14,7 +14,7 @@ class Header extends Component {
             <div className = "container-fluid banner p-1">
                 <h1>
                     <div className = "row justify-content-md-center">
-                        <h1 className = "col-3 p-2 m-2 align-self-start">Project Tracker</h1>
+                        <h1 className = "col-3 p-2 m-2 align-self-start">Tanks</h1>
                         <button type="button" className = "btn btn-warning col-1 m-2 p-2" onClick = {() => this.changeView(0)}>Order History</button>
                         <button type="button" className = "btn btn-warning col-1 m-2 p-2" onClick = {() => this.changeView(1)}>Products</button>
                         <button type="button" className = "btn btn-warning col-1 m-2 p-2" onClick = {() => this.changeView(2)}>Directory</button>
