@@ -6,14 +6,15 @@ html {
   /* The image used */
   background-image: url("https://i.pinimg.com/originals/84/cc/c8/84ccc8700cd66266b2447f2da906e3c5.jpg");
 
-  /* Full height */
+  /* Full height */ 
   height: 100%;
   min-height: 100vh;
 
-  /* Center and scale the image nicely */
+  /* Center and scale the image nicely */ 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 
   margin-bottom: 0;
+  
 }

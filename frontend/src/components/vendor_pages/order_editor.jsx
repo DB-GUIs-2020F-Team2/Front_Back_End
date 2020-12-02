@@ -2,7 +2,6 @@ import React from 'react';
 import {OrdersRepository} from '../../API/ordersRepo';
 import { Link } from 'react-router-dom';
 
-// referenced AccountEditor.jsx. Need to add ordersRepository 
 export class OrderEditor  extends React.Component {
 
     ordersRepository = new OrdersRepository(); 
@@ -59,7 +58,6 @@ state = {
 
      componentDidMount() {
         const orderId = +this.props.match.params.orderId;
-        // console.log(orderId);
         this.setState({id: orderId}); 
 
     }

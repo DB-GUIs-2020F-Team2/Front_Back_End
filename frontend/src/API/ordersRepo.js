@@ -1,12 +1,10 @@
-// referenced AccountsRepository.js 
-// how do we filter what to show by who is loggin in?? eg. by the specific logged in vendor in my case??? 
 
 import axios from 'axios';
 
 export class OrdersRepository{
 
-    // SET UP ALL OF THIS 
-    url = 'http://localhost:8000'; //set up!!!!!!!!!! referenced my team's GUI from last year 
+    url = 'http://3.137.192.24:8000';
+    //url = 'http://localhost:8000'; //local host 
     config = {
 
     };
@@ -23,7 +21,7 @@ export class OrdersRepository{
         });
     }
 
-    //wasn't working :/
+    
     getOrdersForVendor(id) {
         console.log("in getting orders for vendor");
         return new Promise((resolve, reject) => {
@@ -35,7 +33,7 @@ export class OrdersRepository{
                 });
         });
     }
-    //try this! 
+    
     getOrdersForAVendor(id) {
         console.log("in getting orders for vendor");
         return new Promise((resolve, reject) => {
@@ -48,7 +46,7 @@ export class OrdersRepository{
         });
     }
 
-    //try this for past! 
+    //past orders for vendor 
     getPastOrdersForAVendor(id) {
         console.log("in getting past orders for vendor");
         return new Promise((resolve, reject) => {
@@ -61,7 +59,7 @@ export class OrdersRepository{
         });
     }
 
-    //try this for current! 
+    //current orders for vendor 
     getCurrentOrdersForAVendor(id) {
         console.log("in getting past orders for vendor");
         return new Promise((resolve, reject) => {
@@ -132,7 +130,7 @@ export class OrdersRepository{
 
     
 
-    //will be called in order_editor 
+    //called in order_editor 
     updateOrder(id, orderStatus) {
         let params = { OrderStatus: orderStatus,
                     OrderID: id}
@@ -146,7 +144,7 @@ export class OrdersRepository{
         });
     }
 
-        //will be called in order_editor 
+    //called in order_editor 
     updateProduct(id, isDiscount, details) {
         let params = { IsDiscount: isDiscount,
                     ProductID: id,

@@ -70,11 +70,6 @@ export class Products extends React.Component{
     componentDidMount() {
         this.ordersRepository.getProductsForVendor(4)
             .then(products => this.setState({products}));
-        //const orderId = +this.props.match.params.orderId;
-        //console.log(orderId);
-        /*if (orderId) {
-            this.ordersRepository.getOrderProducts(orderId)
-                .then(orderDetails => this.setState({orderDetails: orderDetails}));
-        }*/
+        
     }
 }
