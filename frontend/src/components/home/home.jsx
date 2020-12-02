@@ -9,7 +9,7 @@ render(){
       return <div className = "jumbotron jumbotron-fluid mb-0">
     <Container className = "justify-content-center my-5 container-fluid mt-0 pt-0 bt-0">
       <Row className = "justify-content-center">
-            <h1> Project Tracker</h1>
+            <h1> Tanks </h1>
       </Row>
 
       <Row className = "justify-content-center">     
