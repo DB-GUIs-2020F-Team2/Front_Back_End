@@ -74,7 +74,6 @@ state = {
 
      componentDidMount() {
         const productId = +this.props.match.params.productId;
-        // console.log(orderId);
         this.setState({id: productId}); 
         if (productId) {
             this.ordersRepository.getProduct(productId)
