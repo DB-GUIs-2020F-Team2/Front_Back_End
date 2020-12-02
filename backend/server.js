@@ -170,6 +170,23 @@ app.put('/UpdateUser', (req, res) => {
   });
 });
 
+app.put('/UpdateUser', (req, res) => {
+  connection.query('UPDATE User SET UserName = ?, HashPass = ?, ContactInfo = ?, Email = ? WHERE UserID = ?;', [req.body.UserName, req.body.HashPass, req.body.ContactInfo, req.body.Email, req.body.UserID],  function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
+
 
 app.get('/getProjects', (req, res) => {
   connection.query('SELECT * FROM Project;', function (err, rows, fields) {
@@ -284,6 +301,24 @@ app.delete('/deleteProject/:id', (req, res) => {
     }
   });
 })
+
+
+app.put('/UpdatePStatus', (req, res) => {
+  connection.query('UPDATE Project SET ProjectStatus = ? WHERE ProjectID = ?;', [req.body.ProjectStatus, req.body.ProjectID],  function (err, rows, fields) {
+    if (err) {
+      logger.error("Error while executing Query: \n", err);
+      res.status(400).json({
+        "data": [],
+        "error": "MySQL error"
+      })
+    }
+    else{
+      res.status(200).json({
+        "data": rows
+      });
+    }
+  });
+});
 
 ///////////////////////////////// NOTIFICATIONS ////////////////////////////////////////////
 // Get a notification based on UserID

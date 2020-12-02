@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './navabar.jsx';
 import { ContractorRepo } from '../../API/contractorRepo';
+import { Link } from 'react-router-dom';
 
 export class Project extends Component {
 
@@ -8,8 +9,55 @@ export class Project extends Component {
 
     state = {
         myProjects: [],
-        projects: []
+        projects: [],
+        details: [],
+        orderDetails: []
      }
+
+     loadOrders(id){
+        this.contractorRepo.getOrders(id)
+        .then(x => this.setState({details : x}));
+     }
+
+     getDetails(){
+        
+        this.state.details.map(x => {
+            const orderId = x.OrderID;
+         if (orderId) {
+                this.contractorRepo.getOrderProducts(orderId)
+                    .then(orderDetails => this.setState({orderDetails: orderDetails}));
+            }
+    }
+        )
+    
+     }
+
+     getPrice(currPrice, discountPrice, isDiscounted)
+    {
+        if(isDiscounted === 1){
+            return discountPrice;
+        }
+        else{
+            return currPrice;
+        }
+
+    }
+
+     veiwDetails(id){
+        this.loadOrders(id);
+        this.getDetails();
+
+        
+        
+
+        if(!this.state.details){
+            return(
+                <div>No Orders Yet</div>
+            )
+        }
+        
+     }
+
     render() { 
         return ( 
             <div>
@@ -35,7 +83,7 @@ export class Project extends Component {
                             <td>{x.ProjectStatus}</td>
                             <td> {String(x.ApplyDate).substring(5,7) + '/' + String(x.ApplyDate).substring(8,10) +'/' + String(x.ApplyDate).substring(0,4)} </td>
                             <td>{String(x.ExpireDate).substring(5,7) + '/' + String(x.ExpireDate).substring(8,10) +'/' + String(x.ExpireDate).substring(0,4)}</td>
-                            <td><button className = "btn-primary">update</button></td>
+                            <td><Link to='/projectUpdate'  className="btn btn-primary" >Update</Link></td>
                             </tr>
                     )}
                 </tbody>
@@ -46,7 +94,7 @@ export class Project extends Component {
                 <br/>
                 <br/>
 
-                <h2 className = "display-5 text-center font-weight m-2 p-2 bg-light"> All Projects</h2>
+                <h2 className = "display-5 text-center font-weight m-2 p-2 bg-light">All Projects</h2>
                 <table className="table table-hover">
                 <thead>
                     <tr>
@@ -66,9 +114,44 @@ export class Project extends Component {
                             <td>{x.ProjectStatus}</td>
                             <td> {String(x.ApplyDate).substring(5,7) + '/' + String(x.ApplyDate).substring(8,10) +'/' + String(x.ApplyDate).substring(0,4)} </td>
                             <td>{String(x.ExpireDate).substring(5,7) + '/' + String(x.ExpireDate).substring(8,10) +'/' + String(x.ExpireDate).substring(0,4)}</td>
-                            <td><button className = "btn-primary">Details</button></td>
+                            <td><button className = "btn-primary"  onClick= {() => this.veiwDetails(x.ProjectID)}>Details</button></td>
                             </tr>
                     )}
+                </tbody>
+                </table>
+
+
+                <h2 className = "display-5 text-center font-weight m-2 p-2 bg-light">Details -- Invoices</h2>
+                <table className="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col"> Product </th>
+                        <th scope="col">Details</th>
+                        <th scope="col"> Quantity </th>
+                        <th scope="col"> Price </th> 
+                        <th scope="col"> Cost </th> 
+                    </tr>
+                </thead>
+                <tbody>
+
+                {
+                    this.state.orderDetails.map((x) =>(
+                        <tr key={x.Order_ProductID}>
+                                    <td>
+                                        {x.ProductName}
+                                    </td>
+                                    <td>{x.Details}</td>
+
+                                    
+                                    <td> {x.Amount} </td>
+                                    <td> ${this.getPrice(x.CurrentPrice, x.DiscountPrice, x.IsDiscount)}</td>
+
+                                    <td> ${ this.getPrice(x.CurrentPrice, x.DiscountPrice, x.IsDiscount) * x.Amount}</td>
+                                </tr>
+
+                    ))
+
+                } 
                 </tbody>
                 </table>
             </div>
