@@ -19,18 +19,11 @@ export class DirectoryC extends Component {
      veiwProjects(id){
          this.loadProjects(id);
 
-         return (
-            <div>
-                {this.state.myProjects.map((x,i) =>
-                            <tr key = {i}>
-                            <td>{x.ProjectType}</td>
-                            <td>{x.ProjectStatus}</td>
-                            <td>{x.ApplyDate}</td>
-                            <td>{x.ExpireDate}</td>
-                            </tr>
-                    )}
-            </div>
-         );
+         if(!this.state.myProjects){
+             return(
+                 <div>No Projects</div>
+             )
+         }
      }
 
     render() { 

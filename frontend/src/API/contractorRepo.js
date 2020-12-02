@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export class ContractorRepo{
 
-    url = 'http://localhost:8000';
+    url = 'http://3.137.192.24:8000';
     config = {
 
     };
@@ -111,6 +111,44 @@ export class ContractorRepo{
         })
     }
 
+    getOrders(id){
+        return new Promise((resolve,reject) =>{
+            axios.get(`${this.url}/project_order/${id}`)
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    getBids(){
+        return new Promise((resolve,reject) =>{
+            axios.get(`${this.url}/bids`, this.config)
+            .then(x => {
+                resolve(x.data.data);
+            })
+            .catch(x => {
+                alert(x);
+                reject(x);
+            })
+    })
+}
+
+getOrderProducts(orderId) {
+    return new Promise((resolve, reject) => {
+        axios.get(`${this.url}/orders_full/${orderId}`, this.config)
+        .then(x => resolve(x.data.data))
+        .catch(e => {
+            alert(e);
+            reject();
+        });
+    });
+}
+
+
     registerUser(UserName, email, contact, password, department ){
         return new Promise((resolve,reject) =>{
 
@@ -123,6 +161,43 @@ export class ContractorRepo{
                 "InformationVis": iv,
                 "Email": email,
                 "UserType": department
+              })
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    updateUser(UserName, email, contact, password, UserID ){
+        return new Promise((resolve,reject) =>{
+            alert("updated");
+            axios.put(`${this.url}/UpdateUser`,{
+                "UserName": UserName,
+                "HashPass": password,
+                "ContactInfo": contact,
+                "Email": email,
+                "UserID": UserID
+              })
+                .then(x => {
+                    resolve(x.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    updateStatus(status, id ){
+        return new Promise((resolve,reject) =>{
+
+            axios.put(`${this.url}/UpdatePStatus`,{
+                "ProjectStatus": status,
+                "ProjectID": id
               })
                 .then(x => {
                     resolve(x.data);

@@ -7,15 +7,31 @@ export class Contracts extends Component {
     contractorRepo = new ContractorRepo();
     state = { 
         myContracts: [],
-        contracts: []
+        contracts: [],
+        bid: [],
+        contractor: []
      }
 
-     isPaid(){
-         if(this.state.myContracts.isPaid === 0){
+     isPaid(x){
+         if( x === 0){
              return "no";
          }
          else
             return "yes";
+     }
+
+
+
+     getBid(pos){
+    
+        
+        return(
+            <div >
+                {this.state.bid.map((x,i) =>
+                             <div>{x.BiddingPrice}</div>      
+                            )}
+            </div>
+        )
      }
 
     render() { 
@@ -38,7 +54,7 @@ export class Contracts extends Component {
                                     <tr key = {i}>
                                     <td>{x.ContractDetail}</td>
                                     <td>{x.ContractStatus}</td>
-                                    <td>{this.isPaid()}</td>
+                                    <td>{this.isPaid(x.isPaid)}</td>
                                     </tr>
                             )}
                     </tbody>
@@ -55,7 +71,7 @@ export class Contracts extends Component {
                     <th scope="col">Contract</th>
                     <th scope="col">Status</th>
                     <th scope="col">Paid</th>
-                    <th scope="col">Bid</th>
+                    <th scope="col">Current Bids</th>
                     </tr>
                
                 </thead>
@@ -65,8 +81,8 @@ export class Contracts extends Component {
                                     <tr key = {i}>
                                     <td>{x.ContractDetail}</td>
                                     <td>{x.ContractStatus}</td>
-                                    <td>{x.isPaid}</td>
-                                    <td>{x.BestBiddingID}</td>
+                                    <td>{this.isPaid(x.isPaid)}</td>
+                                    <td>{this.getBid(i)}</td>
                                     </tr>
                             )}
                     </tbody>
@@ -89,17 +105,8 @@ export class Contracts extends Component {
 
             this.contractorRepo.getAllContracts()
             .then(x => this.setState({contracts : x}));
+
+         this.contractorRepo.getBids()
+            .then(x => this.setState({bid : x}));
     }
 }
-
-/*  <tbody>
-                    {this.state.contracts.map((x,i) =>
-                            <tr key = {i}>
-                            <td>{x.UserName}</td>
-                            <td>{x.ContactInfo}</td>
-                            <td>{x.Email}</td>
-                            <td>{x.UserType}</td>
-                            </tr>
-                    )}
-                    
-                </tbody> */

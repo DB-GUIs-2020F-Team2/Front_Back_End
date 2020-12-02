@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './directory.css'
 import NavBar from './navabar.jsx'
 import { ContractorRepo } from '../../API/contractorRepo'
 import {Link} from "react-router-dom";
@@ -64,58 +63,3 @@ export class Directory extends Component {
 
     }
 }
-
-/* 
-
-        
-
- <button className="btn btn-primary" onClick = {this.onClickC}>Contractor</button>
-                    <button className="btn btn-primary" onClick = {this.onClickV}>Vendor</button>
-        
-             <div className = {this.onVeiwC}>
-                <thead>
-                    <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Contact Info</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {this.state.contractors.map((x,i) =>
-                            <tr key = {i}>
-                            <td>{x.UserName}</td>
-                            <td>{x.ContactInfo}</td>
-                            <td>{x.Email}</td>
-                            <td>{x.UserType}</td>
-                            </tr>
-                    )}
-                 
-                </tbody>
-             </div>
-
-             <div className = {this.onVeiwV}>
-                <thead>
-                    <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Contact Info</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.vendors.map((x,i) =>
-                            <tr key = {i}>
-                            <td>{x.UserName}</td>
-                            <td>{x.ContactInfo}</td>
-                            <td>{x.Email}</td>
-                            <td>{x.UserType}</td>
-                            </tr>
-                    )}
-                 
-                </tbody>
-             </div>
-
-
-
-*/
