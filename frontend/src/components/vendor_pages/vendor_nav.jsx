@@ -7,7 +7,7 @@ export const VendorNav = props => <>
         <nav className = "navbar navbar-expand bg-dark navbar-dark">
         <ul className = "navbar-nav">
             <li className="navbar-text h4" id = "SiteName">
-            Project Tracker 
+            Tanks 
         </li>
             <li className = " nav-item btn btn-link">
                 <Link to = "/vendor" className = "btn btn-warning"> Orders </Link>
