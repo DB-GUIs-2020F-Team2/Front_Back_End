@@ -24,7 +24,6 @@ class Contracts extends Component {
                             <tr>
                                 <th>ID</th>
                                 <th>Details</th>
-                                <th>Highest Bidder</th>
                                 <th>Contractor</th>
                                 <th>Paid For?</th>
                             </tr>
@@ -38,7 +37,6 @@ class Contracts extends Component {
                                         <tr>
                                             <td>{item.ContractID}</td>
                                             <td>{item.ContractDetail}</td>
-                                            <td>{item.BestBiddingID}</td>
                                             <td>{item.ContractorID}</td>
                                             <td>{this.isPayedFor(item.IsPaid)}</td>
                                         </tr>
