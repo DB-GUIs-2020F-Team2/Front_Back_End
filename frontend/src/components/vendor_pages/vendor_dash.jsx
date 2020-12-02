@@ -25,13 +25,8 @@ export class VendorDashboard extends React.Component{
     }
 
     componentDidMount() {
-        // change to getting orders based on vendor id 
-        console.log(localStorage.getItem('UserID')); // is indeed correct 
-        //this.ordersRepository.getOrdersForAVendor(localStorage.getItem('UserID')) this is working just not sepearting orders
-        //.then(orders=>this.setState({orders})); this is working just not separating orders 
-        //this.ordersRepository.getOrders()
-        //.then(orders=>this.setState({orders}));
 
+        console.log(localStorage.getItem('UserID')); // is indeed correct 
         this.ordersRepository.getPastOrdersForAVendor(localStorage.getItem('UserID'))
         .then(pastorders=>this.setState({pastorders}));
 
