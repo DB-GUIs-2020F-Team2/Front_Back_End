@@ -21,13 +21,7 @@ export class Profile extends Component {
         });
     }
 
-    updateUser(){
-        let user = {
-            ...this.state.users[0],
-        };
-        console.log(user.UserName);
-        this.contractorRepo.updateUser(user.UserName, user.Email, user.ContactInfo, user.HashPass, localStorage.getItem('UserID'));
-    }
+
 
     onSubmit(){
         if(this.state.name){
@@ -45,8 +39,8 @@ export class Profile extends Component {
         if(this.state.password){
             this.handleChangePass();
         }
-
-        this.updateUser();
+        this.forceUpdate();
+        this.contractorRepo.updateUser(this.state.users[0].UserName, this.state.users[0].Email, this.state.users[0].ContactInfo, this.state.users[0].HashPass, localStorage.getItem('UserID'));
 
         this.setState({
             name: '',

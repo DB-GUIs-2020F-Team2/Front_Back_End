@@ -17,6 +17,7 @@ export class updateProject extends Component {
         
     if(this.state.myProjects){
         this.contractorRepo.updateStatus(this.state.status, this.state.myProjects[0].ProjectID);
+        this.forceUpdate();
     }
         this.setState({
             status: ''

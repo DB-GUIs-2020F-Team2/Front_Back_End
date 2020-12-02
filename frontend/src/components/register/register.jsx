@@ -32,7 +32,11 @@ export class Register extends Component {
 
         return (  
             <React.Fragment>
-                <NavBar/>
+                 <div className = "container-fluid banner p-1">
+                    <div className = "row justify-content-md-center">
+                        <h3 className = "col-3 p-2 m-2 align-self-start">Project Tracker</h3>
+                </div>
+                </div>
                 <div className = "register jumbotron">
                     <header className = "display-4 text-center font-weight-bold text-white mt-5">New Account</header>
                     <div className="card-fluid col-8 mt-4 mx-auto">
