@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from './navabar.jsx'
 import { ContractorRepo } from '../../API/contractorRepo'
+import { Link } from 'react-router-dom';
 
 export class Contracts extends Component {
 
@@ -20,19 +21,6 @@ export class Contracts extends Component {
             return "yes";
      }
 
-
-
-     getBid(pos){
-    
-        
-        return(
-            <div >
-                {this.state.bid.map((x,i) =>
-                             <div>{x.BiddingPrice}</div>      
-                            )}
-            </div>
-        )
-     }
 
     render() { 
         return ( 
@@ -71,7 +59,7 @@ export class Contracts extends Component {
                     <th scope="col">Contract</th>
                     <th scope="col">Status</th>
                     <th scope="col">Paid</th>
-                    <th scope="col">Current Bids</th>
+                    <th scope="col">Bidding</th>
                     </tr>
                
                 </thead>
@@ -82,13 +70,14 @@ export class Contracts extends Component {
                                     <td>{x.ContractDetail}</td>
                                     <td>{x.ContractStatus}</td>
                                     <td>{this.isPaid(x.isPaid)}</td>
-                                    <td>{this.getBid(i)}</td>
+                                    <td><Link to= {'/bidding/' + x.ContractID}  className="btn btn-primary" >Bids</Link></td>
                                     </tr>
                             )}
                     </tbody>
               
                 </table>
 
+               
                 
             </div>
             /////// In a table ////////
@@ -105,8 +94,5 @@ export class Contracts extends Component {
 
             this.contractorRepo.getAllContracts()
             .then(x => this.setState({contracts : x}));
-
-         this.contractorRepo.getBids()
-            .then(x => this.setState({bid : x}));
     }
 }

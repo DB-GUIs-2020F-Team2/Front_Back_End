@@ -39,8 +39,12 @@ export class Profile extends Component {
         if(this.state.password){
             this.handleChangePass();
         }
-        this.forceUpdate();
-        this.contractorRepo.updateUser(this.state.users[0].UserName, this.state.users[0].Email, this.state.users[0].ContactInfo, this.state.users[0].HashPass, localStorage.getItem('UserID'));
+        
+        this.contractorRepo.updateUser(this.state.users[0].UserName, this.state.users[0].Email, this.state.users[0].ContactInfo, this.state.users[0].HashPass, localStorage.getItem('UserID'))
+                            .then(()=>{
+                                alert('profile updated!');
+                            })
+
 
         this.setState({
             name: '',
@@ -191,7 +195,7 @@ export class Profile extends Component {
                     <div className="col">
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
-                            <input type="text" className="form-control" id = "password"
+                            <input type="password" className="form-control" id = "password"
                                 readOnly={true}
                                 value ={x.HashPass}
                                 />
@@ -200,7 +204,7 @@ export class Profile extends Component {
                     <div className="col">
                         <div className="form-group">
                                 <label htmlFor="password"></label>
-                                <input type="text" className="form-control" id = "password"
+                                <input type="password" className="form-control" id = "password"
                                     readOnly={this.state.readOnly}
                                     value = {this.state.password}
                                     onChange= { 
@@ -237,7 +241,7 @@ export class Profile extends Component {
             // api calls - get profile
             // edit button -> edit any info on page
          );
-    }componentDidMount(){
+    }componentWillMount(){
         
         const id = localStorage.getItem('UserID');
 
