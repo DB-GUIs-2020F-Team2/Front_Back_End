@@ -26,6 +26,7 @@ export class Project extends Component {
          if (orderId) {
                 this.contractorRepo.getOrderProducts(orderId)
                     .then(orderDetails => this.setState({orderDetails: orderDetails}));
+                this.forceUpdate();
             }
     }
         )

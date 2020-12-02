@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './register.css'
-import NavBar from '../contractor/navabar'
 import { ContractorRepo } from '../../API/contractorRepo'
 
 export class Register extends Component {
@@ -32,7 +31,11 @@ export class Register extends Component {
 
         return (  
             <React.Fragment>
-                <NavBar/>
+                 <div className = "container-fluid banner p-1">
+                    <div className = "row justify-content-md-center text-center ">
+                        <h3 className = "text-center align-self-start">Tanks</h3>
+                </div>
+                </div>
                 <div className = "register jumbotron">
                     <header className = "display-4 text-center font-weight-bold text-white mt-5">New Account</header>
                     <div className="card-fluid col-8 mt-4 mx-auto">
@@ -49,7 +52,7 @@ export class Register extends Component {
                             <div className= "form-group col-5 font-weight-bold text-white">
                                 <label htmlFor = "Password">Password: </label>
                                 <input 
-                                    type = "text" 
+                                    type = "password" 
                                     className = "form-control "
                                     value ={this.state.password}
                                     onChange= { event => this.setState({ password: event.target.value})}/>  

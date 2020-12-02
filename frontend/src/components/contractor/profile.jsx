@@ -21,13 +21,7 @@ export class Profile extends Component {
         });
     }
 
-    updateUser(){
-        let user = {
-            ...this.state.users[0],
-        };
-        console.log(user.UserName);
-        this.contractorRepo.updateUser(user.UserName, user.Email, user.ContactInfo, user.HashPass, localStorage.getItem('UserID'));
-    }
+
 
     onSubmit(){
         if(this.state.name){
@@ -45,8 +39,12 @@ export class Profile extends Component {
         if(this.state.password){
             this.handleChangePass();
         }
+        
+        this.contractorRepo.updateUser(this.state.users[0].UserName, this.state.users[0].Email, this.state.users[0].ContactInfo, this.state.users[0].HashPass, localStorage.getItem('UserID'))
+                            .then(()=>{
+                                alert('profile updated!');
+                            })
 
-        this.updateUser();
 
         this.setState({
             name: '',
@@ -197,7 +195,7 @@ export class Profile extends Component {
                     <div className="col">
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
-                            <input type="text" className="form-control" id = "password"
+                            <input type="password" className="form-control" id = "password"
                                 readOnly={true}
                                 value ={x.HashPass}
                                 />
@@ -206,7 +204,7 @@ export class Profile extends Component {
                     <div className="col">
                         <div className="form-group">
                                 <label htmlFor="password"></label>
-                                <input type="text" className="form-control" id = "password"
+                                <input type="password" className="form-control" id = "password"
                                     readOnly={this.state.readOnly}
                                     value = {this.state.password}
                                     onChange= { 
@@ -243,7 +241,7 @@ export class Profile extends Component {
             // api calls - get profile
             // edit button -> edit any info on page
          );
-    }componentDidMount(){
+    }componentWillMount(){
         
         const id = localStorage.getItem('UserID');
 

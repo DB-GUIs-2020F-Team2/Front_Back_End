@@ -16,6 +16,7 @@ import { Products } from './components/vendor_pages/products'
 import { DirectoryC } from './components/contractor/directoryC'
 import {updateProject} from './components/contractor/updateProject'
 import { DirectoryV } from './components/contractor/directoryV'
+import { Bidding } from './components/contractor/bidding'
 
 export const ROUTES = [
     { path: '/home', component: Home },
@@ -33,6 +34,7 @@ export const ROUTES = [
     { path: '/directoryC', component: DirectoryC},
     { path: '/directoryV', component: DirectoryV},
     { path: '/projectUpdate', component: updateProject },
+    { path: '/bidding/:contractId', component: Bidding },
     { path: '/profile', component: Profile },
     { path: '/contracts', component: Contracts },
     { path: '/', component: Home }

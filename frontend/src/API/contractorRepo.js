@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 export class ContractorRepo{
-
+    
     url = 'http://3.137.192.24:8000';
+    //url = 'http://localhost:8000';
     config = {
 
     };
@@ -49,6 +50,19 @@ export class ContractorRepo{
     getContracts(ContractorID){
         return new Promise((resolve,reject) =>{
             axios.get(`${this.url}/contractC/`,{params: {ContractorID}},this.config)
+                .then(x => {
+                    resolve(x.data.data);
+                })
+                .catch(x => {
+                    alert(x);
+                    reject(x);
+                })
+        })
+    }
+
+    getContract(ContractID){
+        return new Promise((resolve,reject) =>{
+            axios.get(`${this.url}/contract/`,{params: {ContractID}},this.config)
                 .then(x => {
                     resolve(x.data.data);
                 })
@@ -148,6 +162,40 @@ getOrderProducts(orderId) {
     });
 }
 
+getBidsC(ContractID) {
+    return new Promise((resolve, reject) => {
+        axios.get(`${this.url}/bid2/`, {params: {ContractID}}, this.config)
+        .then(x => resolve(x.data.data))
+        .catch(e => {
+            alert(e);
+            reject();
+        });
+    });
+}
+
+newBid(ContractorID, BiddingPrice, ContractID){
+    return new Promise((resolve,reject) =>{
+
+        console.log("in api");
+        console.log(ContractorID);
+        console.log(BiddingPrice);
+        console.log(ContractID);
+
+        axios.post(`${this.url}/bids/`, {
+            "ContractorID" : ContractorID,
+            "BiddingPrice" : BiddingPrice,
+            "ContractID" : ContractID
+        })
+            .then(x => {
+                resolve(x.data);
+            })
+            .catch(x => {
+                alert(x);
+                reject(x);
+            })
+    })
+}
+
 
     registerUser(UserName, email, contact, password, department ){
         return new Promise((resolve,reject) =>{
@@ -174,7 +222,6 @@ getOrderProducts(orderId) {
 
     updateUser(UserName, email, contact, password, UserID ){
         return new Promise((resolve,reject) =>{
-            alert("updated");
             axios.put(`${this.url}/UpdateUser`,{
                 "UserName": UserName,
                 "HashPass": password,

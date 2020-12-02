@@ -16,7 +16,11 @@ export class updateProject extends Component {
     onSubmit(){
         
     if(this.state.myProjects){
-        this.contractorRepo.updateStatus(this.state.status, this.state.myProjects[0].ProjectID);
+        this.contractorRepo.updateStatus(this.state.status, this.state.myProjects[0].ProjectID)
+            .then(()=>{
+                alert('profile updated!');
+            })
+        this.forceUpdate();
     }
         this.setState({
             status: ''
@@ -92,7 +96,7 @@ export class updateProject extends Component {
         );
     }
 
-    componentDidMount(){
+    componentWillMount(){
 
         const id = localStorage.getItem('UserID');
         
