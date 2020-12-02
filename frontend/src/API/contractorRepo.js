@@ -181,7 +181,11 @@ newBid(ContractorID, BiddingPrice, ContractID){
         console.log(BiddingPrice);
         console.log(ContractID);
 
-        axios.post(`${this.url}/bids/`,{params: {ContractorID, BiddingPrice, ContractID}}, this.config)
+        axios.post(`${this.url}/bids/`, {
+            "ContractorID" : ContractorID,
+            "BiddingPrice" : BiddingPrice,
+            "ContractID" : ContractID
+        })
             .then(x => {
                 resolve(x.data);
             })

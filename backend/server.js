@@ -781,10 +781,10 @@ app.get('/bid2/', async(req, res)=>{
 //POST 
 
 app.post('/bids/', async(req, res)=>{
-  var ContractorID= req.param("ContractorID")
-  var BiddingPrice= req.param("BiddingPrice")
-  var ContractID= req.param("ContractID")
-  connection.query('INSERT INTO `team2`.`Bidding`  (`ContractorID`,`BiddingPrice`,`ContractID`) VALUES (?, ?, ?)',[ContractorID, BiddingPrice, ContractID], function (err, rows, fields) {
+  //var ContractorID= req.param("ContractorID")
+  //var BiddingPrice= req.param("BiddingPrice")
+  //var ContractID= req.param("ContractID")
+  connection.query('INSERT INTO `team2`.`Bidding`  (`ContractorID`,`BiddingPrice`,`ContractID`) VALUES (?, ?, ?)',[req.body.ContractorID, req.body.BiddingPrice, req.body.ContractID], function (err, rows, fields) {
     if (err) {
       logger.error("Error while executing Query: \n", err);
       res.status(400).json({
