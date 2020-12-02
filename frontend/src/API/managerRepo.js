@@ -116,7 +116,7 @@ export class ManagerRepo {
 
     getPastOrders(date){ //send todays date
         return new Promise((resolve,reject) =>{
-            axios.get(`${this.url}/orders_full/before/${date}`,this.config)
+            axios.get(`${this.url}/orders/before/${date}`,this.config)
                 .then(x => {
                     resolve(x.data);
                 })
