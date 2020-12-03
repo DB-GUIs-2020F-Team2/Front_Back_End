@@ -44,6 +44,7 @@ class Projects extends Component {
                                 <th>Status</th>
                                 <th>Type</th>
                                 <th>Manager in Charge</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         
@@ -77,6 +78,7 @@ class Projects extends Component {
                                             <td>{item.ProjectStatus}</td>
                                             <td>{item.ProjectType}</td>
                                             <td>{item.ManagerID}</td>
+                                            <th><button className = 'btn btn-danger' onClick = {() => this.deleteMe(item.ProjectID)}>Delete Project</button></th>
                                         </tr>
                                 );
                             })}
