@@ -23,7 +23,6 @@ class History extends Component {
                                 <th>Apply Date</th>
                                 <th>Expire Date</th>
                                 <th>Vendor ID</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
                         
@@ -38,7 +37,6 @@ class History extends Component {
                                             <td> {String(item.ApplyDate).substring(5,7) + '/' + String(item.ApplyDate).substring(8,10) +'/' + String(item.ApplyDate).substring(0,4)} </td>
                                             <td>{String(item.ExpireDate).substring(5,7) + '/' + String(item.ExpireDate).substring(8,10) +'/' + String(item.ExpireDate).substring(0,4)}</td>
                                             <td>{item.VendorID}</td>
-                                            <td><button className = 'btn btn-danger' onClick = {() => this.deleteOrder(item.OrderID)}>Delete Order</button></td>
                                         </tr>
                                     );
                                 })}
